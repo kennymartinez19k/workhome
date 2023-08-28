@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">bodega-la-fe</string>
+    <string name="title_activity_main">bodega-la-fe</string>
+    <string name="package_name">com.bodegalafe.app</string>
+    <string name="custom_url_scheme">com.bodegalafe.app</string>
+</resources>

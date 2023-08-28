@@ -1,0 +1,7 @@
+{
+  "name": "bodega-la-fe",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

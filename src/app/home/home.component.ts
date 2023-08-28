@@ -10,9 +10,4 @@ export class HomeComponent {
 
 
 
-
-  send(){
-    
-  }
-
 }

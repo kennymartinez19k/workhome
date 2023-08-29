@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .mensaje {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    color: #3498db;
+  }
+  
+  p {
+    color: #666;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  

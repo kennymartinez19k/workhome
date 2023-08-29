@@ -9,15 +9,17 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ExitosoComponent } from './components/exitoso/exitoso.component';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    ExitosoComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

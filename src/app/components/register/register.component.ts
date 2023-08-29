@@ -34,7 +34,7 @@ async onSubmit(){
   .then(response =>{
     const registro = this.firestoreService.addUser(usuario)
     console.log(response, registro)
-    this.router.navigate(['/exito'])
+    this.router.navigate(['/login'])
   })
   .catch(error => console.log(error))
 }

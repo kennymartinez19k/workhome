@@ -18,8 +18,9 @@ import { HomeComponent } from './components/home/home.component';
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent,
-    HomeComponent
+    // ExitosoComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -34,3 +35,4 @@ import { HomeComponent } from './components/home/home.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

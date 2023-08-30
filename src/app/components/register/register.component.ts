@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-register',
@@ -12,8 +13,10 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 export class RegisterComponent implements OnInit {
 
   formReg: FormGroup;
+  nombre: string = ''
+  email: string = ''
 
-constructor( private authService: AuthService, private router: Router, private firestoreService: FirestoreService){
+constructor(private auth: Auth, private authService: AuthService, private router: Router, private firestoreService: FirestoreService){
   this.formReg = new FormGroup({
     nombre: new FormControl(),
     email: new FormControl(),
@@ -25,14 +28,9 @@ ngOnInit(): void{}
 
 async onSubmit(){
 
-  const nombre = this.formReg.value.nombre;
-  const email = this.formReg.value.email;
-  
-  const usuario = {nombre, email}
-
   this.authService.register(this.formReg.value)
   .then(response =>{
-    const registro = this.firestoreService.addUser(usuario)
+    const registro = this.firestoreService.addUser(this.formReg.value.nombre, this.formReg.value.email)
     console.log(response, registro)
     this.router.navigate(['/login'])
   })

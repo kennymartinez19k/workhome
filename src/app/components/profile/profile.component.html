@@ -1,0 +1,8 @@
+<ion-content>
+    <h2 style="text-align: center;">Lista de Usuarios</h2>
+    <ul>
+        <li *ngFor="let usuario of users">
+            Nombre: {{usuario.nombre}} - Correo: {{usuario.correo}} - ID: {{usuario.uid}}
+        </li>
+    </ul>
+</ion-content>

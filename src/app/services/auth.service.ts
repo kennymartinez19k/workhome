@@ -20,4 +20,13 @@ export class AuthService {
     return signInWithPopup(this.auth, new GoogleAuthProvider());
   }
 
+  async getUid() {
+    const user = await this.auth.currentUser
+    if(user){
+      return user.uid
+    }else{
+      return null
+    }
+  }
+
 }

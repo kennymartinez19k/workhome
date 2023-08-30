@@ -29,7 +29,7 @@ constructor( private router: Router, private authService: AuthService ){
       console.log(response)
       localStorage.setItem("islog", JSON.stringify(true))
       alert("Logeo Exitoso")
-      this.router.navigate(['/home'])
+      this.router.navigate(['profile'])
     })
     .catch(error => {
       console.log(error)
@@ -43,7 +43,7 @@ constructor( private router: Router, private authService: AuthService ){
         localStorage.setItem("islog", JSON.stringify(true))
         console.log(response);
         alert("Logeo Exitoso")
-        this.router.navigate(['home'])
+        this.router.navigate(['profile'])
       })
       .catch(error => {
         console.log(error)

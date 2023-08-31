@@ -19,6 +19,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 register();
 import { ProfileComponent } from './components/profile/profile.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     // ExitosoComponent,
     HomeComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

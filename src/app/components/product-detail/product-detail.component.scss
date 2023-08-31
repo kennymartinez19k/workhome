@@ -1,0 +1,92 @@
+$fuenteDeLetra: 'Poppins', sans-serif;
+$semiBold: 600;
+$extraBold: 800;
+
+ion-toolbar {
+    background: #02B761;
+    ion-back-button {
+        color: white;
+        position: absolute;
+    }
+    ion-title {
+        font-family: $fuenteDeLetra;
+        font-weight: $extraBold;
+        color: white;
+        text-align: center;
+    }
+}
+
+.producto {
+    h2{
+        font-family: $fuenteDeLetra;
+        font-weight: $extraBold;
+    }
+}
+
+.precio-cant {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    font-family: $fuenteDeLetra;
+    .precio {
+        h2{
+            font-weight: $extraBold;
+        }
+    }
+    .cantidad {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 18px;
+        ion-icon {
+            font-size: 40px;
+        }
+        .menos {
+            color: red;
+        }
+        .mas {
+            color: #02B761;
+        }
+    }
+}
+
+button {
+    background: #02B761;
+    padding: 15px;
+    width: 70%;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: $extraBold;
+    font-size: 15px;
+    margin: 30px auto;
+    align-items: center;
+    ion-icon{
+        font-size: 25px;
+        padding-left: 5px;
+    }
+}
+
+ion-footer {
+    ion-toolbar {
+        background: #02B761;
+    }
+
+    .footer {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        .home, .categorias, .carrito, .perfil {
+            font-family: $fuenteDeLetra;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            line-height: 0;
+            margin-top: 0.5em;
+            ion-icon {
+                font-size: 25px;
+            }
+        }
+    }
+}

@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { FirestoreService } from 'src/app/services/firestore.service';
-import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-register',
@@ -13,10 +12,8 @@ import { Auth } from '@angular/fire/auth';
 export class RegisterComponent implements OnInit {
 
   formReg: FormGroup;
-  nombre: string = ''
-  email: string = ''
 
-constructor(private auth: Auth, private authService: AuthService, private router: Router, private firestoreService: FirestoreService){
+constructor( private authService: AuthService, private router: Router){
   this.formReg = new FormGroup({
     nombre: new FormControl(),
     email: new FormControl(),
@@ -26,15 +23,21 @@ constructor(private auth: Auth, private authService: AuthService, private router
 
 ngOnInit(): void{}
 
-async onSubmit(){
+async register(){
+  const nombre = this.formReg.value.nombre
+  const email = this.formReg.value.email
+  const password = this.formReg.value.password
+  
+  if(nombre && email && password){
+    try {
+      await this.authService.register(email, password, nombre)
+      this.router.navigate(['profile'])
+      alert("logeo exitoso")
+    } catch (error) {
+      alert("error")
+    }
+  }
 
-  this.authService.register(this.formReg.value)
-  .then(response =>{
-    const registro = this.firestoreService.addUser(this.formReg.value.nombre, this.formReg.value.email)
-    console.log(response, registro)
-    this.router.navigate(['/login'])
-  })
-  .catch(error => console.log(error))
 }
 
 }

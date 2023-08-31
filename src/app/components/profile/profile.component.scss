@@ -1,0 +1,71 @@
+$fuenteDeLetra: 'Poppins', sans-serif;
+$semiBold: 600;
+$extraBold: 800;
+
+ion-toolbar {
+    background: #02B761;
+    ion-back-button {
+        color: white;
+        position: absolute;
+    }
+    ion-title {
+        font-family: $fuenteDeLetra;
+        font-weight: $extraBold;
+        color: white;
+        text-align: center;
+    }
+}
+
+.person {
+    text-align: center;
+    padding-bottom: 2em;
+    font-family: $fuenteDeLetra;
+    h1 {
+        font-weight: $extraBold;
+    }
+    p{
+        font-weight: 500;
+    }
+}
+
+ion-item {
+    --inner-border-width: 0; /* Quits inner border */
+    --highlight-background-focused: transparent; /* Removes highlight when focused */
+    --highlight-background: transparent; /* Removes highlight when pressed */
+    --ripple-color: transparent; /* Removes ripple effect */
+    font-family: $fuenteDeLetra;
+    font-weight: $semiBold;
+    font-size: 22px;
+    ion-icon {
+        font-size: 40px;
+        padding-right: 10px;
+    }
+    
+}
+
+ion-footer {
+    ion-toolbar {
+        background: #02B761;
+    }
+
+    .footer {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        .home, .categorias, .carrito, .perfil {
+            font-family: $fuenteDeLetra;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            line-height: 0;
+            margin-top: 0.5em;
+            ion-icon {
+                font-size: 25px;
+            }
+        }
+
+        .perfil {
+            color: white;
+        }
+    }
+}

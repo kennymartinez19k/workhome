@@ -3,6 +3,19 @@
     display: flex;
     justify-content: center;
     border-radius: 10px;
+    position: relative;
+    width: fit-content;
+    margin: 0px auto;
+   
+}
+
+.divBuscador{
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    /* border-bottom-left-radius: 0px; */
+    /* border-bottom-right-radius: 0px; */
+    padding: 0px 10px;
 }
 
 .titulo{
@@ -17,15 +30,15 @@
     justify-content: space-between;
 }
 .card{
-    width: 45%;
-    display: flex;
-    justify-content: space-between;
+    width: 43%;
+    
+    
     
 }
 .cardPadre{
     display: flex;
-    flex-direction: wrap;
-    
+     flex-wrap: wrap;
+   
    
 }
 

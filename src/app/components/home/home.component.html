@@ -1,9 +1,16 @@
-<button style="background: red; padding: 30px;" (click)="logout()" *ngIf="islog">LOGOUT</button>
+ 
+<ion-content>
+ <button style="background: red; padding: 30px;" (click)="logout()" *ngIf="islog">LOGOUT</button>
 <img src="assets/img/logoBodegaLaFe.png" alt="">
 
 <img src="" alt="">
 
-<div class="buscador"><input type="text" placeholder="Busca tu producto aqui"></div>
+<div class="divBuscador">
+  <ion-label position="floating"></ion-label>
+  <ion-input type="text" placeholder="Busca tu producto aqui..."/>
+</div>
+<div class="buscador"> 
+ </div>
 
 <div class="titulo"><h1>oferta del mes</h1></div>
 
@@ -11,6 +18,8 @@
     <b>categorias</b>
     <p>ver todo ></p>
 </div>
+
+
 
 <div class="productos">
     <b>Productos populares</b> 
@@ -53,3 +62,4 @@
       
       </ion-card>
 </div>
+</ion-content> 

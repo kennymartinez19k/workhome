@@ -12,6 +12,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+// import function to register Swiper custom elements
+import { register } from 'swiper/element/bundle';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// register Swiper custom elements
+
+register();
 
 
 @NgModule({
@@ -32,7 +38,8 @@ import { HomeComponent } from './components/home/home.component';
     provideFirestore(() => getFirestore())
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
 

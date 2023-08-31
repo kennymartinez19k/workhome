@@ -1,8 +1,52 @@
-<ion-content>
-    <h2 style="text-align: center;">Lista de Usuarios</h2>
-    <ul>
-        <li *ngFor="let usuario of users">
-            Nombre: {{usuario.nombre}} - Correo: {{usuario.correo}} - ID: {{usuario.uid}}
-        </li>
-    </ul>
+<ion-header>
+    <ion-toolbar color="#">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+      <ion-title>
+        Mi perfil
+      </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding persons">
+    <div class="person">
+        <h1>Maria Jose</h1>
+        <p>correo@corre.com</p>
+    </div>
+    <div class="options">
+        <ion-item class="option">
+            <ion-icon name="cart-outline"></ion-icon>
+            <p>Historial de pedidos</p>
+        </ion-item>
+
+        <ion-item class="option">
+            <ion-icon name="log-out-outline"></ion-icon>
+            <p>Cerrar sesión</p>
+        </ion-item>
+    </div>
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar color="#">
+      <div class="footer">
+            <div class="home">
+                <ion-icon name="home-outline"></ion-icon>
+                <p>Inicio</p>
+            </div>
+            <div class="categorias">
+                <ion-icon name="grid"></ion-icon>
+                <p>Categorías</p>
+            </div>
+            <div class="carrito">
+                <ion-icon name="cart-outline"></ion-icon>
+                <p>Carrito</p>
+            </div>
+            <div class="perfil">
+                <ion-icon name="person-outline"></ion-icon>
+                <p>Perfil</p>
+            </div>
+      </div>
+    </ion-toolbar>
+</ion-footer>
+  

@@ -23,30 +23,30 @@ constructor( private router: Router, private authService: AuthService ){
 
   ngOnInit(): void {}
 
-  onSubmit(){
-    this.authService.login(this.formLogin.value)
-    .then(response => {
-      console.log(response)
-      localStorage.setItem("islog", JSON.stringify(true))
-      alert("Logeo Exitoso")
-      this.router.navigate(['/home'])
-    })
-    .catch(error => {
-      console.log(error)
-      alert("Credenciales incorrectas")
-    })
-  }
+  // onSubmit(){
+  //   this.authService.login(this.formLogin.value)
+  //   .then(response => {
+  //     console.log(response)
+  //     localStorage.setItem("islog", JSON.stringify(true))
+  //     alert("Logeo Exitoso")
+  //     this.router.navigate(['profile'])
+  //   })
+  //   .catch(error => {
+  //     console.log(error)
+  //     alert("Credenciales incorrectas")
+  //   })
+  // }
 
-  onClick() {
-    this.authService.loginWithGoogle()
-      .then(response => {
-        localStorage.setItem("islog", JSON.stringify(true))
-        console.log(response);
-        alert("Logeo Exitoso")
-        this.router.navigate(['home'])
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
+  // onClick() {
+  //   this.authService.loginWithGoogle()
+  //     .then(response => {
+  //       localStorage.setItem("islog", JSON.stringify(true))
+  //       console.log(response);
+  //       alert("Logeo Exitoso")
+  //       this.router.navigate(['profile'])
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //     })
+  // }
 }

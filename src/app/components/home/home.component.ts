@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
     const estaLogeado = (localStorage.getItem("islog"))
     if(estaLogeado !== null){
       this.islog =JSON.parse(estaLogeado)
+    }else {
+      this.router.navigate(['login'])
     }
   }
 }

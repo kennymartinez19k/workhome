@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { switchMap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -11,28 +12,22 @@ import { switchMap } from 'rxjs';
 
 export class ProfileComponent implements OnInit{
 
-  // users: any[] = [];
-  // uid: string | undefined;
-  userProfile: any;
+  public islog = false;
 
-  constructor(private authService: AuthService, private firestore: FirestoreService){}
+  constructor(private router: Router){}
 
-  async ngOnInit() {
-    // this.getUid()
-    const currentUser = this.authService.getCurrentUser()
-    if(currentUser) {
-      this.firestore.getPerson(currentUser.uid).subscribe(personData =>{
-        this.userProfile = personData
-      })
+  logout(){
+    if (confirm("Desea Cerrar Sesión")){
+      localStorage.removeItem("islog")
+      this.router.navigate(['/login'])
     }
   }
 
-  // async getUid() {
-  //   const uid = await this.authService.getUid()
-  //   if(uid){
-  //     this.uid = uid
-  //     alert(`Hola ID: ${uid}`)
-  //   }
-  // }
+  ngOnInit(): void {
+    const estaLogeado = (localStorage.getItem("islog"))
+    if(estaLogeado !== null){
+      this.islog = JSON.parse(estaLogeado)
+    }
+  }
 
 }

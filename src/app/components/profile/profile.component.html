@@ -10,9 +10,9 @@
 </ion-header>
 
 <ion-content class="ion-padding persons">
-    <div class="person">
-        <h1>Maria Jose</h1>
-        <p>correo@corre.com</p>
+    <div class="person" *ngIf="userData">
+        <h1>{{userData.nombre}}</h1>
+        <p>{{userData.email}}</p>
     </div>
     <div class="options">
         <ion-item class="option">
@@ -22,7 +22,7 @@
 
         <ion-item class="option">
             <ion-icon name="log-out-outline"></ion-icon>
-            <p>Cerrar sesión</p>
+            <p (click)="logout()">Cerrar sesión</p>
         </ion-item>
     </div>
 </ion-content>

@@ -17,6 +17,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 // register Swiper custom elements
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { AddProductComponent } from './components/add-product/add-product.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     HomeComponent,
     LoginComponent,
     ProfileComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,

@@ -24,8 +24,7 @@ export class GuardFactoryService {
       })
       await alert.present()
       await alert.onDidDismiss()
-      this.router.navigate(['home'])
-      location.reload()
+      this.router.navigate(['/login'])
       return false
     }
   }

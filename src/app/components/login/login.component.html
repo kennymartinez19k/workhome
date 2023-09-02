@@ -18,8 +18,7 @@
         </p>
     </div>
   
-    <!-- <form [formGroup]="formLogin" (ngSubmit)="onSubmit()"> -->
-      <form>
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
         <ion-item>
             <ion-label position="floating">Email</ion-label>
             <ion-input type="email" placeholder="Ingresa tu correo" required formControlName="email"></ion-input>
@@ -34,7 +33,7 @@
         <button type="submit">Iniciar Sesión</button>
         <div class="google">
             <p>O inicia sesión con</p>
-            <!-- <img src="assets/img/google.png" alt="google" (click)="onClick()"> -->
+            <img src="assets/img/google.png" alt="google" (click)="onClick()">
         </div>
         <p class="noexists">¿No tienes una cuenta? <span routerLink="/register">Registrate</span></p>
     </form>

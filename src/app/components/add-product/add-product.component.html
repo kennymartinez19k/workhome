@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar color="#">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/register"></ion-back-button>
+    </ion-buttons>
+      <ion-title>
+        Agregar producto
+      </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-paddding">
+
+  
+    <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+        <ion-item>
+            <ion-label position="floating">Nombre del producto</ion-label>
+            <ion-input type="email" placeholder="Ingresa el nombre del producto" required formControlName="name"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label position="floating">Precio</ion-label>
+            <ion-input type="number" placeholder="Ingresa el precio" required formControlName="price"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Cantidad en Stock</ion-label>
+            <ion-input type="number" placeholder="Ingresa la cantidad en stock" required formControlName="stock"></ion-input>
+        </ion-item>
+    
+        <button type="submit">Agregar producto</button>
+    </form>
+  
+</ion-content>

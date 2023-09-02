@@ -9,15 +9,8 @@ export class AuthService {
 
   constructor(private auth: Auth, private firestore: FirestoreService) { }
 
-  async register(email: string, password: string, nombre: string) {
-    try {
-      const result = await createUserWithEmailAndPassword(this.auth, email, password)
-      const uid = result.user.uid
-      
-      await this.firestore.savePerson(uid, nombre, email)
-    } catch (error) {
-      console.log("error de registro", error)
-    }
+  async register({email, password}: any) {
+    await createUserWithEmailAndPassword(this.auth, email, password)
   }
 
   async login(email: string, password: string) {
@@ -26,6 +19,14 @@ export class AuthService {
     } catch (error) {
       console.log("error de logueo", error)
     }
+  }
+
+  loginWithGoogle(){
+    return signInWithPopup(this.auth, new GoogleAuthProvider())
+  }
+
+  logout() {
+    return signOut(this.auth);
   }
 
   getCurrentUser(){

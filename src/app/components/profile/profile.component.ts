@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from 'src/app/services/firestore.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Auth } from '@angular/fire/auth';
-import { User } from 'firebase/auth';
-import { Firestore ,collection, doc, getDocs, query, where } from 'firebase/firestore';
 
 @Component({
   selector: 'app-profile',

@@ -37,7 +37,7 @@ constructor( private router: Router, private authService: AuthService ){
       localStorage.setItem("usuario", JSON.stringify(userData))
       localStorage.setItem("islog", JSON.stringify(true))
       alert("Logeo Exitoso")
-      this.router.navigate(['profile'])
+      this.router.navigate(['home'])
     })
     .catch(error => {
       console.log(error)
@@ -55,7 +55,7 @@ constructor( private router: Router, private authService: AuthService ){
         localStorage.setItem("islog", JSON.stringify(true))
         console.log(response);
         alert("Logeo Exitoso")
-        this.router.navigate(['profile'])
+        this.router.navigate(['home'])
       })
       .catch(error => {
         console.log(error)

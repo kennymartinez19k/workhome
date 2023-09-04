@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs'
+import { Observable, from, map } from 'rxjs'
 import { Product } from '../interfaces/product';
-import { Firestore, collection, doc, setDoc, addDoc,collectionData } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, addDoc, query, where, getDocs } from '@angular/fire/firestore';
+import { doc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +11,31 @@ export class FirestoreService {
 
   constructor(private firestore: Firestore) {}
 
-  async savePerson(uid: string, nombre: string, email: string) {
-    const userRef = doc(this.firestore, 'personas', uid)
-    await setDoc(userRef, {nombre, email, uid})
-  }
-
-  addProduct(product: Product) {
+  agregarProducto(producto: Product) {
     const productRef = collection(this.firestore, 'productos')
-    return addDoc(productRef, product)
+    return addDoc(productRef, producto)
   }
 
-  getProduct(): Observable<Product[]> {
-    const productRef = collection(this.firestore, 'productos')
-    return collectionData(productRef, {idField: 'id'}) as Observable<Product[]>
-  }
+  obtenerProducto(): Observable<Product[]> {
 
+    const q = query(collection(this.firestore, "productos"))
+
+    return from(getDocs(q)).pipe(
+      map((x) =>{
+        const productos: Product[] = []
+        x.forEach((doc) => {
+          const data = doc.data() as Product
+          productos.push(data)
+        })
+        return productos
+      })
+    )
+
+    // const querySnapshot = await getDocs(q)
+    // querySnapshot.forEach((doc) => {
+    //   const productos = doc.data()
+    //   console.log(productos)
+    // })
+  }
+  
 }

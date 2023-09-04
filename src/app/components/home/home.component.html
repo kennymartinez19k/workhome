@@ -1,87 +1,56 @@
-<button style="background: red; padding: 30px;" routerLink="/profile">PERFIL</button>
-<img src="assets/img/logoBodegaLaFe.png" alt="">
+<ion-content class="container ion-padding">
+  <div class="main">
 
-<img src="" alt="">
+    <div class="header ion-padding">
+      <ion-img src="assets/img/bodega-la-fe.png" alt="logo bodega la fe"></ion-img>
+      <div class="usuario" *ngIf="usuario">
+        <h1>¡Hola {{usuario.nombre}}!</h1>
+        <em>¡Gracias por comprar con nosotros!</em>
+      </div>
+    </div>
 
-<div class="divBuscador">
-  <ion-label position="floating"></ion-label>
-  <ion-input type="text" placeholder="Busca tu producto aqui..."/>
-</div>
-<div class="buscador"> 
- </div>
+    <div class="busqueda ion-padding">
+      <ion-searchbar animated="true" placeholder="Busca tu producto aquí..."></ion-searchbar>
+    </div>
 
-<div class="titulo"><h1>oferta del mes</h1></div>
+    <div class="productos-populares ion-padding">
+      <ion-row *ngFor="let producto of productos">
+        <ion-card>
+          <img class="ion-padding" alt="Silhouette of mountains" src="https://i0.wp.com/suspiritosrd.com/wp-content/uploads/2017/01/pan-de-agua-dominicano.jpg?ssl=1" />
+          <ion-card-header>
+            <ion-card-title>{{producto.nombre}}</ion-card-title>
+            <ion-card-subtitle>${{producto.precio}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+           Stock: {{producto.stock}}
+          </ion-card-content>
+        </ion-card>
+      </ion-row>
+    </div>
 
-<div class="categoria">
-    <b>categorias</b>
-    <p>ver todo ></p>
-</div>
+  </div>
 
-
-<ion-content>
-<div class="productos">
-    <b>Productos populares</b> 
-    <p>ver todo ></p>
-</div>
-
-<div class="cardPadre">
-    <ion-card class="card">
-        <img alt="Silhouette of mountains" src="" />
-        <ion-card-header>
-          <ion-card-title>producto #1</ion-card-title>
-          <ion-card-subtitle>$100</ion-card-subtitle>
-        </ion-card-header>
-      
-      </ion-card>
-
-      <ion-card class="card">
-        <img alt="Silhouette of mountains" src="" />
-        <ion-card-header>
-          <ion-card-title>producto #2</ion-card-title>
-          <ion-card-subtitle>$200</ion-card-subtitle>
-        </ion-card-header>
-      
-      </ion-card>
-
-      <ion-card class="card">
-        <img alt="Silhouette of mountains" src="" />
-        <ion-card-header>
-          <ion-card-title>producto #3</ion-card-title>
-          <ion-card-subtitle>$300</ion-card-subtitle>
-        </ion-card-header>
-      
-      </ion-card>
-      <ion-card class="card">
-        <img alt="Silhouette of mountains" src="" />
-        <ion-card-header>
-          <ion-card-title>producto #4</ion-card-title>
-          <ion-card-subtitle>$400</ion-card-subtitle>
-        </ion-card-header>
-      
-      </ion-card>
-</div>
 </ion-content>
-
 
 <ion-footer>
   <ion-toolbar color="#">
     <div class="footer">
-          <div class="home">
-              <ion-icon name="home-outline"></ion-icon>
-              <p>Inicio</p>
-          </div>
-          <div class="categorias">
-              <ion-icon name="grid"></ion-icon>
-              <p>Categorías</p>
-          </div>
-          <div class="carrito">
-              <ion-icon name="cart-outline"></ion-icon>
-              <p>Carrito</p>
-          </div>
-          <div class="perfil" routerLink="/profile">
-              <ion-icon name="person-outline"></ion-icon>
-              <p>Perfil</p>
-          </div>
+      <div class="home">
+        <ion-icon name="home-outline"></ion-icon>
+        <p>Inicio</p>
+      </div>
+      <div class="categorias">
+        <ion-icon name="grid"></ion-icon>
+        <p>Categorías</p>
+      </div>
+      <div class="carrito">
+        <ion-icon name="cart-outline"></ion-icon>
+        <p>Carrito</p>
+      </div>
+      <div class="perfil" routerLink="/profile">
+        <ion-icon name="person-outline"></ion-icon>
+        <p>Perfil</p>
+      </div>
     </div>
   </ion-toolbar>
 </ion-footer>

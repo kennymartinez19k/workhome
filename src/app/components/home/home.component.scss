@@ -2,55 +2,35 @@ $fuenteDeLetra: 'Poppins', sans-serif;
 $semiBold: 600;
 $extraBold: 800;
 
-.buscador{
+* {
+    font-family: $fuenteDeLetra;
+}
+
+.header {
+    height: 10%;
+    ion-img {
+        margin: auto;
+        width: 70%;
+    }
+    h1 {
+        font-weight: $extraBold;
+    }
+}
+
+.productos-populares {
+    ion-row {
+        width: 50%;
+    }
     display: flex;
-    justify-content: center;
-    border-radius: 10px;
-    position: relative;
-    width: fit-content;
-    margin: 0px auto;
-   
+    flex-wrap: wrap;
+    ion-card {
+        ion-card-title, ion-card-subtitle, ion-card-content {
+            font-weight: $extraBold;
+        }
+    }
 }
-
-.divBuscador{
-    margin: 20px;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    /* border-bottom-left-radius: 0px; */
-    /* border-bottom-right-radius: 0px; */
-    padding: 0px 10px;
-}
-
-.titulo{
-    display: flex;
-    justify-content: center;
-    background-color: gray;
-    
-}
-
-.categoria{
-    display: flex;
-    justify-content: space-between;
-}
-.card{
-    width: 43%;
-    
-    
-    
-}
-.cardPadre{
-    display: flex;
-     flex-wrap: wrap;
-   
-   
-}
-
-.productos{
-    display: flex;
-    justify-content: space-between;
-}
-
-
+  
+  
 
 ion-footer {
     ion-toolbar {

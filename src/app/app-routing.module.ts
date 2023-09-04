@@ -9,7 +9,7 @@ import { GuardFactoryService } from './guard.guard';
 import { AddProductComponent } from './components/add-product/add-product.component';
 const routes: Routes = [
 
-  {path: '',component: LoginComponent},
+  {path: '',component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},

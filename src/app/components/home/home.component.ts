@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/interfaces/product';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
   selector: 'app-home',
@@ -8,21 +10,24 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  public islog = false;
-  constructor(private router: Router){}
-  logout(){
-    if (confirm("Desea Cerrar Sesión")){
-      localStorage.removeItem("islog")
-      this.router.navigate(['/login'])
-    }
+productos: Product[] = []
+usuario: any
+
+  constructor(private router: Router, private firestoreService: FirestoreService){
+    this.productos = [{
+      nombre: "",
+      precio: 0,
+      stock: 0
+    }]
   }
 
   ngOnInit(): void {
-    const estaLogeado = (localStorage.getItem("islog"))
-    if(estaLogeado !== null){
-      this.islog =JSON.parse(estaLogeado)
-    }else {
-      this.router.navigate(['login'])
+    this.firestoreService.obtenerProducto().subscribe(productos => {
+      this.productos = productos
+    })
+    const dataUsuario = localStorage.getItem("usuario")
+    if(dataUsuario) {
+      this.usuario = JSON.parse(dataUsuario)
     }
   }
 }

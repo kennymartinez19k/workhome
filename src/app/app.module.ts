@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,11 +13,15 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 // import function to register Swiper custom elements
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 // register Swiper custom elements
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
+import { SliderComponent } from './components/slider/slider.component';
+import { SwiperModule } from 'swiper/angular';
+
+
+
 
 
 @NgModule({
@@ -29,7 +33,8 @@ import { AddProductComponent } from './components/add-product/add-product.compon
     LoginComponent,
     ProfileComponent,
     ProductDetailComponent,
-    AddProductComponent
+    AddProductComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,8 @@ import { AddProductComponent } from './components/add-product/add-product.compon
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     ReactiveFormsModule,
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    SwiperModule
   ],
   providers: [],
   bootstrap: [AppComponent],

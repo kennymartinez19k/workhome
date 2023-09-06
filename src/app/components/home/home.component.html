@@ -1,7 +1,7 @@
 <ion-content class="container ion-padding">
   <div class="main">
 
-    <div class="header ion-padding">
+    <div class="header">
       <ion-img src="assets/img/bodega-la-fe.png" alt="logo bodega la fe"></ion-img>
       <div class="usuario" *ngIf="usuario">
         <h1>¡Hola {{usuario.nombre}}!</h1>
@@ -9,27 +9,74 @@
       </div>
     </div>
 
-    <div class="busqueda ion-padding">
+    <div class="busqueda">
       <ion-searchbar animated="true" placeholder="Busca tu producto aquí..."></ion-searchbar>
     </div>
 
-    <div class="productos-populares ion-padding">
-      <ion-row *ngFor="let producto of productos">
-        <ion-card>
-          <img class="ion-padding" alt="Silhouette of mountains" src="https://i0.wp.com/suspiritosrd.com/wp-content/uploads/2017/01/pan-de-agua-dominicano.jpg?ssl=1" />
-          <ion-card-header>
-            <ion-card-title>{{producto.nombre}}</ion-card-title>
-            <ion-card-subtitle>${{producto.precio}}</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-           Stock: {{producto.stock}}
-          </ion-card-content>
-        </ion-card>
-      </ion-row>
-    </div>
+  
 
   </div>
-
+  <button style="background: red; padding: 30px;" (click)="logout()" *ngIf="islog">LOGOUT</button>
+  <img src="assets/img/logoBodegaLaFe.png" alt="">
+  
+  <img src="" alt="">
+  
+  <div class="titulo"><h1>OFERTA DEL MES</h1></div>
+  
+  <div class="categoria">
+    <div class="category">
+      <b>categorias</b>
+      <p>ver todo ></p>
+    </div>
+  
+      <swiper
+      [config]="config"
+      class="swiper-container"
+      >    
+        <ng-template swiperSlide class="swiper-slide-swipe">
+          <div  class="banner-top">
+            <img class="swiperimg" src="../../../assets/bread.png" alt="">
+            <b>panes</b>
+         </div>
+        </ng-template>
+  
+        <ng-template swiperSlide class="swiper-slide-swipe">
+          <div class="banner-top">
+              <img class="swiperimg" src="../../../assets/fried-egg.png" alt="">
+              <b>huevos</b>
+          </div>
+        </ng-template>
+  
+        <ng-template swiperSlide class="swiper-slide-swipe">
+          <div  class="banner-top">
+             <img class="swiperimg" src="../../../assets/watermelon.png" alt="">
+             <b>sandias</b>
+          </div>
+        </ng-template>
+      </swiper>
+  
+  </div>
+  
+  <div class="productos">
+      <b>Productos populares</b> 
+      <p>ver todo ></p>
+  </div>
+  
+  <div class="productos-populares">
+    <ion-row *ngFor="let producto of productos">
+      <ion-card>
+        <img class="ion-padding" alt="Silhouette of mountains" src="https://i0.wp.com/suspiritosrd.com/wp-content/uploads/2017/01/pan-de-agua-dominicano.jpg?ssl=1" />
+        <ion-card-header>
+          <ion-card-title>{{producto.nombre}}</ion-card-title>
+          <ion-card-subtitle>${{producto.precio}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+         Stock: {{producto.stock}}
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </div>
+  
 </ion-content>
 
 <ion-footer>
@@ -54,3 +101,4 @@
     </div>
   </ion-toolbar>
 </ion-footer>
+

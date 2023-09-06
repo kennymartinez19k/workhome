@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit{
         buttons: ['OK']
       })
       await alert.present()
+      localStorage.removeItem("usuario")
       this.router.navigate(['login'])
     })
   }

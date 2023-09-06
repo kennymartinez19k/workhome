@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/interfaces/product';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,23 @@ usuario: any
       precio: 0,
       stock: 0
     }]
+  }
+  config: SwiperOptions = {
+    slidesPerView: 2,
+    scrollbar: { draggable: true },
+    autoplay:{
+      delay: 1000,
+      disableOnInteraction: false,
+    },
+    
+    loop:true
+  };
+  public islog = false;
+  logout(){
+    if (confirm("Desea Cerrar Sesión")){
+      localStorage.removeItem("islog")
+      this.router.navigate(['/login'])
+    }
   }
 
   ngOnInit(): void {

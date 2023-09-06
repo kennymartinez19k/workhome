@@ -7,6 +7,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { GuardFactoryService } from './guard.guard';
 import { AddProductComponent } from './components/add-product/add-product.component';
+import { SliderComponent } from './components/slider/slider.component';
 const routes: Routes = [
 
   {path: '',component: HomeComponent},
@@ -15,7 +16,9 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [GuardFactoryService]},
   {path: 'product-detail', component: ProductDetailComponent},
-  {path: 'add-product', component: AddProductComponent}
+  {path: 'add-product', component: AddProductComponent},
+  {path: 'profile', component: ProfileComponent},
+  {path: 'slider', component: SliderComponent}
   
 ];
 

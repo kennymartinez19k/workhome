@@ -28,6 +28,40 @@ $extraBold: 800;
             font-weight: $extraBold;
         }
     }
+
+    @media (min-width: 600px){
+        ion-row{
+            width: 33%;
+        }
+    }
+}
+
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(184, 178, 178);
+    padding: 25px;
+    margin: 0px 0px 20px;
+    border-radius: 40px;
+}
+
+.category{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card{
+    width: 45%;
+    
+    
+}
+.cardPadre{
+    display: flex;
+    flex-wrap: wrap;
+    
+   
 }
   
   
@@ -57,4 +91,33 @@ ion-footer {
             color: white;
         }
     }
+
+}
+.productos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.swiperimg{
+    border-radius: 100px;
+    width: 50px;
+    margin-right: 10px;
+    
+}
+
+.swiper-container{
+   display: flex;
+   align-items: center;
+   
+   
+}
+.banner-top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 50px ;
+    padding: 10px 20px;
+    margin: 0px 15px;
 }

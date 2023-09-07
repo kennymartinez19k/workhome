@@ -3,32 +3,31 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './components/register/register.component';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
+import { IonicModule } from '@ionic/angular';
+
+//MODULOS  DE FIREBASE
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
-import { ReactiveFormsModule } from '@angular/forms';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { LoginComponent } from './components/login/login.component';
+// import { provideStorage,getStorage } from '@angular/fire/storage';
+
+import { environment } from '../environments/environment';
+import { ReactiveFormsModule } from '@angular/forms';
+
+//COMPONENTES
 import { HomeComponent } from './components/home/home.component';
-// import function to register Swiper custom elements
-// register Swiper custom elements
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { SwiperModule } from 'swiper/angular';
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    // ExitosoComponent,
     HomeComponent,
     LoginComponent,
     ProfileComponent,
@@ -40,11 +39,12 @@ import { SwiperModule } from 'swiper/angular';
     BrowserModule,
     AppRoutingModule,
     IonicModule.forRoot(),
+    ReactiveFormsModule,
+    SwiperModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    ReactiveFormsModule,
     provideFirestore(() => getFirestore()),
-    SwiperModule
+    // provideStorage(() => getStorage()),
   ],
   providers: [],
   bootstrap: [AppComponent],

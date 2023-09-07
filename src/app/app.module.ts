@@ -23,6 +23,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { SwiperModule } from 'swiper/angular';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { SwiperModule } from 'swiper/angular';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     // provideStorage(() => getStorage()),
   ],
   providers: [],

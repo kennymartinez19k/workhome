@@ -18,9 +18,11 @@ usuario: any
     this.productos = [{
       nombre: "",
       precio: 0,
-      stock: 0
+      stock: 0,
+      // imagenUrl: ''
     }]
   }
+
   config: SwiperOptions = {
     slidesPerView: 2,
     scrollbar: { draggable: true },
@@ -31,13 +33,6 @@ usuario: any
     
     loop:true
   };
-  public islog = false;
-  logout(){
-    if (confirm("Desea Cerrar Sesión")){
-      localStorage.removeItem("islog")
-      this.router.navigate(['/login'])
-    }
-  }
 
   ngOnInit(): void {
     this.firestoreService.obtenerProducto().subscribe(productos => {

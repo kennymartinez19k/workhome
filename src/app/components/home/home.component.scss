@@ -66,33 +66,7 @@ $extraBold: 800;
   
   
 
-ion-footer {
-    ion-toolbar {
-        background: #02B761;
-    }
 
-    .footer {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        .home, .categorias, .carrito, .perfil {
-            font-family: $fuenteDeLetra;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            line-height: 0;
-            margin-top: 0.5em;
-            ion-icon {
-                font-size: 25px;
-            }
-        }
-
-        .home {
-            color: white;
-        }
-    }
-
-}
 .productos{
     display: flex;
     justify-content: space-between;

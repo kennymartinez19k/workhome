@@ -28,10 +28,18 @@
             <ion-input type="number" placeholder="Ingresa la cantidad en stock" required formControlName="stock"></ion-input>
         </ion-item>
         
-        <!-- <ion-item>
-            <ion-label position="stacked">Imagen (Opcional)</ion-label>
-            <ion-button expand="full" (click)="seleccionarImagen()">Seleccionar Imagen</ion-button>
-        </ion-item> -->
+        <div class="uk-flex align-items-center">
+            <ion-item  class="w-90">
+                <ion-label position="floating">Inserte el link de su imagen</ion-label>
+                <ion-input type="text" (keyup)="setImg($event)" (paste)="onPaste($event)" placeholder="Ingresa la cantidad en stock" required formControlName="img"></ion-input>
+            </ion-item>
+            <ion-icon (click)="pasteImg()" class="icon-paste" name="clipboard-outline"></ion-icon>
+        </div>
+
+       <div>
+        <img [src]="imgView" alt="">
+       </div>
+
 
         <button type="submit">Agregar producto</button>
     </form>

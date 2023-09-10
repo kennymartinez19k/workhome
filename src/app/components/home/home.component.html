@@ -10,7 +10,7 @@
     </div>
 
     <div class="busqueda">
-      <ion-searchbar animated="true" placeholder="Busca tu producto aquí..."></ion-searchbar>
+      <ion-searchbar animated="true" placeholder="Busca tu product aquí..."></ion-searchbar>
     </div>
 
   
@@ -58,15 +58,23 @@
   </div>
   
   <div class="productos-populares">
-    <ion-row *ngFor="let producto of productos">
+    <ion-row *ngFor="let product of products">
       <ion-card>
-        <img class="ion-padding" alt="Silhouette of mountains" src="https://i0.wp.com/suspiritosrd.com/wp-content/uploads/2017/01/pan-de-agua-dominicano.jpg?ssl=1" />
-        <ion-card-header>
-          <ion-card-title>{{producto.nombre}}</ion-card-title>
-          <ion-card-subtitle>${{producto.precio}}</ion-card-subtitle>
+        <img class="" alt="Silhouette of mountains" [src]="product.img" />
+        <ion-card-header class="card-header">
+          <p class="title-card">{{product.nombre}}</p>
+          <p class="subtitle-card">${{product.precio}}</p>
+          <p class=""> Disponible: {{product.stock}}</p>
         </ion-card-header>
-        <ion-card-content>
-         Stock: {{producto.stock}}
+        <ion-card-content class="uk-flex uk-flex-between">
+        <div class="mt-10 uk-flex align-items-center">
+          <ion-icon (click)="removeProduct(product)" class="qty-icon" name="remove-outline"></ion-icon>
+          <input class="field-qty" type="number" [value]="product.qty" min="0" name="" id="">
+          <ion-icon class="qty-icon" name="add-outline" (click)="addProduct(product)"></ion-icon>
+        </div>
+        <div>
+          <ion-icon class="cart" name="cart-outline"></ion-icon>
+        </div>
         </ion-card-content>
       </ion-card>
     </ion-row>

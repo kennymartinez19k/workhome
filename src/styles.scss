@@ -9,3 +9,47 @@ ion-button{
 @import 'swiper/scss/navigation';
 @import 'swiper/scss/pagination';
 
+$fuenteDeLetra: 'Poppins', sans-serif;
+$semiBold: 600;
+$extraBold: 800;
+
+.uk-flex{
+    display: flex !important;
+}
+.uk-flex-center{
+    justify-content: center! important ;  /* align horizontal */
+}
+
+.align-items-center{
+    align-items: center !important;
+}
+.uk-flex-between{
+    justify-content: space-between;
+}
+.w-100{
+    width: 100%;
+}
+
+
+.w-90{
+    width: 90%;
+}
+
+.padding-remove{
+    padding: 0px;
+}
+
+.margin-remove{
+    margin: 0px;
+}
+.mt-10{
+    margin-top: 10px;
+}
+
+.mt-5{
+    margin-top: 5px;
+}
+
+.uk-text-center{
+    text-align: center;
+}

@@ -10,7 +10,7 @@
     </div>
 
     <div class="busqueda">
-      <ion-searchbar animated="true" placeholder="Busca tu producto aquí..."></ion-searchbar>
+      <ion-searchbar animated="true" placeholder="Busca tu product aquí..."></ion-searchbar>
     </div>
 
   
@@ -58,42 +58,29 @@
   </div>
   
   <div class="productos-populares">
-    <ion-row *ngFor="let producto of productos">
+    <ion-row *ngFor="let product of products">
       <ion-card>
-        <img class="ion-padding" alt="Silhouette of mountains" src="{{producto.imagenUrl}}" />
-        <ion-card-header>
-          <ion-card-title>{{producto.nombre}}</ion-card-title>
-          <ion-card-subtitle>${{producto.precio}}</ion-card-subtitle>
+        <img class="" alt="Silhouette of mountains" [src]="product.img" />
+        <ion-card-header class="card-header">
+          <p class="title-card">{{product.nombre}}</p>
+          <p class="subtitle-card">${{product.precio}}</p>
+          <p class=""> Disponible: {{product.stock}}</p>
         </ion-card-header>
-        <ion-card-content>
-         Stock: {{producto.stock}}
+        <ion-card-content class="uk-flex uk-flex-between">
+        <div class="mt-10 uk-flex align-items-center">
+          <ion-icon (click)="removeProduct(product)" class="qty-icon" name="remove-outline"></ion-icon>
+          <input class="field-qty" type="number" [value]="product.qty" min="0" name="" id="">
+          <ion-icon class="qty-icon" name="add-outline" (click)="addProduct(product)"></ion-icon>
+        </div>
+        <div>
+          <ion-icon class="cart" name="cart-outline"></ion-icon>
+        </div>
         </ion-card-content>
       </ion-card>
     </ion-row>
   </div>
   
 </ion-content>
+<app-footer-nav currentRoute="/"></app-footer-nav>
 
-<ion-footer>
-  <ion-toolbar color="#">
-    <div class="footer">
-      <div class="home">
-        <ion-icon name="home-outline"></ion-icon>
-        <p>Inicio</p>
-      </div>
-      <div class="categorias">
-        <ion-icon name="grid"></ion-icon>
-        <p>Categorías</p>
-      </div>
-      <div class="carrito">
-        <ion-icon name="cart-outline"></ion-icon>
-        <p>Carrito</p>
-      </div>
-      <div class="perfil" routerLink="/profile">
-        <ion-icon name="person-outline"></ion-icon>
-        <p>Perfil</p>
-      </div>
-    </div>
-  </ion-toolbar>
-</ion-footer>
 

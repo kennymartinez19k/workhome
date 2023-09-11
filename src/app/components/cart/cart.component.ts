@@ -1,40 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Product } from 'src/app/interfaces/product';
 import { FirestoreService } from 'src/app/services/firestore.service';
-import { SwiperOptions } from 'swiper';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class CartComponent implements OnInit{
+  products : any= []
+  constructor(private firestoreService: FirestoreService){
 
-products: Product[] = []
-usuario: any
-
-  constructor(private router: Router, private firestoreService: FirestoreService){
-    this.products = [{
-      nombre: "",
-      precio: 0,
-      stock: 0,
-      img: "",
-      qty: 0
-      // imagenUrl: ''
-    }]
   }
-
-  config: SwiperOptions = {
-    slidesPerView: 2,
-    scrollbar: { draggable: true },
-    autoplay:{
-      delay: 1000,
-      disableOnInteraction: false,
-    },
-    
-    loop:true
-  };
+  latitude: any = ""
+  longitude: any = ""
 
   ngOnInit(): void {
     this.firestoreService.obtenerProducto().subscribe(products => {
@@ -48,12 +27,9 @@ usuario: any
         }
       })
     })
-    const dataUsuario = localStorage.getItem("usuario")
-    if(dataUsuario) {
-      this.usuario = JSON.parse(dataUsuario)
-    }
   }
 
+  
   addProduct(product: any){
     if(product.qty < product.stock ){
       product.qty++
@@ -65,5 +41,25 @@ usuario: any
       product.qty--
     }
   }
-}
+  
+  async getLocation(){
+    try{
+      // let permission = await Geolocation.requestPermissions();
 
+      // console.log(permission)
+      const coordinates = await Geolocation.getCurrentPosition();
+      const locCordinates = coordinates.coords;
+      this.latitude = locCordinates.latitude
+      this.longitude = locCordinates.longitude
+      console.log(locCordinates)
+      
+    }catch(err: any){
+      console.log(err.message)
+    }
+  }
+
+  saveOrder(){
+
+  }
+
+}

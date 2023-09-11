@@ -66,33 +66,7 @@ $extraBold: 800;
   
   
 
-ion-footer {
-    ion-toolbar {
-        background: #02B761;
-    }
 
-    .footer {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        .home, .categorias, .carrito, .perfil {
-            font-family: $fuenteDeLetra;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            line-height: 0;
-            margin-top: 0.5em;
-            ion-icon {
-                font-size: 25px;
-            }
-        }
-
-        .home {
-            color: white;
-        }
-    }
-
-}
 .productos{
     display: flex;
     justify-content: space-between;
@@ -120,4 +94,45 @@ ion-footer {
     border-radius: 50px ;
     padding: 10px 20px;
     margin: 0px 15px;
+}
+
+.card-header{
+    padding: 0px 15px;
+}
+
+.card-header > *{
+    margin: 0px;
+}
+.title-card{
+    font-size: 16px;
+    font-weight: 700;
+}
+.subtitle-card{
+    font-size: 14px;
+    color: green;
+}
+.field-qty{
+    width: 45px;
+    border: 0px;
+    border-bottom: 1px solid #b9b6b6;
+    text-align: center;
+}
+
+.field-qty:focus-visible{
+    border: 0px;
+    outline: #fff;
+    border-bottom: 1px solid #b9b6b6;
+
+}
+.ion-card-content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart{
+    color: green;
+    font-size: 28px;
+}
+.qty-icon{
+    font-size: 25px;
 }

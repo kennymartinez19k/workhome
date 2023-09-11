@@ -1,4 +1,5 @@
 export const environment = {
+  production: false,
   firebase: {
     projectId: 'bodega-la-fe',
     appId: '1:97413658267:web:971944223afa377efcf83e',

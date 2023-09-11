@@ -8,6 +8,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { GuardFactoryService } from './guard.guard';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { ImagenesComponent } from './components/imagenes/imagenes.component';
 import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'add-product', component: AddProductComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'slider', component: SliderComponent},
+  {path: 'img', component: ImagenesComponent}
   {path: 'cart', component: CartComponent}
   
 ];

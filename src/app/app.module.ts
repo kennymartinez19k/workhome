@@ -1,18 +1,17 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicModule } from '@ionic/angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //MODULOS  DE FIREBASE
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-// import { provideStorage,getStorage } from '@angular/fire/storage';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 import { environment } from '../environments/environment';
-import { ReactiveFormsModule } from '@angular/forms';
 
 //COMPONENTES
 import { HomeComponent } from './components/home/home.component';
@@ -23,7 +22,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { SwiperModule } from 'swiper/angular';
-import { provideStorage,getStorage } from '@angular/fire/storage';
+import { ImagenesComponent } from './components/imagenes/imagenes.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     ProfileComponent,
     ProductDetailComponent,
     AddProductComponent,
-    SliderComponent
+    SliderComponent,
+    ImagenesComponent
   ],
   imports: [
     BrowserModule,
@@ -45,8 +45,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage()),
-    // provideStorage(() => getStorage()),
+    provideStorage(() => getStorage())  
   ],
   providers: [],
   bootstrap: [AppComponent],

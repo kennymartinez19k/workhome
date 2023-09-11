@@ -31,7 +31,18 @@
         <!-- <ion-item>
             <ion-label position="stacked">Imagen (Opcional)</ion-label>
             <ion-button expand="full" (click)="seleccionarImagen()">Seleccionar Imagen</ion-button>
+            <p *ngIf="selectedImage">{{selectedImage.format}}</p>
         </ion-item> -->
+        <div>
+            <h2>Subir una imagen</h2>
+            <!-- <button (click)="takePhoto()">Tomar Foto</button> -->
+        </div>
+          
+        <!-- <div *ngIf="imageUrl">
+            <h3>Imagen Subida:</h3>
+            <img [src]="imageUrl" alt="Imagen Subida">
+        </div> -->
+          
 
         <button type="submit">Agregar producto</button>
     </form>

@@ -16,7 +16,7 @@
   
 
   </div>
-  <div class="titulo"><h1>OFERTA DEL MES</h1></div>
+  <div class="titulo" routerLink="/add-product"><h1>AGREGAR PRODUCTO</h1></div>
   
   <div class="categoria">
     <div class="category">
@@ -60,7 +60,7 @@
   <div class="productos-populares">
     <ion-row *ngFor="let producto of productos">
       <ion-card>
-        <img class="ion-padding" alt="Silhouette of mountains" src="https://i0.wp.com/suspiritosrd.com/wp-content/uploads/2017/01/pan-de-agua-dominicano.jpg?ssl=1" />
+        <img class="ion-padding" alt="Silhouette of mountains" src="{{producto.imagenUrl}}" />
         <ion-card-header>
           <ion-card-title>{{producto.nombre}}</ion-card-title>
           <ion-card-subtitle>${{producto.precio}}</ion-card-subtitle>

@@ -21,7 +21,6 @@ usuario: any
       stock: 0,
       img: "",
       qty: 0
-      // imagenUrl: ''
     }]
   }
 

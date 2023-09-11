@@ -24,7 +24,6 @@ import { AddProductComponent } from './components/add-product/add-product.compon
 import { SliderComponent } from './components/slider/slider.component';
 import { SwiperModule } from 'swiper/angular';
 import { ImagenesComponent } from './components/imagenes/imagenes.component';
-import { provideStorage,getStorage } from '@angular/fire/storage'; // tslint:disable-next-line:no-var-requires
 import { CartComponent } from './components/cart/cart.component';
 import { FooterNavComponent } from './components/footer-nav/footer-nav.component';
 // import { AgmCoreModule } from '@agm/core';
@@ -33,7 +32,6 @@ import { FooterNavComponent } from './components/footer-nav/footer-nav.component
   declarations: [
     AppComponent,
     RegisterComponent,
-    
     HomeComponent,
     LoginComponent,
     ProfileComponent,

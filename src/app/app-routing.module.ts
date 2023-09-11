@@ -22,8 +22,8 @@ const routes: Routes = [
   {path: 'add-product', component: AddProductComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'slider', component: SliderComponent},
-  {path: 'img', component: ImagenesComponent}
-  {path: 'cart', component: CartComponent}
+  {path: 'img', component: ImagenesComponent},
+  {path: 'cart', component: CartComponent, canActivate: [GuardFactoryService]}
   
 ];
 

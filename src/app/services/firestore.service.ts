@@ -3,7 +3,6 @@ import { Observable, from, map } from 'rxjs'
 import { Product } from '../interfaces/product';
 import { Firestore, collectionData, collection, addDoc, query, where, getDocs } from '@angular/fire/firestore';
 import { Storage, ref, uploadBytes, getDownloadURL} from '@angular/fire/storage';
-import { Photo } from '@capacitor/camera';
 
 
 @Injectable({
@@ -16,7 +15,6 @@ export class FirestoreService {
   constructor(private firestore: Firestore, private storage: Storage) {}
 
   async agregarProducto(producto: Product) {
-
     const productRef = collection(this.firestore, 'productos');
     return addDoc(productRef, producto);
   }

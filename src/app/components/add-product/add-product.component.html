@@ -35,7 +35,7 @@
         </ion-item> -->
         <div>
             <h2>Subir una imagen</h2>
-            <!-- <button (click)="takePhoto()">Tomar Foto</button> -->
+            <button (click)="takePhoto()">Tomar Foto</button>
         </div>
           
         <!-- <div *ngIf="imageUrl">
@@ -43,13 +43,13 @@
             <img [src]="imageUrl" alt="Imagen Subida">
         </div> -->
           
-        <div class="uk-flex align-items-center">
+        <!-- <div class="uk-flex align-items-center">
             <ion-item  class="w-90">
                 <ion-label position="floating">Inserte el link de su imagen</ion-label>
                 <ion-input type="text" (keyup)="setImg($event)" (paste)="onPaste($event)" placeholder="Ingresa la cantidad en stock" required formControlName="img"></ion-input>
             </ion-item>
             <ion-icon (click)="pasteImg()" class="icon-paste" name="clipboard-outline"></ion-icon>
-        </div>
+        </div> -->
 
        <div>
         <img [src]="imgView" alt="">

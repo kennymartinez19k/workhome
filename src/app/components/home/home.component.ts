@@ -20,7 +20,8 @@ usuario: any
       precio: 0,
       stock: 0,
       img: "",
-      qty: 0
+      qty: 0,
+      categoryId: ""
     }]
   }
 

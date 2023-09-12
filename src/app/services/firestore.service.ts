@@ -19,9 +19,14 @@ export class FirestoreService {
     return addDoc(productRef, producto);
   }
 
-  obtenerProducto(): Observable<Product[]> {
-    const q = query(collection(this.firestore, 'productos'));
+  //FILTRANDO PRODUCTOS POR CATEGORÍA
 
+  obtenerProducto(): Observable<Product[]> {
+    const q = query(
+      collection(this.firestore, 'productos'),
+      where('categoryId', '==', 'banana')
+    );
+  
     return from(getDocs(q)).pipe(
       map((querySnapshot) => {
         const productos: Product[] = [];
@@ -33,4 +38,21 @@ export class FirestoreService {
       })
     );
   }
+
+  //DESCOMENTAR. TRAER TODOS LOS PRODUCTOS
+
+  // obtenerProducto(): Observable<Product[]> {
+  //   const q = query(collection(this.firestore, 'productos'));
+
+  //   return from(getDocs(q)).pipe(
+  //     map((querySnapshot) => {
+  //       const productos: Product[] = [];
+  //       querySnapshot.forEach((doc) => {
+  //         const data = doc.data() as Product;
+  //         productos.push(data);
+  //       });
+  //       return productos;
+  //     })
+  //   );
+  // }
 }

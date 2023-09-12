@@ -5,5 +5,5 @@ export interface Product {
     stock: number
     img: string
     qty: number
-    // categoryId: string
+    categoryId: string
 }

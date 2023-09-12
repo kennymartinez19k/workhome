@@ -38,10 +38,10 @@
             <button (click)="takePhoto()">Tomar Foto</button>
         </div>
           
-        <!-- <div *ngIf="imageUrl">
-            <h3>Imagen Subida:</h3>
-            <img [src]="imageUrl" alt="Imagen Subida">
-        </div> -->
+        <div *ngIf="imgUrl">
+            <h3 *ngIf="imgName">{{imgName}}</h3>
+            <img [src]="imgUrl" alt="Imagen Subida">
+        </div>
           
         <!-- <div class="uk-flex align-items-center">
             <ion-item  class="w-90">

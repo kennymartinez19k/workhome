@@ -27,12 +27,15 @@
             <ion-label position="floating">Cantidad en Stock</ion-label>
             <ion-input type="number" placeholder="Ingresa la cantidad en stock" required formControlName="stock"></ion-input>
         </ion-item>
-        
-        <!-- <ion-item>
-            <ion-label position="stacked">Imagen (Opcional)</ion-label>
-            <ion-button expand="full" (click)="seleccionarImagen()">Seleccionar Imagen</ion-button>
-            <p *ngIf="selectedImage">{{selectedImage.format}}</p>
-        </ion-item> -->
+
+        <ion-item>
+            <ion-select label="Categoría del producto" placeholder="Categoría" formControlName="categoryId">
+              <ion-select-option value="apple">Apple</ion-select-option>
+              <ion-select-option value="banana">Banana</ion-select-option>
+              <ion-select-option value="orange">Orange</ion-select-option>
+            </ion-select>
+        </ion-item>
+
         <div>
             <h2>Subir una imagen</h2>
             <button (click)="takePhoto()">Tomar Foto</button>
@@ -42,14 +45,6 @@
             <h3 *ngIf="imgName">{{imgName}}</h3>
             <img [src]="imgUrl" alt="Imagen Subida">
         </div>
-          
-        <!-- <div class="uk-flex align-items-center">
-            <ion-item  class="w-90">
-                <ion-label position="floating">Inserte el link de su imagen</ion-label>
-                <ion-input type="text" (keyup)="setImg($event)" (paste)="onPaste($event)" placeholder="Ingresa la cantidad en stock" required formControlName="img"></ion-input>
-            </ion-item>
-            <ion-icon (click)="pasteImg()" class="icon-paste" name="clipboard-outline"></ion-icon>
-        </div> -->
 
        <div>
         <img [src]="imgView" alt="">

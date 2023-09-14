@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-toolbar color="#">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        Editar Producto
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+    <form [formGroup]="formEdit" (ngSubmit)="editProduct()">
+      <ion-item>
+        <ion-label position="floating">Nombre del producto</ion-label>
+        <ion-input type="text" placeholder="Ingresa el nombre del producto" required formControlName="nombre"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating">Precio</ion-label>
+        <ion-input type="number" placeholder="Ingresa el precio" required formControlName="precio"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Cantidad en Stock</ion-label>
+        <ion-input type="number" placeholder="Ingresa la cantidad en stock" required formControlName="stock"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-select label="Categoría del producto" placeholder="Categoría" formControlName="categoryId" style="font-weight: 800;">
+          <ion-select-option value="Alimentos Frescos">Alimentos Frescos</ion-select-option>
+          <ion-select-option value="Bebidas">Bebidas</ion-select-option>
+          <ion-select-option value="Enlatados">Enlatados</ion-select-option>
+          <ion-select-option value="Papitas">Papitas</ion-select-option>
+          <ion-select-option value="Higiene">Higiene</ion-select-option>
+          <ion-select-option value="Farmacos">Farmacos</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+      <!-- Agrega aquí la lógica para mostrar la imagen del producto actual si es necesario -->
+  
+      <button type="submit">Guardar cambios</button>
+    </form>
+</ion-content>
+  

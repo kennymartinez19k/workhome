@@ -29,27 +29,23 @@
         </ion-item>
 
         <ion-item>
-            <ion-select label="Categoría del producto" placeholder="Categoría" formControlName="categoryId">
-              <ion-select-option value="apple">Apple</ion-select-option>
-              <ion-select-option value="banana">Banana</ion-select-option>
-              <ion-select-option value="orange">Orange</ion-select-option>
+            <ion-select label="Categoría del producto" placeholder="Categoría" formControlName="categoryId" style="font-weight: 800;">
+              <ion-select-option value="Alimentos Frescos">Alimentos Frescos</ion-select-option>
+              <ion-select-option value="Bebidas">Bebidas</ion-select-option>
+              <ion-select-option value="Enlatados">Enlatados</ion-select-option>
+              <ion-select-option value="Papitas">Papitas</ion-select-option>
+              <ion-select-option value="Higiene">Higiene</ion-select-option>
+              <ion-select-option value="Farmacos">Farmacos</ion-select-option>
             </ion-select>
         </ion-item>
 
-        <div>
-            <h2>Subir una imagen</h2>
-            <button (click)="takePhoto()">Tomar Foto</button>
-        </div>
-          
-        <div *ngIf="imgUrl">
-            <h3 *ngIf="imgName">{{imgName}}</h3>
-            <img [src]="imgUrl" alt="Imagen Subida">
-        </div>
-
-       <div>
-        <img [src]="imgView" alt="">
-       </div>
-
+        <ion-item>
+            <div class="icon-img" (click)="takePhoto()" style="display: flex; align-items: center; gap: 10px;">
+                <ion-icon name="image-outline" style="font-size: 70px;"></ion-icon>
+                <strong>Seleccione la imagen del producto</strong>
+            </div>
+            <em *ngIf="imgName">{{imgName}}</em>
+        </ion-item>
 
 
         <button type="submit">Agregar producto</button>

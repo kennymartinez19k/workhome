@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
-import { FirestoreService } from './firestore.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: Auth, private firestore: FirestoreService) { }
+  constructor(private auth: Auth) { }
 
   async register({email, password}: any) {
     await createUserWithEmailAndPassword(this.auth, email, password)
   }
 
-  async login(email: string, password: string) {
+  async login({email, password}: any) {
     try {
       await signInWithEmailAndPassword(this.auth, email, password)
     } catch (error) {
@@ -25,8 +24,8 @@ export class AuthService {
     return signInWithPopup(this.auth, new GoogleAuthProvider())
   }
 
-  logout() {
-    return signOut(this.auth);
+  async logout() {
+    return await signOut(this.auth);
   }
 
   getCurrentUser(){

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Product } from 'src/app/interfaces/product';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { SwiperOptions } from 'swiper';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
 products: Product[] = []
 usuario: any
 
-  constructor(private router: Router, private firestoreService: FirestoreService){
+  constructor(private router: Router, private firestoreService: FirestoreService, private alert: AlertController){
     this.products = [{
       nombre: "",
       precio: 0,
@@ -36,7 +37,8 @@ usuario: any
     loop:true
   };
 
-  ngOnInit(): void {
+    ngOnInit(): void {
+
     this.firestoreService.obtenerProducto().subscribe(products => {
       this.products = products
       products.forEach(product => {
@@ -65,5 +67,44 @@ usuario: any
       product.qty--
     }
   }
+
+  editProduct(product: Product) {
+    if(product.uid) {
+      this.router.navigate(['/edit-product', product.uid])
+    } else {
+      alert("el uid es null o undefined")
+    }
+  }
+
+  deleteProduct(uid: string): void {
+    this.firestoreService.deleteProduct(uid).then( () => {
+      this.products = this.products.filter(product => product.uid !== uid)
+    }).then( () => {
+      location.reload()
+    } )
+    .catch(error => {
+      console.log("error eliminar producto", error)
+    })
+  }
+
+  async confirmDelete(uid: string) {
+    const alert = await this.alert.create({
+      header: 'Eliminar el producto',
+      message: '¿Está seguro de eliminar el producto?',
+      buttons: [{
+        text: 'Cancelar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: () => {alert.dismiss()}
+      },
+    {
+      text: 'Eliminar',
+      handler: () => {
+        this.deleteProduct(uid)}
+    }]
+    })
+    await alert.present()
+  }
+
 }
 

@@ -11,9 +11,17 @@
 
 <ion-content class="ion-padding persons">
     <div class="person" *ngIf="userData">
-        <h1>{{userData.nombre}}</h1>
+        <h1>{{userData.username}}</h1>
         <p>{{userData.email}}</p>
     </div>
+
+    <div class="options" *ngIf="usuario.role=='admin'" routerLink="/add-product">
+        <ion-item class="option">
+            <ion-icon name="add-circle-outline"></ion-icon>
+            <p>Agregar un producto</p>
+        </ion-item>
+    </div>
+    
     <div class="options">
         <ion-item class="option">
             <ion-icon name="cart-outline"></ion-icon>
@@ -25,6 +33,7 @@
             <p (click)="logout()">Cerrar sesión</p>
         </ion-item>
     </div>
+
 </ion-content>
 
 <app-footer-nav currentRoute="/profile"></app-footer-nav>

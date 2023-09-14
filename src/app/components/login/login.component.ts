@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {Router} from "@angular/router"
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/interfaces/user';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
 
   formLogin: FormGroup;
-constructor( private router: Router, private authService: AuthService ){
+  userdata: User[] = []
+constructor( private router: Router, private authService: AuthService, private firestoreService: FirestoreService){
   this.formLogin = new FormGroup({
     email: new FormControl(),
     password: new FormControl()
@@ -24,18 +27,25 @@ constructor( private router: Router, private authService: AuthService ){
   ngOnInit(): void {}
 
 
-  onSubmit(){
+  login(){
 
-    const email = this.formLogin.value.email
-    const password = this.formLogin.value.password
-    this.authService.login(email, password)
+    const userData = {
+      email: this.formLogin.value.email,
+      password: this.formLogin.value.password
+    }
+
+    this.authService.login(userData)
     .then(response => {
       console.log(response)
-      const usuarioNombre = this.authService.getCurrentUser()?.displayName
-      const usuarioEmail = this.authService.getCurrentUser()?.email
-      const userData = {nombre: usuarioNombre, email: usuarioEmail}
-      localStorage.setItem("usuario", JSON.stringify(userData))
-      localStorage.setItem("islog", JSON.stringify(true))
+      this.firestoreService.obtenerUsuario().subscribe(userdata => {
+        this.userdata = userdata
+        console.log(userdata)
+        const username = userdata.map(x => x.username)
+        const email = userdata.map(x => x.email)
+        const role = userdata.map(x => x.role)
+        const usuario = {username, email, role}
+        localStorage.setItem("usuario", JSON.stringify(usuario))
+      })
       alert("Logeo Exitoso")
       this.router.navigate(['home'])
     })
@@ -45,12 +55,12 @@ constructor( private router: Router, private authService: AuthService ){
     })
   }
 
-  onClick() {
+  loginGoogle() {
     this.authService.loginWithGoogle()
       .then(response => {
         const usuarioNombre = this.authService.getCurrentUser()?.displayName
         const usuarioEmail = this.authService.getCurrentUser()?.email
-        const userData = {nombre: usuarioNombre, email: usuarioEmail}
+        const userData = {username: usuarioNombre, email: usuarioEmail}
         localStorage.setItem("usuario", JSON.stringify(userData))
         localStorage.setItem("islog", JSON.stringify(true))
         console.log(response);

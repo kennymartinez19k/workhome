@@ -15,7 +15,6 @@
     
     formulario: FormGroup;
     selectedFile: File | null = null;
-    imgView: any = null;
     imgUrl: any = null;
     imgName: string | null = null;
 
@@ -39,13 +38,22 @@
         stock: this.formulario.value.stock,
         img: this.imgUrl,
         qty: 0,
-        categoryId: this.formulario.value.categoryId
+        categoryId: this.formulario.value.categoryId,
+        uid: ''
       }
     
       
       if (this.imgUrl) {
-        await this.firestoreService.agregarProducto(producto);
-        this.router.navigate(['home']).then(()=> {location.reload()})
+        this.firestoreService.agregarProducto(producto).then( (productUid) => {
+          console.log(`El producto se ha subido con el id: ${productUid}`)
+          producto.uid = productUid
+          this.firestoreService.actualizarProducto(productUid, producto).then(() =>{
+            console.log('producto actualizado en firebase')
+          })
+          .then(()=>{
+          this.router.navigate(['home']).then(()=> {location.reload()})
+          })
+        })
       } else {
         console.log('No se pudo almacenar la imagen en Firestore.');
       }

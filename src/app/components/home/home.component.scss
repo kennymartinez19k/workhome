@@ -18,6 +18,11 @@ $extraBold: 800;
 }
 
 .productos-populares {
+    .buttons-crud {
+        display: flex;
+        margin: auto;
+        gap: 30px;
+    }
     ion-row {
         width: 50%;
     }

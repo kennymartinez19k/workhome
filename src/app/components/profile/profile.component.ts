@@ -12,8 +12,8 @@ import { Auth } from '@angular/fire/auth';
 
 export class ProfileComponent implements OnInit{
 
-  public islog = false;
   userData: any;
+  usuario: any;
 
   constructor(private router: Router, private auth: AuthService, 
     private alert: AlertController, private test: Auth){}
@@ -32,16 +32,16 @@ export class ProfileComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const estaLogeado = (localStorage.getItem("islog"))
-    if(estaLogeado !== null){
-      this.islog = JSON.parse(estaLogeado)
+
+    const dataUsuario = localStorage.getItem("usuario")
+    if(dataUsuario) {
+      this.usuario = JSON.parse(dataUsuario)
     }
     
-    const userDataString = localStorage.getItem("usuario")
-    if(userDataString) {
-      this.userData = JSON.parse(userDataString)
+    const userDataRef = localStorage.getItem("usuario")
+    if(userDataRef) {
+      this.userData = JSON.parse(userDataRef)
     }
-    console.log(this.test.currentUser?.displayName)
 
   }
 

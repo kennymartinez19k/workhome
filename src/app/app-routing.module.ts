@@ -10,6 +10,7 @@ import { AddProductComponent } from './components/add-product/add-product.compon
 import { SliderComponent } from './components/slider/slider.component';
 import { ImagenesComponent } from './components/imagenes/imagenes.component';
 import { CartComponent } from './components/cart/cart.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 const routes: Routes = [
 
@@ -17,13 +18,14 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
-  {path: 'profile', component: ProfileComponent, canActivate: [GuardFactoryService]},
+  {path: 'profile', component: ProfileComponent},
   {path: 'product-detail', component: ProductDetailComponent},
-  {path: 'add-product', component: AddProductComponent},
+  {path: 'add-product', component: AddProductComponent, canActivate: [GuardFactoryService]},
   {path: 'profile', component: ProfileComponent},
   {path: 'slider', component: SliderComponent},
   {path: 'img', component: ImagenesComponent},
-  {path: 'cart', component: CartComponent, canActivate: [GuardFactoryService]}
+  {path: 'cart', component: CartComponent, canActivate: [GuardFactoryService]},
+  {path: 'edit-product/:uid', component: EditProductComponent, canActivate: [GuardFactoryService]}
   
 ];
 

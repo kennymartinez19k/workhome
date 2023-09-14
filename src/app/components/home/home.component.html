@@ -4,7 +4,7 @@
     <div class="header">
       <ion-img src="assets/img/bodega-la-fe.png" alt="logo bodega la fe"></ion-img>
       <div class="usuario" *ngIf="usuario">
-        <h1>¡Hola {{usuario.nombre}}!</h1>
+        <h1>¡Hola {{usuario.username}}!</h1>
         <em>¡Gracias por comprar con nosotros!</em>
       </div>
     </div>
@@ -13,10 +13,9 @@
       <ion-searchbar animated="true" placeholder="Busca tu product aquí..."></ion-searchbar>
     </div>
 
-  
-
   </div>
-  <div class="titulo" routerLink="/add-product"><h1>AGREGAR PRODUCTO</h1></div>
+
+  <div class="titulo" *ngIf="usuario.role=='admin'" routerLink="/add-product"><h1>AGREGAR PRODUCTO</h1></div>
   
   <div class="categoria">
     <div class="category">
@@ -59,6 +58,14 @@
   
   <div class="productos-populares">
     <ion-row *ngFor="let product of products">
+      <div class="buttons-crud" *ngIf="usuario.role=='admin'">
+        <div (click)="editProduct(product)">
+          <ion-icon name="create-outline" style="font-size: 40px;"></ion-icon>
+        </div>
+        <div (click)="product.uid && confirmDelete(product.uid)">
+          <ion-icon name="trash-outline" style="font-size: 40px;"></ion-icon>
+        </div>
+      </div>
       <ion-card>
         <img class="" alt="Silhouette of mountains" [src]="product.img" />
         <ion-card-header class="card-header">

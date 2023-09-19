@@ -14,8 +14,6 @@
     </div>
 
   </div>
-
-  <div class="titulo" *ngIf="usuario.role=='admin'" routerLink="/add-product"><h1>AGREGAR PRODUCTO</h1></div>
   
   <div class="categoria">
     <div class="category">
@@ -58,7 +56,7 @@
   
   <div class="productos-populares">
     <ion-row *ngFor="let product of products">
-      <div class="buttons-crud" *ngIf="usuario.role=='admin'">
+      <div class="buttons-crud" *ngIf="usuario && usuario.role=='admin'">
         <div (click)="editProduct(product)">
           <ion-icon name="create-outline" style="font-size: 40px;"></ion-icon>
         </div>

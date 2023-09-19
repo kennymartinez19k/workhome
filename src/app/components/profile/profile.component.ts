@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Auth } from '@angular/fire/auth';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,11 +12,11 @@ import { Auth } from '@angular/fire/auth';
 
 export class ProfileComponent implements OnInit{
 
-  userData: any;
-  usuario: any;
+  userData: any = {};
+  usuario: any = {};
 
   constructor(private router: Router, private auth: AuthService, 
-    private alert: AlertController, private test: Auth){}
+    private alert: AlertController, private storageService: StorageService){}
 
     logout(){
     this.auth.logout().then(async() => {
@@ -31,16 +31,16 @@ export class ProfileComponent implements OnInit{
     })
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
 
-    const dataUsuario = localStorage.getItem("usuario")
+    const dataUsuario = await this.storageService.get("usuario")
     if(dataUsuario) {
-      this.usuario = JSON.parse(dataUsuario)
+      this.usuario = dataUsuario
     }
     
-    const userDataRef = localStorage.getItem("usuario")
+    const userDataRef = await this.storageService.get("usuario")
     if(userDataRef) {
-      this.userData = JSON.parse(userDataRef)
+      this.userData = userDataRef
     }
 
   }

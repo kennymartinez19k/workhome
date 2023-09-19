@@ -4,6 +4,7 @@ import { Product } from 'src/app/interfaces/product';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { SwiperOptions } from 'swiper';
 import { AlertController } from '@ionic/angular';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +14,10 @@ import { AlertController } from '@ionic/angular';
 export class HomeComponent implements OnInit {
 
 products: Product[] = []
-usuario: any
+usuario: any = {}
 
-  constructor(private router: Router, private firestoreService: FirestoreService, private alert: AlertController){
+  constructor(private router: Router, private firestoreService: FirestoreService, 
+    private alert: AlertController, private storageService: StorageService){
     this.products = [{
       nombre: "",
       precio: 0,
@@ -37,7 +39,7 @@ usuario: any
     loop:true
   };
 
-    ngOnInit(): void {
+   async ngOnInit() {
 
     this.firestoreService.obtenerProducto().subscribe(products => {
       this.products = products
@@ -50,10 +52,8 @@ usuario: any
         }
       })
     })
-    const dataUsuario = localStorage.getItem("usuario")
-    if(dataUsuario) {
-      this.usuario = JSON.parse(dataUsuario)
-    }
+   this.usuario = await this.storageService.get("usuario")
+   console.log(this.usuario)
   }
 
   addProduct(product: any){

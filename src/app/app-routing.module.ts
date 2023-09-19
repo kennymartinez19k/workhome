@@ -20,7 +20,7 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'product-detail', component: ProductDetailComponent},
-  {path: 'add-product', component: AddProductComponent, canActivate: [GuardFactoryService]},
+  {path: 'add-product', component: AddProductComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'slider', component: SliderComponent},
   {path: 'img', component: ImagenesComponent},

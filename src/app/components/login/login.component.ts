@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {Router} from "@angular/router"
+import { Router } from "@angular/router"
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/interfaces/user';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent {
 
   formLogin: FormGroup;
   userdata: User[] = []
-constructor( private router: Router, private authService: AuthService, private firestoreService: FirestoreService){
+  constructor( private router: Router, private authService: AuthService, 
+    private firestoreService: FirestoreService, private storageService: StorageService){
   this.formLogin = new FormGroup({
     email: new FormControl(),
     password: new FormControl()
@@ -26,8 +28,7 @@ constructor( private router: Router, private authService: AuthService, private f
 
   ngOnInit(): void {}
 
-
-  login(){
+ async login() {
 
     const userData = {
       email: this.formLogin.value.email,
@@ -35,24 +36,17 @@ constructor( private router: Router, private authService: AuthService, private f
     }
 
     this.authService.login(userData)
-    .then(response => {
-      console.log(response)
-      this.firestoreService.obtenerUsuario().subscribe(userdata => {
+
+      this.firestoreService.obtenerUsuario().subscribe(async userdata => {
         this.userdata = userdata
-        console.log(userdata)
         const username = userdata.map(x => x.username)
         const email = userdata.map(x => x.email)
         const role = userdata.map(x => x.role)
         const usuario = {username, email, role}
-        localStorage.setItem("usuario", JSON.stringify(usuario))
+        await this.storageService.set("usuario", usuario)
+        
+        this.router.navigate(['home']).then(()=> {location.reload()})
       })
-      alert("Logeo Exitoso")
-      this.router.navigate(['home'])
-    })
-    .catch(error => {
-      console.log(error)
-      alert("Credenciales incorrectas")
-    })
   }
 
   loginGoogle() {
@@ -71,4 +65,6 @@ constructor( private router: Router, private authService: AuthService, private f
         console.log(error)
       })
   }
+
+
 }

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicModule } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage-angular'
 
 //MODULOS  DE FIREBASE
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -50,6 +51,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     ReactiveFormsModule,
     AppRoutingModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     ReactiveFormsModule,
     SwiperModule,
     // AgmCoreModule.forRoot({
@@ -62,7 +64,9 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())  
   ],
-  providers: [],
+  providers: [
+    Storage
+  ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

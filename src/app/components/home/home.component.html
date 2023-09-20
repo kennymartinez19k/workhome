@@ -1,4 +1,11 @@
 <ion-content class="container ion-padding">
+
+  <ion-fab slot="fixed" vertical="top" horizontal="end" routerLink="/add-product">
+    <ion-fab-button color="success">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <div class="main">
 
     <div class="header">
@@ -9,7 +16,7 @@
       </div>
     </div>
 
-    <div class="busqueda">
+    <div class="busqueda ion-padding">
       <ion-searchbar animated="true" placeholder="Busca tu product aquí..."></ion-searchbar>
     </div>
 
@@ -56,14 +63,6 @@
   
   <div class="productos-populares">
     <ion-row *ngFor="let product of products">
-      <div class="buttons-crud" *ngIf="usuario && usuario.role=='admin'">
-        <div (click)="editProduct(product)">
-          <ion-icon name="create-outline" style="font-size: 40px;"></ion-icon>
-        </div>
-        <div (click)="product.uid && confirmDelete(product.uid)">
-          <ion-icon name="trash-outline" style="font-size: 40px;"></ion-icon>
-        </div>
-      </div>
       <ion-card>
         <img class="" alt="Silhouette of mountains" [src]="product.img" />
         <ion-card-header class="card-header">
@@ -71,7 +70,19 @@
           <p class="subtitle-card">${{product.precio}}</p>
           <p class=""> Disponible: {{product.stock}}</p>
         </ion-card-header>
-        <ion-card-content class="uk-flex uk-flex-between">
+
+        <ion-card-content class="uk-flex uk-flex-between" *ngIf="usuario && usuario.role =='admin'">
+          <div class="buttons-crud">
+            <div (click)="editProduct(product)">
+              <ion-icon name="create-outline" style="font-size: 30px;"></ion-icon>
+            </div>
+            <div (click)="product.uid && confirmDelete(product.uid)">
+              <ion-icon name="trash-outline" style="font-size: 30px;"></ion-icon>
+            </div>
+          </div>
+        </ion-card-content>
+
+        <ion-card-content class="uk-flex uk-flex-between" *ngIf="usuario && usuario.role =='usuario' || !usuario">
         <div class="mt-10 uk-flex align-items-center">
           <ion-icon (click)="removeProduct(product)" class="qty-icon" name="remove-outline"></ion-icon>
           <input class="field-qty" type="number" [value]="product.qty" min="0" name="" id="">
@@ -81,6 +92,7 @@
           <ion-icon class="cart" name="cart-outline"></ion-icon>
         </div>
         </ion-card-content>
+
       </ion-card>
     </ion-row>
   </div>

@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
     <ion-toolbar color="#">
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/register"></ion-back-button>
@@ -7,7 +7,7 @@
         Iniciar Sesión
       </ion-title>
     </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content class="ion-paddding">
 
@@ -35,7 +35,12 @@
             <p>O inicia sesión con</p>
             <img src="assets/img/google.png" alt="google" (click)="loginGoogle()">
         </div>
+        <div class="google">
+          <p>ingresar como invitado</p>
+          <img src="assets/img/invitado.png" alt="google" routerLink="/home">
+        </div>
         <p class="noexists">¿No tienes una cuenta? <span routerLink="/register">Registrate</span></p>
     </form>
   
+
 </ion-content>

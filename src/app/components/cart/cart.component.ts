@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Geolocation } from '@capacitor/geolocation';
+import { Map, tileLayer, marker } from 'leaflet';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit{
-  products : any= []
-  constructor(private firestoreService: FirestoreService){
+export class CartComponent implements OnInit {
 
-  }
+  products : any= []
   latitude: any = ""
   longitude: any = ""
+
+  constructor(private firestoreService: FirestoreService){}
 
   ngOnInit(): void {
     this.firestoreService.obtenerProducto().subscribe(products => {
@@ -29,6 +30,20 @@ export class CartComponent implements OnInit{
     })
   }
 
+  // async ngAfterViewInit(){
+  //   const map = new Map('map').setView([19.4478, -70.7029], 13)
+
+  //   tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  //     maxZoom: 19,
+  //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  //   }).addTo(map)
+
+  //  const makerItem = marker([19.4478, -70.7029]).addTo(map).bindPopup('Tu ubicación')
+
+  //   map.fitBounds([
+  //     [makerItem.getLatLng().lat, makerItem.getLatLng().lng]
+  //   ])
+  // }
   
   addProduct(product: any){
     if(product.qty < product.stock ){
@@ -52,6 +67,19 @@ export class CartComponent implements OnInit{
       this.latitude = locCordinates.latitude
       this.longitude = locCordinates.longitude
       console.log(locCordinates)
+
+      const map = new Map('map').setView([this.latitude, this.longitude], 13)
+
+      tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map)
+  
+     const makerItem = marker([this.latitude, this.longitude]).addTo(map).bindPopup('Tu ubicación')
+  
+      map.fitBounds([
+        [makerItem.getLatLng().lat, makerItem.getLatLng().lng]
+      ])
       
     }catch(err: any){
       console.log(err.message)

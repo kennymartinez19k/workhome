@@ -42,26 +42,18 @@
       
           </ion-list>
         </ion-card-content>
-        <ion-card-header>
-            <ion-card-subtitle class="uk-text-center">Introduzca su ubicacion para poder realizar el pedido</ion-card-subtitle>
-          </ion-card-header>
+  
+        <ion-item>
+          <div class="icon-img" (click)="getLocation()" style="display: flex; align-items: center; gap: 10px; padding: 5px;">
+              <ion-icon name="location-outline" style="font-size: 70px;"></ion-icon>
+              <em>Presione para añadir su ubicación</em>
+          </div>
+        </ion-item>
+
         <ion-card-content>
 
-
-            <div class="uk-flex align-items-center">
-                <ion-item>
-                    <ion-label position="floating">Latitude</ion-label>
-                    <ion-input type="number" [(ngModel)]="latitude"  placeholder=""></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label position="floating">Longitude</ion-label>
-                    <ion-input type="number" [(ngModel)]="longitude"  placeholder="" ></ion-input>
-                </ion-item>
-                <ion-icon class="icon-location" (click)="getLocation()" name="navigate"></ion-icon>
-            </div>
-
-
-            <ion-button expand="full" (click)="saveOrder()">Hacer Pedido</ion-button>
+            <div id="map"></div>
+            <ion-button expand="full" (click)="saveOrder()" style="padding-top: 20px;">Hacer Pedido</ion-button>
         </ion-card-content>
       </ion-card>
 </ion-content>

@@ -44,7 +44,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     ImagenesComponent,
     CartComponent,
     FooterNavComponent,
-    EditProductComponent
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,

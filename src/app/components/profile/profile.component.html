@@ -14,13 +14,6 @@
         <h1>{{userData.username}}</h1>
         <p>{{userData.email}}</p>
     </div>
-
-    <div class="options" *ngIf="usuario.role=='admin'" routerLink="/add-product">
-        <ion-item class="option">
-            <ion-icon name="add-circle-outline"></ion-icon>
-            <p>Agregar un producto</p>
-        </ion-item>
-    </div>
     
     <div class="options">
         <ion-item class="option">

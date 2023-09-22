@@ -2,6 +2,10 @@
 $fuenteDeLetra: 'Poppins', sans-serif;
 $semiBold: 600;
 $extraBold: 800;
+
+#map {
+    height: 200px;
+}
 ion-toolbar {
     background: #02B761;
     ion-back-button {

@@ -14,7 +14,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
 
 const routes: Routes = [
 
-  {path: '',component: HomeComponent},
+  {path: '',component: CartComponent},
   {path: 'home', component: HomeComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},

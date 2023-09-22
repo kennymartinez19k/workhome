@@ -10,6 +10,7 @@ import { AddProductComponent } from './components/add-product/add-product.compon
 import { SliderComponent } from './components/slider/slider.component';
 import { ImagenesComponent } from './components/imagenes/imagenes.component';
 import { CartComponent } from './components/cart/cart.component';
+import {OrderHistoryComponent} from './components/order-history/order-history.component'
 
 const routes: Routes = [
 
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'slider', component: SliderComponent},
   {path: 'img', component: ImagenesComponent},
-  {path: 'cart', component: CartComponent, canActivate: [GuardFactoryService]}
+  {path: 'cart', component: CartComponent, canActivate: [GuardFactoryService]},
+  {path:  'OrderHistory', component: OrderHistoryComponent}
   
 ];
 

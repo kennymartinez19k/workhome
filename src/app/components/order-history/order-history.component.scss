@@ -1,0 +1,42 @@
+
+$fuenteDeLetra: 'Poppins', sans-serif;
+$semiBold: 600;
+$extraBold: 800;
+
+.divpadre{
+    display: flex;
+    padding: 20px;
+    
+}
+
+img{
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    
+}
+
+.Divhijo{
+    margin-left: 30px;
+}
+
+button{
+    background-color: #02B761;
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+ion-toolbar {
+    background: #02B761;
+    ion-back-button {
+        color: white;
+        position: absolute;
+    }
+    ion-title {
+        font-family: $fuenteDeLetra;
+        font-weight: $extraBold;
+        color: white;
+        text-align: center;
+    }
+}

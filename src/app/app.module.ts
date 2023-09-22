@@ -26,6 +26,7 @@ import { SwiperModule } from 'swiper/angular';
 import { ImagenesComponent } from './components/imagenes/imagenes.component';
 import { CartComponent } from './components/cart/cart.component';
 import { FooterNavComponent } from './components/footer-nav/footer-nav.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
 // import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
@@ -40,7 +41,8 @@ import { FooterNavComponent } from './components/footer-nav/footer-nav.component
     SliderComponent,
     ImagenesComponent,
     CartComponent,
-    FooterNavComponent
+    FooterNavComponent,
+    OrderHistoryComponent
   ],
   imports: [
     BrowserModule,

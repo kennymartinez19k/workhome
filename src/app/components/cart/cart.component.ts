@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { Map, tileLayer, marker } from 'leaflet';
@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
   constructor(private firestoreService: FirestoreService){}
 
   ngOnInit(): void {
-    this.firestoreService.obtenerProducto().subscribe(products => {
+    this.firestoreService.getProduct().subscribe(products => {
       this.products = products
       products.forEach(product => {
         if(!product.img){
@@ -30,21 +30,7 @@ export class CartComponent implements OnInit {
     })
   }
 
-  // async ngAfterViewInit(){
-  //   const map = new Map('map').setView([19.4478, -70.7029], 13)
 
-  //   tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  //     maxZoom: 19,
-  //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  //   }).addTo(map)
-
-  //  const makerItem = marker([19.4478, -70.7029]).addTo(map).bindPopup('Tu ubicación')
-
-  //   map.fitBounds([
-  //     [makerItem.getLatLng().lat, makerItem.getLatLng().lng]
-  //   ])
-  // }
-  
   addProduct(product: any){
     if(product.qty < product.stock ){
       product.qty++
@@ -59,9 +45,7 @@ export class CartComponent implements OnInit {
   
   async getLocation(){
     try{
-      // let permission = await Geolocation.requestPermissions();
 
-      // console.log(permission)
       const coordinates = await Geolocation.getCurrentPosition();
       const locCordinates = coordinates.coords;
       this.latitude = locCordinates.latitude
@@ -81,8 +65,8 @@ export class CartComponent implements OnInit {
         [makerItem.getLatLng().lat, makerItem.getLatLng().lng]
       ])
       
-    }catch(err: any){
-      console.log(err.message)
+    }catch(error){
+      console.log(error)
     }
   }
 

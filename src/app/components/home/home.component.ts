@@ -41,7 +41,7 @@ usuario: any = {}
 
    async ngOnInit() {
 
-    this.firestoreService.obtenerProducto().subscribe(products => {
+    this.firestoreService.getProduct().subscribe(products => {
       this.products = products
       products.forEach(product => {
         if(!product.img){

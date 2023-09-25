@@ -14,6 +14,9 @@
         <h1>{{userData.username}}</h1>
         <p>{{userData.email}}</p>
     </div>
+    <div class="person" *ngIf="!userData">
+        <h1>INVITADO</h1>
+    </div>
     
     <div class="options">
         <ion-item class="option">

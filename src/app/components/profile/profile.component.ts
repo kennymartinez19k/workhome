@@ -18,9 +18,9 @@ export class ProfileComponent implements OnInit{
   constructor(private router: Router, private auth: AuthService, 
     private alert: AlertController, private storageService: StorageService){}
 
-    logout(){
-    this.auth.logout().then(() => {
-      this.storageService.remove("usuario")
+     logout(){
+      this.storageService.clear().then(() => {
+      this.auth.logout()
       this.router.navigate(['login']).then(()=>{location.reload()})
     })
   }

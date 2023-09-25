@@ -63,8 +63,10 @@
   
   <div class="productos-populares">
     <ion-row *ngFor="let product of products">
-      <ion-card>
-        <img class="" alt="Silhouette of mountains" [src]="product.img" />
+      <ion-card class="product-card">
+        <div class="image-container">
+          <img class="product-img" alt="Silhouette of products" [src]="product.img" />
+        </div>
         <ion-card-header class="card-header">
           <p class="title-card">{{product.nombre}}</p>
           <p class="subtitle-card">${{product.precio}}</p>

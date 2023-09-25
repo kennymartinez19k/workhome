@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Geolocation } from '@capacitor/geolocation';
-import { Map, tileLayer, marker } from 'leaflet';
+// import { Map, tileLayer, marker } from 'leaflet';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cart',
@@ -13,8 +14,10 @@ export class CartComponent implements OnInit {
   products : any= []
   latitude: any = ""
   longitude: any = ""
+  showMap = false
+  mapURL: SafeResourceUrl | undefined
 
-  constructor(private firestoreService: FirestoreService){}
+  constructor(private firestoreService: FirestoreService, private sanitizer: DomSanitizer){}
 
   ngOnInit(): void {
     this.firestoreService.getProduct().subscribe(products => {
@@ -44,6 +47,7 @@ export class CartComponent implements OnInit {
   }
   
   async getLocation(){
+
     try{
 
       const coordinates = await Geolocation.getCurrentPosition();
@@ -52,18 +56,24 @@ export class CartComponent implements OnInit {
       this.longitude = locCordinates.longitude
       console.log(locCordinates)
 
-      const map = new Map('map').setView([this.latitude, this.longitude], 13)
+      // const url = `https://www.google.com/maps/dir/${this.latitude},${this.longitude}/`
+      const url = `https://www.google.com/maps/embed/v1/place?q=${this.latitude},${this.longitude}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`
 
-      tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      }).addTo(map)
+      this.mapURL = this.sanitizer.bypassSecurityTrustResourceUrl(url)
+      this.showMap = true
+
+    //   const map = new Map('map').setView([this.latitude, this.longitude], 13)
+
+    //   tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //     maxZoom: 19,
+    //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    //   }).addTo(map)
   
-     const makerItem = marker([this.latitude, this.longitude]).addTo(map).bindPopup('Tu ubicación')
+    //  const makerItem = marker([this.latitude, this.longitude]).addTo(map).bindPopup('Tu ubicación')
   
-      map.fitBounds([
-        [makerItem.getLatLng().lat, makerItem.getLatLng().lng]
-      ])
+    //   map.fitBounds([
+    //     [makerItem.getLatLng().lat, makerItem.getLatLng().lng]
+    //   ])
       
     }catch(error){
       console.log(error)

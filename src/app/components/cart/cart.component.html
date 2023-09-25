@@ -1,63 +1,68 @@
 <ion-header>
-    <ion-toolbar color="#">
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/home"></ion-back-button>
+  <ion-toolbar color="#">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-      <ion-title>
-        Mis Pedidos
-      </ion-title>
-    </ion-toolbar>
+    <ion-title>
+      Mis Pedidos
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-card class="margin-remove">
-        <ion-card-header>
-          <ion-card-title class="uk-text-center">Hola Maria</ion-card-title>
-          <ion-card-subtitle  class="uk-flex uk-flex-between"><b>Total: </b><span>$RD 2000</span> </ion-card-subtitle>
-          <ion-card-subtitle class="uk-flex uk-flex-between"><b>Cantidad de productos: </b><span>10</span> </ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-list>
-            <ion-item *ngFor="let product of products">
-              <ion-thumbnail slot="start">
-                <img alt="Silhouette of mountains" [src]="product.img" />
-              </ion-thumbnail>
-              <div class="uk-flex uk-flex-between w-100">
-                  <div>
-                    <div>
-                        <p class="title-card">{{product.nombre}}</p>
-                        <p class="subtitle-card">${{product.precio}}</p>
-                    </div>
-                    <div class="mt-5 uk-flex align-items-center">
-                        <ion-icon (click)="removeProduct(product)" class="qty-icon" name="remove-outline"></ion-icon>
-                        <input class="field-qty" type="number" [value]="product.qty" min="0" name="" id="">
-                        <ion-icon class="qty-icon" name="add-outline" (click)="addProduct(product)"></ion-icon>
-                      </div>
-                  </div>
-                  <div>
-                    <!-- <ion-icon name="close-circle-outline"></ion-icon> -->
-                    <ion-icon class="icon-close" name="trash"></ion-icon>
-                  </div>
+  <ion-card class="margin-remove">
+    <ion-card-header>
+      <ion-card-title class="uk-text-center">Hola Maria</ion-card-title>
+      <ion-card-subtitle class="uk-flex uk-flex-between"><b>Total: </b><span>$RD 2000</span> </ion-card-subtitle>
+      <ion-card-subtitle class="uk-flex uk-flex-between"><b>Cantidad de productos: </b><span>10</span>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let product of products">
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" [src]="product.img" />
+          </ion-thumbnail>
+          <div class="uk-flex uk-flex-between w-100">
+            <div>
+              <div>
+                <p class="title-card">{{product.nombre}}</p>
+                <p class="subtitle-card">${{product.precio}}</p>
               </div>
-            </ion-item>
-      
-          </ion-list>
-        </ion-card-content>
-  
-        <ion-item>
-          <div class="icon-img" (click)="getLocation()" style="display: flex; align-items: center; gap: 10px; padding: 5px;">
-              <ion-icon name="location-outline" style="font-size: 70px;"></ion-icon>
-              <em>Presione para añadir su ubicación</em>
+              <div class="mt-5 uk-flex align-items-center">
+                <ion-icon (click)="removeProduct(product)" class="qty-icon" name="remove-outline"></ion-icon>
+                <input class="field-qty" type="number" [value]="product.qty" min="0" name="" id="">
+                <ion-icon class="qty-icon" name="add-outline" (click)="addProduct(product)"></ion-icon>
+              </div>
+            </div>
+            <div>
+              <!-- <ion-icon name="close-circle-outline"></ion-icon> -->
+              <ion-icon class="icon-close" name="trash"></ion-icon>
+            </div>
           </div>
         </ion-item>
 
-        <ion-card-content>
+      </ion-list>
+    </ion-card-content>
 
-            <div id="map"></div>
-            <ion-button expand="full" (click)="saveOrder()" style="padding-top: 20px;">Hacer Pedido</ion-button>
-        </ion-card-content>
-      </ion-card>
+    <ion-item>
+      <div class="icon-img" (click)="getLocation()"
+        style="display: flex; align-items: center; gap: 10px; padding: 5px;">
+        <ion-icon name="location-outline" style="font-size: 70px;"></ion-icon>
+        <em>Presione para añadir su ubicación</em>
+      </div>
+    </ion-item>
+
+    <ion-card-content>
+
+      <div id="map">
+        <iframe *ngIf="showMap" width="100%" height="200" frameborder="0" scrolling="no" marginheight="0"
+        marginwidth="0" [src]="mapURL" allowfullscreen></iframe>
+      </div>
+      <ion-button expand="full" (click)="saveOrder()" style="padding-top: 20px;">Hacer Pedido</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 
 
-  <app-footer-nav></app-footer-nav>
+<app-footer-nav></app-footer-nav>

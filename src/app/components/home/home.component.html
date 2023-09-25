@@ -89,6 +89,7 @@
           <ion-icon (click)="removeProduct(product)" class="qty-icon" name="remove-outline"></ion-icon>
           <input class="field-qty" type="number" [value]="product.qty" min="0" name="" id="">
           <ion-icon class="qty-icon" name="add-outline" (click)="addProduct(product)"></ion-icon>
+          <button (click)="addToCart(product)">carrito</button>
         </div>
         <div>
           <ion-icon class="cart" name="cart-outline"></ion-icon>

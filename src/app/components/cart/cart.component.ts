@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Geolocation } from '@capacitor/geolocation';
-import { Map, tileLayer, marker } from 'leaflet';
+// import { Map, tileLayer, marker } from 'leaflet';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cart',
@@ -13,11 +14,13 @@ export class CartComponent implements OnInit {
   products : any= []
   latitude: any = ""
   longitude: any = ""
+  showMap = false
+  mapURL: SafeResourceUrl | undefined
 
-  constructor(private firestoreService: FirestoreService){}
+  constructor(private firestoreService: FirestoreService, private sanitizer: DomSanitizer){}
 
   ngOnInit(): void {
-    this.firestoreService.obtenerProducto().subscribe(products => {
+    this.firestoreService.getProduct().subscribe(products => {
       this.products = products
       products.forEach(product => {
         if(!product.img){
@@ -30,21 +33,7 @@ export class CartComponent implements OnInit {
     })
   }
 
-  // async ngAfterViewInit(){
-  //   const map = new Map('map').setView([19.4478, -70.7029], 13)
 
-  //   tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  //     maxZoom: 19,
-  //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  //   }).addTo(map)
-
-  //  const makerItem = marker([19.4478, -70.7029]).addTo(map).bindPopup('Tu ubicación')
-
-  //   map.fitBounds([
-  //     [makerItem.getLatLng().lat, makerItem.getLatLng().lng]
-  //   ])
-  // }
-  
   addProduct(product: any){
     if(product.qty < product.stock ){
       product.qty++
@@ -58,31 +47,36 @@ export class CartComponent implements OnInit {
   }
   
   async getLocation(){
-    try{
-      // let permission = await Geolocation.requestPermissions();
 
-      // console.log(permission)
+    try{
+
       const coordinates = await Geolocation.getCurrentPosition();
       const locCordinates = coordinates.coords;
       this.latitude = locCordinates.latitude
       this.longitude = locCordinates.longitude
       console.log(locCordinates)
 
-      const map = new Map('map').setView([this.latitude, this.longitude], 13)
+      // const url = `https://www.google.com/maps/dir/${this.latitude},${this.longitude}/`
+      const url = `https://www.google.com/maps/embed/v1/place?q=${this.latitude},${this.longitude}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`
 
-      tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      }).addTo(map)
+      this.mapURL = this.sanitizer.bypassSecurityTrustResourceUrl(url)
+      this.showMap = true
+
+    //   const map = new Map('map').setView([this.latitude, this.longitude], 13)
+
+    //   tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //     maxZoom: 19,
+    //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    //   }).addTo(map)
   
-     const makerItem = marker([this.latitude, this.longitude]).addTo(map).bindPopup('Tu ubicación')
+    //  const makerItem = marker([this.latitude, this.longitude]).addTo(map).bindPopup('Tu ubicación')
   
-      map.fitBounds([
-        [makerItem.getLatLng().lat, makerItem.getLatLng().lng]
-      ])
+    //   map.fitBounds([
+    //     [makerItem.getLatLng().lat, makerItem.getLatLng().lng]
+    //   ])
       
-    }catch(err: any){
-      console.log(err.message)
+    }catch(error){
+      console.log(error)
     }
   }
 

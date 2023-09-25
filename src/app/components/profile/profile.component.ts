@@ -18,16 +18,10 @@ export class ProfileComponent implements OnInit{
   constructor(private router: Router, private auth: AuthService, 
     private alert: AlertController, private storageService: StorageService){}
 
-    logout(){
-    this.auth.logout().then(async() => {
-      const alert = await this.alert.create({
-        header: 'Cierre de sesión existoso',
-        message: 'Vuelva a inicar sesión para seguir comprando.',
-        buttons: ['OK']
-      })
-      await alert.present()
-      this.storageService.remove("usuario")
-      this.router.navigate(['login'])
+     logout(){
+      this.storageService.clear().then(() => {
+      this.auth.logout()
+      this.router.navigate(['login']).then(()=>{location.reload()})
     })
   }
 
@@ -43,6 +37,25 @@ export class ProfileComponent implements OnInit{
       this.userData = userDataRef
     }
 
+  }
+
+  async confirmLogout() {
+    const alert = await this.alert.create({
+      header: 'Cerrar sesión',
+      message: '¿Está que desea cerrar sesión?',
+      buttons: [{
+        text: 'Cancelar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: () => {alert.dismiss()}
+      },
+    {
+      text: 'Eliminar',
+      handler: () => {
+        this.logout()}
+    }]
+    })
+    await alert.present()
   }
 
 }

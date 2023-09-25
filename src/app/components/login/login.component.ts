@@ -17,6 +17,7 @@ export class LoginComponent {
 
   formLogin: FormGroup;
   userdata: User[] = []
+  
   constructor( private router: Router, private authService: AuthService, 
     private firestoreService: FirestoreService, private storageService: StorageService){
   this.formLogin = new FormGroup({
@@ -35,9 +36,9 @@ export class LoginComponent {
       password: this.formLogin.value.password
     }
 
-    this.authService.login(userData)
-
-      this.firestoreService.obtenerUsuario().subscribe(async userdata => {
+    this.authService.login(userData).then(()=>{
+      
+      this.firestoreService.getUser().subscribe(async userdata => {
         this.userdata = userdata
         const username = userdata.map(x => x.username)
         const email = userdata.map(x => x.email)
@@ -47,19 +48,17 @@ export class LoginComponent {
         
         this.router.navigate(['home']).then(()=> {location.reload()})
       })
+    })
   }
 
-  loginGoogle() {
+    loginGoogle() {
     this.authService.loginWithGoogle()
-      .then(response => {
+      .then( async () => {
         const usuarioNombre = this.authService.getCurrentUser()?.displayName
         const usuarioEmail = this.authService.getCurrentUser()?.email
-        const userData = {username: usuarioNombre, email: usuarioEmail}
-        localStorage.setItem("usuario", JSON.stringify(userData))
-        localStorage.setItem("islog", JSON.stringify(true))
-        console.log(response);
-        alert("Logeo Exitoso")
-        this.router.navigate(['home'])
+        const userData = {username: usuarioNombre, email: usuarioEmail, role: 'usuario'}
+        await this.storageService.set("usuario", userData)
+        this.router.navigate(['home']).then(()=> {location.reload()})
       })
       .catch(error => {
         console.log(error)

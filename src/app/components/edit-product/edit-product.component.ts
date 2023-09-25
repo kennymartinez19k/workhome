@@ -28,7 +28,7 @@ export class EditProductComponent implements OnInit {
   ngOnInit(): void {
     const productId = this.activatedRoute.snapshot.paramMap.get('uid')
     if(productId !== null) {
-      this.firestoreService.obtenerProductoPorId(productId).then((product) =>{
+      this.firestoreService.getProductById(productId).then((product) =>{
         if(product) {
           this.product = product
           this.formEdit.patchValue(product)
@@ -43,7 +43,7 @@ export class EditProductComponent implements OnInit {
         ...this.product,
         ...this.formEdit.value
       }
-      this.firestoreService.actualizarProducto(this.product.uid, productUpt).then( ()=>{
+      this.firestoreService.updateProduct(this.product.uid, productUpt).then( ()=>{
         this.router.navigate(['home']).then(()=>{location.reload()})
       })
     }

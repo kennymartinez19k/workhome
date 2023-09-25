@@ -18,6 +18,8 @@ $extraBold: 800;
 }
 
 .productos-populares {
+    display: flex;
+    flex-wrap: wrap;
     .buttons-crud {
         display: flex;
         margin: auto;
@@ -25,12 +27,25 @@ $extraBold: 800;
     }
     ion-row {
         width: 50%;
-    }
-    display: flex;
-    flex-wrap: wrap;
-    ion-card {
-        ion-card-title, ion-card-subtitle, ion-card-content {
-            font-weight: $extraBold;
+        .product-card {
+            width: 200px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            .image-container {
+                flex: 1;
+                overflow: hidden;
+                .product-img {
+                    max-width: 100%;
+                    max-height: 100%;
+                    object-fit: cover;
+                }
+            }
+            ion-card-title, ion-card-subtitle, ion-card-content {
+                font-weight: $extraBold;
+            }
         }
     }
 

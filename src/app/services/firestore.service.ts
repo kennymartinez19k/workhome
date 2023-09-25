@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from, map } from 'rxjs';
 import { User } from '../interfaces/user';
 import { Product } from '../interfaces/product';
-import { Firestore, collectionData, collection, addDoc, query, where, getDocs, doc, getDoc, updateDoc, setDoc, deleteDoc } from '@angular/fire/firestore';
-import { Storage, ref, uploadBytes, getDownloadURL} from '@angular/fire/storage';
+import { Firestore, collection, addDoc, query, where, getDocs, doc, getDoc, setDoc, deleteDoc } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 
 
@@ -12,16 +11,15 @@ import { AuthService } from './auth.service';
 })
 export class FirestoreService {
 
-  
 
-  constructor(private firestore: Firestore, private storage: Storage, private auth: AuthService) {}
+  constructor(private firestore: Firestore,  private auth: AuthService) {}
 
   async addUser(user: User) {
     const userRef = collection(this.firestore, 'usuarios')
     return addDoc(userRef, user)
   }
 
-  async agregarProducto(product: Product) {
+  async addProduct(product: Product) {
     const productRef = collection(this.firestore, 'productos');
     const docRef = await addDoc(productRef, product)
     return docRef.id
@@ -49,7 +47,7 @@ export class FirestoreService {
 
   //DESCOMENTAR. TRAER TODOS LOS PRODUCTOS
 
-  obtenerProducto(): Observable<Product[]> {
+  getProduct(): Observable<Product[]> {
     const q = query(collection(this.firestore, 'productos'));
 
     return from(getDocs(q)).pipe(
@@ -65,7 +63,7 @@ export class FirestoreService {
   }
 
 
-  obtenerUsuario(): Observable<User[]> {
+  getUser(): Observable<User[]> {
     const q = query(
       collection(this.firestore, 'usuarios'),
       where('uid', '==', this.auth.getCurrentUser()?.uid)
@@ -83,7 +81,7 @@ export class FirestoreService {
     );
   }
 
-  async obtenerProductoPorId(uid: string): Promise<Product | undefined> {
+  async getProductById(uid: string): Promise<Product | undefined> {
     const docRef = doc(this.firestore, 'productos', uid)
     const docSnap = await getDoc(docRef)
     if(docSnap.exists()) {
@@ -93,7 +91,7 @@ export class FirestoreService {
     }
   }
 
-  async actualizarProducto(uid: string, product: Product): Promise <void> {
+  async updateProduct(uid: string, product: Product): Promise <void> {
     const productRef = doc(this.firestore, 'productos', uid)
     return setDoc(productRef, product, {merge: true})
   }

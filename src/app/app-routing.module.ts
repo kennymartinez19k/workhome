@@ -14,7 +14,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
 
 const routes: Routes = [
 
-  {path: '',component: CartComponent},
+  {path: '',component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
@@ -24,7 +24,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'slider', component: SliderComponent},
   {path: 'img', component: ImagenesComponent},
-  {path: 'cart', component: CartComponent, canActivate: [GuardFactoryService]},
+  {path: 'cart', component: CartComponent},
   {path: 'edit-product/:uid', component: EditProductComponent, canActivate: [GuardFactoryService]}
   
 ];

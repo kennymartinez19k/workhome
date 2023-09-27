@@ -11,6 +11,7 @@ import { SliderComponent } from './components/slider/slider.component';
 import { ImagenesComponent } from './components/imagenes/imagenes.component';
 import { CartComponent } from './components/cart/cart.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 const routes: Routes = [
 
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path: 'slider', component: SliderComponent},
   {path: 'img', component: ImagenesComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'edit-product/:uid', component: EditProductComponent, canActivate: [GuardFactoryService]}
+  {path: 'edit-product/:uid', component: EditProductComponent, canActivate: [GuardFactoryService]},
+  {path: 'orders', component: OrdersComponent}
   
 ];
 

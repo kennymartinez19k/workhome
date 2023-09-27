@@ -1,6 +1,6 @@
 <ion-content class="container ion-padding">
 
-  <ion-fab slot="fixed" vertical="top" horizontal="end" routerLink="/add-product">
+  <ion-fab slot="fixed" vertical="top" horizontal="end" routerLink="/add-product" *ngIf="usuario && usuario.role =='admin'">
     <ion-fab-button color="success">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
@@ -12,6 +12,10 @@
       <ion-img src="assets/img/bodega-la-fe.png" alt="logo bodega la fe"></ion-img>
       <div class="usuario" *ngIf="usuario">
         <h1>¡Hola {{usuario.username}}!</h1>
+        <em>¡Gracias por comprar con nosotros!</em>
+      </div>
+      <div class="usuario" *ngIf="!usuario">
+        <h1>¡Hola Invitado!</h1>
         <em>¡Gracias por comprar con nosotros!</em>
       </div>
     </div>
@@ -85,13 +89,8 @@
         </ion-card-content>
 
         <ion-card-content class="uk-flex uk-flex-between" *ngIf="usuario && usuario.role =='usuario' || !usuario">
-        <div class="mt-10 uk-flex align-items-center">
-          <ion-icon (click)="removeProduct(product)" class="qty-icon" name="remove-outline"></ion-icon>
-          <input class="field-qty" type="number" [value]="product.qty" min="0" name="" id="">
-          <ion-icon class="qty-icon" name="add-outline" (click)="addProduct(product)"></ion-icon>
-          <button (click)="addToCart(product)">carrito</button>
-        </div>
-        <div>
+        <div class="button-cart" (click)="addToCart(product)" style="display: flex; align-items: center;">
+          <ion-button style="font-size: 10px;">Añadir al carrito</ion-button>
           <ion-icon class="cart" name="cart-outline"></ion-icon>
         </div>
         </ion-card-content>

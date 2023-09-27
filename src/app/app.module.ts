@@ -29,6 +29,8 @@ import { ImagenesComponent } from './components/imagenes/imagenes.component';
 import { CartComponent } from './components/cart/cart.component';
 import { FooterNavComponent } from './components/footer-nav/footer-nav.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { OrdersComponent } from './components/orders/orders.component';
+
 // import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
@@ -45,6 +47,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     CartComponent,
     FooterNavComponent,
     EditProductComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,

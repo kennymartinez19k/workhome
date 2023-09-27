@@ -3,7 +3,14 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AlertController } from '@ionic/angular';
+import { StorageService } from 'src/app/services/storage.service';
+import { Firestore, collection, query, where, getDocs } from '@angular/fire/firestore';
+import { Auth } from '@angular/fire/auth';
+import { Product } from 'src/app/interfaces/product';
+import { Observable, from, map } from 'rxjs';
 
+Observable
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -18,17 +25,38 @@ export class CartComponent implements OnInit {
   cartItems: any[] = []
   totalCartPrice: number = 0
   deliveryFree = false
+  products: Product[] = []
+
 
   constructor(private sanitizer: DomSanitizer, private cartService: ShoppingCartService,
-    private firestoreService: FirestoreService){}
+    private firestoreService: FirestoreService, private alert: AlertController,
+    private storage: StorageService, private firestore: Firestore, private auth: Auth){}
 
-  ngOnInit(): void {
-    this.loadCartItems()
-    this.cartService.cartTotalPrice$.subscribe((totalPrice) => {
-      this.totalCartPrice = totalPrice
+  async ngOnInit() {
+    // this.loadCartItems()
+    // this.cartService.cartTotalPrice$.subscribe((totalPrice) => {
+    //   this.totalCartPrice = totalPrice
+    // })
+    this.getCartItems().subscribe(products => {
+      this.products = products
+      console.log(products)
     })
   }
 
+  getCartItems(): Observable<Product[]> {
+    const userId = this.auth.currentUser?.uid
+    const q = query(collection(this.firestore, 'carrito'), where('userId', "==", userId));
+    return from(getDocs(q)).pipe(
+      map((querySnapshot) => {
+        const productos: Product[] = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data() as Product;
+          productos.push(data);
+        });
+        return productos;
+      })
+    );
+  }
 
   addProduct(product: any){
     if(product.qty < product.stock ){
@@ -52,7 +80,7 @@ export class CartComponent implements OnInit {
       const locCordinates = coordinates.coords;
       this.latitude = locCordinates.latitude
       this.longitude = locCordinates.longitude
-
+      console.log(this.latitude, this.longitude)
       const url = `https://www.google.com/maps/embed/v1/place?q=${this.latitude},${this.longitude}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`
 
       this.mapURL = this.sanitizer.bypassSecurityTrustResourceUrl(url)
@@ -87,10 +115,20 @@ export class CartComponent implements OnInit {
     })
   }
 
-  saveOrder(){
-    this.firestoreService.sendOrderToFirestore().then(() =>{
+  async saveOrder(){
+    const userExits = await this.storage.get('usuario')
+    if(userExits) {
+      this.firestoreService.sendOrderToFirestore(`https://www.google.com/maps/dir/${this.latitude},${this.longitude}/`).then(() =>{
       console.log('pedido enviado con exito')
     }).catch((error)=>{console.log(error)})
+    }else {
+      const alert = await this.alert.create({
+        header: 'Inicie sesión',
+        message: 'Por favor, inicie sesión para realizar el pedido',
+        buttons: ['Aceptar']
+      })
+      await alert.present()
+    }
   }
 
 }

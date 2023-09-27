@@ -5,6 +5,7 @@
   import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
   import { Storage, ref, uploadBytes, getDownloadURL} from '@angular/fire/storage';
   import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+  import { LoadingController } from '@ionic/angular';
 
   @Component({
     selector: 'app-add-product',
@@ -19,7 +20,7 @@
     imgName: string | null = null;
 
     constructor(private firestoreService: FirestoreService, private router: Router,
-      private storage: Storage, private firestore: Firestore) {
+      private storage: Storage, private firestore: Firestore, private loading: LoadingController) {
 
       
       this.form = new FormGroup({
@@ -60,6 +61,9 @@
     }
     
     async takePhoto() {
+      const loading = await this.loading.create({
+        message: 'Subiendo imagen...'
+      })
       try {
         const image = await Camera.getPhoto({
           resultType: CameraResultType.DataUrl,
@@ -71,6 +75,7 @@
             image.dataUrl,
             `Photo_${new Date().getTime()}` // Nombre del archivo
           );
+         await loading.present()
     
           // Subir la imagen a Firebase Storage
           const path = 'imagenes/' + this.selectedFile.name;
@@ -94,6 +99,8 @@
         }
       } catch (error) {
         console.error('Error al tomar la foto:', error);
+      }finally{
+        (await loading).dismiss()
       }
     }
 

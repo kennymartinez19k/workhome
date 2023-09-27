@@ -13,13 +13,12 @@ import { StorageService } from 'src/app/services/storage.service';
 export class ProfileComponent implements OnInit{
 
   userData: any = {};
-  usuario: any = {};
 
   constructor(private router: Router, private auth: AuthService, 
     private alert: AlertController, private storageService: StorageService){}
 
      logout(){
-      this.storageService.clear().then(() => {
+      this.storageService.remove('usuario').then(() => {
       this.auth.logout()
       this.router.navigate(['login']).then(()=>{location.reload()})
     })
@@ -27,15 +26,7 @@ export class ProfileComponent implements OnInit{
 
   async ngOnInit() {
 
-    const dataUsuario = await this.storageService.get("usuario")
-    if(dataUsuario) {
-      this.usuario = dataUsuario
-    }
-    
-    const userDataRef = await this.storageService.get("usuario")
-    if(userDataRef) {
-      this.userData = userDataRef
-    }
+    this.userData = await this.storageService.get('usuario')
 
   }
 
@@ -50,7 +41,7 @@ export class ProfileComponent implements OnInit{
         handler: () => {alert.dismiss()}
       },
     {
-      text: 'Eliminar',
+      text: 'Aceptar',
       handler: () => {
         this.logout()}
     }]

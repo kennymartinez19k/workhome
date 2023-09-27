@@ -23,7 +23,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     })
   }
 
-  orderSent(orderId: string): void {
+  orderSent(orderId: any): void {
     if (orderId) {
       this.firestoreService.orderSent(orderId).then(() => {
         console.log('Colección despachada con éxito');

@@ -8,33 +8,36 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-card class="margin-remove">
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let product of cartItems">
           <ion-thumbnail slot="start">
-            <img alt="Silhouette of mountains" [src]="product.img" />
+            <img alt="Silhouette of mountains" [src]="product.product.img" />
           </ion-thumbnail>
           <div class="uk-flex uk-flex-between w-100">
             <div>
               <div>
-                <p class="title-card">{{product.nombre}}</p>
-                <p class="subtitle-card">${{product.precio}}</p>
+                <p class="title-card">{{product.product.nombre}}</p>
+                <p class="subtitle-card">${{product.product.precio}}</p>
               </div>
               <div class="mt-5 uk-flex align-items-center">
-                <ion-icon (click)="removeProduct(product)" class="qty-icon" name="remove-outline"></ion-icon>
+                <ion-icon (click)="decrementQty(product)" class="qty-icon" name="remove-outline"></ion-icon>
                 <input class="field-qty" type="number" [value]="product.qty" min="1" name="" id="">
-                <ion-icon class="qty-icon" name="add-outline" (click)="addProduct(product)"></ion-icon>
+                <ion-icon class="qty-icon" name="add-outline" (click)="incrementQty(product)"></ion-icon>
               </div>
             </div>
-            <div (click)="deleteFromCart(product)">
+            <!-- <div (click)="deleteFromCart(product)">
               <ion-icon class="icon-close" name="trash"></ion-icon>
-            </div>
+            </div> -->
           </div>
         </ion-item>
+        <h2>Total: ${{totalPrice}}</h2>
 
-        <div *ngIf="deliveryFree" class="ion-padding">
+
+        <!-- <div *ngIf="deliveryFree" class="ion-padding">
           <ion-item>
             Subtotal: ${{ totalCartPrice }}
           </ion-item>
@@ -55,12 +58,12 @@
           <ion-item>
             Total: ${{ totalCartPrice + 100}}
           </ion-item>
-        </div>
+        </div> -->
 
       </ion-list>
     </ion-card-content>
 
-    <ion-item>
+    <ion-item *ngIf="!location">
       <div class="icon-img" (click)="getLocation()"
         style="display: flex; align-items: center; gap: 10px; padding: 5px;">
         <ion-icon name="location-outline" style="font-size: 70px;"></ion-icon>
@@ -68,16 +71,40 @@
       </div>
     </ion-item>
 
+    <ion-item *ngIf="location">
+      <div class="icon-img"
+        style="display: flex; align-items: center; gap: 10px; padding: 5px;">
+        <ion-icon name="pin-outline" style="font-size: 40px;"></ion-icon>
+        <em>Ubicación obtenida con éxito</em>
+      </div>
+    </ion-item>
+
+
     <ion-card-content>
-      <div id="map">
+      <!-- <div id="map">
         <iframe *ngIf="showMap" width="100%" height="200" frameborder="0" scrolling="no" marginheight="0"
           marginwidth="0" [src]="mapURL" allowfullscreen></iframe>
-      </div>
+      </div> -->
       <ion-button expand="full" (click)="saveOrder()" style="padding-top: 20px;">Hacer Pedido</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
 
+<!-- <ion-list>
+  <ion-item *ngFor="let cartItem of cartItems">
+    <ion-thumbnail slot="start">
+      <img [src]="cartItem.product.img" alt="{{ cartItem.product.nombre }}" />
+    </ion-thumbnail>
+    <div class="product-details">
+      <h2>{{ cartItem.product.nombre }}</h2>
+      <p>Precio: ${{ cartItem.product.precio }}</p>
+      <ion-button (click)="decrementQty(cartItem)">-</ion-button>
+      <ion-input [(ngModel)]="cartItem.qty" type="number" min="1"></ion-input>
+      <ion-button (click)="incrementQty(cartItem)">+</ion-button>
+      <p>Total: ${{ cartItem.product.precio * cartItem.qty }}</p>
+    </div>
+  </ion-item>
+</ion-list> -->
 
 
 <app-footer-nav></app-footer-nav>

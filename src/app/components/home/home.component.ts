@@ -6,6 +6,7 @@ import { SwiperOptions } from 'swiper';
 import { AlertController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ usuario: any = {}
 
   constructor(private router: Router, private firestoreService: FirestoreService, 
     private alert: AlertController, private storageService: StorageService,
-    private cartService: ShoppingCartService){
+    private cartService: ShoppingCartService, private auth: AuthService){
     this.products = [{
       nombre: "",
       precio: 0,
@@ -109,8 +110,8 @@ usuario: any = {}
     await alert.present()
   }
 
- addToCart(product: any) {
-  this.cartService.addToCart(product)
+ addToCart(product: any): void {
+  this.cartService.addProductCart(product)
  }
 
 }

@@ -18,38 +18,37 @@ export class FirestoreService {
      private cartService: ShoppingCartService, private loading: LoadingController) {}
 
 
-  async sendOrderToFirestore(ubicacion: any) {
-    const orderData = await this.cartService.getCart();
-
-    if (orderData.length > 0) {
-      const orderToSend = {
-        orderData: orderData,
+  async sentOrderToFirestore(userId: any, carritoItems: any[], location: any): Promise <void> {
+    try {
+      const ordersRef = collection(this.firestore, 'pedidos')
+      const newOrder = {
+        userId: userId,
+        items: carritoItems,
+        fecha: new Date().toLocaleDateString(),
+        ubicacion: location,
         status_enviado: 'no',
-        fecha: this.getFormattedDate(),
-        ubicacion: ubicacion,
-        id: '',
-        userId: this.auth.getCurrentUser()?.uid
-      };
-
-      const carritoRef = collection(this.firestore, 'carrito');
-     
-      try {
-        const orderRef = await addDoc(carritoRef, orderToSend)
-        const orderId = orderRef.id
-        await updateDoc(orderRef, {id: orderId})
-        console.log('Documento agregado con ID:', orderId);
-      } catch (error) {
-        console.error('Error al agregar el documento:', error);
+        id: ''
       }
+      const orderRef = await addDoc(ordersRef, newOrder)
+      const orderId = orderRef.id
+      await updateDoc(orderRef, {id: orderId})
 
-    } else {
-      console.log('El carrito está vacío.');
+      //eliminar productos del carrito del usuario despues de ser enviados
+      const cartRef = collection(this.firestore, 'carrito')
+      const q =  query(cartRef, where('userId', '==', userId))
+      const querySnap = await getDocs(q)
+
+      querySnap.forEach(async (doc) => {
+        await deleteDoc(doc.ref)
+        console.log('Pedido enviado con éxito. ID del pedido:', orderId);
+      })
+    } catch (error) {
+      console.log('Error al enviar el pedido:', error);
     }
   }
 
-  async orderSent(orderId: string): Promise<void> {
-    const orderRef = doc(this.firestore, 'carrito', orderId)
-
+  async orderSent(orderId: any): Promise<void> {
+    const orderRef = doc(this.firestore, 'pedidos', orderId)
     try {
       await updateDoc(orderRef, {status_enviado: 'yes'})
       console.log('status actualizado con exito')
@@ -58,14 +57,6 @@ export class FirestoreService {
     }
   }
 
-  getFormattedDate() {
-    const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0
-    const yyyy = today.getFullYear();
-
-    return `${dd}/${mm}/${yyyy}`;
-  }
 
   async addUser({username, email, role}: any): Promise<void> {
     const user = await this.auth.getUserUid()
@@ -130,7 +121,7 @@ export class FirestoreService {
 
   getOrder(): Observable<Product[]> {
     const q = query(
-      collection(this.firestore, 'carrito'),
+      collection(this.firestore, 'pedidos'),
       where('status_enviado', '==', 'no')
     );
   

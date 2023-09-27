@@ -14,23 +14,23 @@
       <ion-card-content *ngFor="let order of orders">
         <ion-list>
           <h3>{{order.fecha}}</h3>
-          <ion-item *ngFor="let product of order['orderData']" class="product-item">
+          <ion-item *ngFor="let product of order['items']" class="product-item">
             <ion-thumbnail slot="start">
-              <img alt="Silhouette of mountains" [src]="product.img"/>
+              <img alt="Silhouette of mountains" [src]="product.product.img"/>
             </ion-thumbnail>
             <div class="product-details">
               <div class="product-info">
-                <p class="title-card">{{product.nombre}}</p>
-                <p class="subtitle-card">${{product.precio}}</p>
+                <p class="title-card">{{product.product.nombre}}</p>
+                <p class="subtitle-card">${{product.product.precio}}</p>
                 <p class="subtitle-card">Cantidad: {{product.qty}}</p>
-                <p class="subtitle-card">Subtotal: ${{product.qty * product.precio}}</p>
+                <p class="subtitle-card">Subtotal: ${{product.qty * product.product.precio}}</p>
               </div>            
             </div>
           </ion-item>
         </ion-list>
         <ion-card-content>
           <p>Ubicación: <a [href]="order.ubicacion" target="_blank">Ver en mapa</a></p>
-          <p class="total-price">Precio Total: ${{ calculateTotalPrice(order.orderData) }}</p>
+          <!-- <p class="total-price">Precio Total: ${{ calculateTotalPrice(order.items) }}</p> -->
           <button expand="full" class="order-button" (click)="orderSent(order.id)">Despachar pedido</button>
         </ion-card-content>
       </ion-card-content>

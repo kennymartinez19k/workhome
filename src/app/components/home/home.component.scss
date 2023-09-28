@@ -41,6 +41,7 @@ $extraBold: 800;
                     max-width: 100%;
                     max-height: 100%;
                     object-fit: cover;
+                    border-radius: 10px;
                 }
             }
             ion-card-title, ion-card-subtitle, ion-card-content {
@@ -156,3 +157,24 @@ $extraBold: 800;
 .qty-icon{
     font-size: 25px;
 }
+
+/* Agrega estilos al mensaje de éxito */
+.success-message {
+    position: fixed;
+    top: 350px;
+    left: 100px;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+  
+  /* Agrega estilos cuando el mensaje está visible */
+  .success-message.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  

@@ -90,13 +90,14 @@
 
         <ion-card-content class="uk-flex uk-flex-between" *ngIf="usuario && usuario.role =='usuario' || !usuario">
         <div class="button-cart" (click)="addToCart(product)" style="display: flex; align-items: center;">
-          <ion-button style="font-size: 10px;">Añadir al carrito</ion-button>
           <ion-icon class="cart" name="cart-outline"></ion-icon>
         </div>
         </ion-card-content>
-
       </ion-card>
     </ion-row>
+  </div>
+  <div class="success-message" [ngClass]="{'show': showSuccessMsg}">
+    Añadido con éxito al carrito
   </div>
   
 </ion-content>

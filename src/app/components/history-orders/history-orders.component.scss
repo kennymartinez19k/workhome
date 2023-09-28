@@ -1,0 +1,110 @@
+
+$fuenteDeLetra: 'Poppins', sans-serif;
+$semiBold: 600;
+$extraBold: 800;
+
+ion-toolbar {
+    background: #02B761;
+    ion-back-button {
+        color: white;
+        position: absolute;
+    }
+    ion-title {
+        font-family: $fuenteDeLetra;
+        font-weight: $extraBold;
+        color: white;
+        text-align: center;
+    }
+}
+
+/* Estilo para los detalles del producto */
+.product-item {
+    border-bottom: 1px solid #eee; /* Borde inferior de cada elemento de producto */
+    padding: 10px 0; /* Espaciado interior de cada elemento de producto */
+    display: flex; /* Utiliza flexbox para organizar los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+  }
+  
+  .product-details {
+    flex: 1; /* Ocupa todo el espacio disponible en el contenedor */
+  }
+  
+  .product-info {
+    margin-bottom: 5px; /* Margen inferior para la información del producto */
+  }
+  
+  /* Estilo para el botón "Despachar colección" */
+  .order-button {
+    background: #02B761;
+    padding: 18px;
+    width: 95%;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: $extraBold;
+    font-size: 15px;
+    margin: 10px auto;
+  }
+  
+  .order-button:hover {
+    background-color: #0b884b; /* Cambia el color de fondo al pasar el mouse por encima */
+  }
+
+  p {
+    font-family: $fuenteDeLetra;
+    font-weight: $extraBold;
+  }
+
+
+  .field-qty{
+    width: 30%;
+    border: 0px;
+    border-bottom: 1px solid #b9b6b6;
+    text-align: center;
+}
+
+.field-qty:focus-visible{
+    border: 0px;
+    outline: #fff;
+    border-bottom: 1px solid #b9b6b6;
+    font-size: 14px;
+
+}
+.ion-card-content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart{
+    color: green;
+    font-size: 28px;
+}
+.qty-icon{
+    font-size: 20px;
+}
+.title-card{
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.subtitle-card {
+  font-size: 14px;
+}
+
+.subtitle-card-price{
+    font-size: 17px;
+    color: #02B761;
+}
+
+ion-thumbnail{
+    width: 100px;
+    height: 70px;
+    img {
+      border-radius: 10px;
+    }
+}
+
+ion-item{
+    margin-bottom: 10px;
+}

@@ -30,6 +30,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { FooterNavComponent } from './components/footer-nav/footer-nav.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { HistoryOrdersComponent } from './components/history-orders/history-orders.component';
 
 // import { AgmCoreModule } from '@agm/core';
 
@@ -48,6 +49,7 @@ import { OrdersComponent } from './components/orders/orders.component';
     FooterNavComponent,
     EditProductComponent,
     OrdersComponent,
+    HistoryOrdersComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,8 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicModule } from '@ionic/angular';
 // import { IonicStorageModule } from '@ionic/storage-angular'
-import { Storage } from '@ionic/storage'
-
+import { Storage } from '@ionic/storage';
 //MODULOS  DE FIREBASE
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
@@ -31,6 +30,7 @@ import { FooterNavComponent } from './components/footer-nav/footer-nav.component
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { HistoryOrdersComponent } from './components/history-orders/history-orders.component';
+import { CategoryComponent } from './components/category/category.component';
 
 // import { AgmCoreModule } from '@agm/core';
 
@@ -50,6 +50,7 @@ import { HistoryOrdersComponent } from './components/history-orders/history-orde
     EditProductComponent,
     OrdersComponent,
     HistoryOrdersComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +72,7 @@ import { HistoryOrdersComponent } from './components/history-orders/history-orde
     provideStorage(() => getStorage())  
   ],
   providers: [
-    Storage
+    Storage,
   ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

@@ -47,6 +47,7 @@ export class CartComponent implements OnInit {
 
   async saveOrder() {
     const userId = await this.auth.getUserUid()
+    if(userId){
     const mapUrl = `https://www.google.com/maps/dir/${this.latitude},${this.longitude}/`
     try {
       await this.firestoreService.sentOrderToFirestore(userId, this.cartItems, mapUrl)
@@ -61,6 +62,9 @@ export class CartComponent implements OnInit {
 
     } catch (error) {
       console.error('Error al enviar el pedido y limpiar el carrito', error);
+    }
+    }else {
+      alert('LOGUEATE')
     }
     
   }

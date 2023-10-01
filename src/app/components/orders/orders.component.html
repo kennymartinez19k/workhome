@@ -9,7 +9,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <!-- <ion-content>
     <ion-card class="margin-remove">
       <ion-card-content *ngFor="let order of orders">
         <ion-list>
@@ -27,16 +27,52 @@
               </div>            
             </div>
           </ion-item>
+          <p class="total-price">Precio Total: ${{ calculateOrderTotal(order) }}</p>
         </ion-list>
         <ion-card-content>
-          <p>Ubicación: <a [href]="order.ubicacion" target="_blank">Ver en mapa</a></p>
-          <!-- <p class="total-price">Precio Total: ${{ calculateTotalPrice(order.items) }}</p> -->
+          <div class="location" style="display: flex; flex-direction: column;">
+            <ion-button [href]="order.ubicacion" target="_blank" style="width: 35%;">Ver en mapa</ion-button>
+            <ion-button (click)="copyToClipboard(order.ubicacion)" style="width: 35%;">copiar URL</ion-button>
+          </div>
+
           <button expand="full" class="order-button" (click)="orderSent(order.id)">Despachar pedido</button>
         </ion-card-content>
       </ion-card-content>
     </ion-card>
-  </ion-content>
+  </ion-content> -->
   
+  <ion-content>
+    <ion-card class="order-card" *ngFor="let order of orders">
+      <ion-card-header>
+        <h3>{{ order.fecha }}</h3>
+      </ion-card-header>
+      <ion-list>
+        <ion-item *ngFor="let product of order.items" class="product-item">
+          <ion-thumbnail slot="start">
+            <img alt="Product Image" [src]="product.product.img" />
+          </ion-thumbnail>
+          <div class="product-details">
+            <div class="product-info">
+              <p class="title-card">{{ product.product.nombre }}</p>
+              <p class="subtitle-card">Precio: <span class="precio">${{ product.product.precio }}</span></p>
+              <p class="subtitle-card">Cantidad: {{ product.qty }}</p>
+              <p class="subtitle-card">Subtotal: <span class="precio">${{ product.qty * product.product.precio }}</span></p>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+      <ion-card-content>
+        <div class="total-section">
+          <p class="total-price">Precio Total: <span class="precio">${{ calculateOrderTotal(order) }}</span></p>
+        </div>
+        <div class="location" style="display: flex; flex-direction: column;">
+          <ion-button [href]="order.ubicacion" target="_blank" style="width: 35%;">Ver en mapa</ion-button>
+          <ion-button (click)="copyToClipboard(order.ubicacion)" style="width: 35%;">copiar URL</ion-button>
+        </div>
+        <ion-button expand="full" class="order-button ion-padding" (click)="orderSent(order.id)">Despachar pedido</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
   
   
   <app-footer-nav></app-footer-nav>

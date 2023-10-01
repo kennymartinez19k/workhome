@@ -82,28 +82,6 @@ export class FirestoreService {
     return docRef.id
   }
 
-  //FILTRANDO PRODUCTOS POR CATEGORÍA
-
-  // obtenerProducto(): Observable<Product[]> {
-  //   const q = query(
-  //     collection(this.firestore, 'productos'),
-  //     where('categoryId', '==', 'Alimentos Frescos')
-  //   );
-  
-  //   return from(getDocs(q)).pipe(
-  //     map((querySnapshot) => {
-  //       const productos: Product[] = [];
-  //       querySnapshot.forEach((doc) => {
-  //         const data = doc.data() as Product;
-  //         productos.push(data);
-  //       });
-  //       return productos;
-  //     })
-  //   );
-  // }
-
-  //DESCOMENTAR. TRAER TODOS LOS PRODUCTOS
-
   getProduct(): Observable<Product[]> {
     const q = query(collection(this.firestore, 'productos'));
 

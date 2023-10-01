@@ -163,13 +163,14 @@ $extraBold: 800;
     position: fixed;
     top: 350px;
     left: 100px;
-    background-color: green;
+    background-color: #02B761;
     color: white;
     border-radius: 5px;
     padding: 10px;
     opacity: 0;
     transform: translateY(-20px);
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    font-family: $fuenteDeLetra;
   }
   
   /* Agrega estilos cuando el mensaje está visible */

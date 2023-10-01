@@ -34,7 +34,7 @@
 
     async addProduct() {
       const product = {
-        nombre: this.form.value.nombre,
+        nombre: this.form.value.nombre.toLowerCase(),
         precio: this.form.value.precio,
         stock: this.form.value.stock,
         img: this.imgUrl,
@@ -45,6 +45,7 @@
     
       
       if (this.imgUrl) {
+
         this.firestoreService.addProduct(product).then( (productUid) => {
           console.log(`El producto se ha subido con el id: ${productUid}`)
           product.uid = productUid

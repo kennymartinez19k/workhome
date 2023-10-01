@@ -13,6 +13,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { HistoryOrdersComponent } from './components/history-orders/history-orders.component';
+import { CategoryComponent } from './components/category/category.component';
 
 const routes: Routes = [
 
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path: 'cart', component: CartComponent},
   {path: 'edit-product/:uid', component: EditProductComponent, canActivate: [GuardFactoryService]},
   {path: 'orders', component: OrdersComponent},
-  {path: 'history', component: HistoryOrdersComponent}
+  {path: 'history', component: HistoryOrdersComponent},
+  {path: 'category/:nombre', component: CategoryComponent}
   
 ];
 

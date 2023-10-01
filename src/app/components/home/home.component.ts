@@ -6,6 +6,7 @@ import { SwiperOptions } from 'swiper';
 import { AlertController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { Firestore, collection, query, where, getDocs, orderBy, startAt, endAt } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-home',
@@ -14,13 +15,15 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 })
 export class HomeComponent implements OnInit {
 
-products: Product[] = []
+products: any[] = []
 usuario: any = {}
 showSuccessMsg = false
+searchTerm: string = ''
+searchProduct: any[] = []
 
   constructor(private router: Router, private firestoreService: FirestoreService, 
     private alert: AlertController, private storageService: StorageService,
-    private cartService: ShoppingCartService){
+    private cartService: ShoppingCartService, private firestore: Firestore){
     this.products = [{
       nombre: "",
       precio: 0,
@@ -59,18 +62,6 @@ showSuccessMsg = false
    this.usuario = await this.storageService.get("usuario")
    console.log(this.usuario)
   }
-
-  // addProduct(product: any){
-  //   if(product.qty < product.stock ){
-  //     product.qty++
-  //   }
-  // }
-
-  // removeProduct(product: any){
-  //   if(product.qty > 0){
-  //     product.qty--
-  //   }
-  // }
 
   editProduct(product: Product) {
     if(product.uid) {
@@ -117,6 +108,27 @@ showSuccessMsg = false
   setTimeout(() => {
     this.showSuccessMsg = false
   }, 1000)
+ }
+
+ async searchProducts() {
+  const productRef = collection(this.firestore, 'productos')
+  const itemLower = this.searchTerm.toLowerCase()
+  const q = query(
+    productRef,
+    where('nombre', '>=', itemLower),
+    where('nombre', '<=', itemLower + '\uf8ff'),
+    orderBy('nombre'),
+    startAt(itemLower),
+    endAt(itemLower + '\uf8ff')
+  );
+
+  try {
+    const querySnap = await getDocs(q)
+    this.searchProduct = querySnap.docs.map(doc => doc.data())
+    console.log(this.searchProduct)
+  } catch (error) {
+    console.log('error al buscar producto ', error)
+  }
  }
 
 }

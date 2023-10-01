@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Subscription } from 'rxjs';
+import { Clipboard } from '@capacitor/clipboard';
+import { ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-orders',
@@ -11,9 +14,9 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   orders: any[] = []
   productsSubscription: Subscription | undefined
-  // totalPrice: number[] = []
 
-  constructor(private firestoreService: FirestoreService) {}
+  constructor(private firestoreService: FirestoreService, private alert: ToastController,
+    private loading: LoadingController) {}
 
   ngOnInit(): void {
     this.productsSubscription = this.firestoreService.getOrder().subscribe((data) => {
@@ -23,9 +26,15 @@ export class OrdersComponent implements OnInit, OnDestroy {
     })
   }
 
-  orderSent(orderId: any): void {
+  async orderSent(orderId: any) {
+    const loading = await this.loading.create({
+      message: 'Despachando pedido...'
+    })
+    await loading.present()
+    
     if (orderId) {
       this.firestoreService.orderSent(orderId).then(() => {
+        location.reload()
         console.log('Colección despachada con éxito');
       }).catch((error) => {
         console.error('Error al despachar la colección:', error);
@@ -33,12 +42,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
     } else {
       console.log('El orderId es inválido o está indefinido.');
     }
-  }
 
-  calculateTotalPrice(orderData: any[]): number {
-    return orderData.reduce((total, product) => {
-      return total + (product.precio * product.qty);
-    }, 0);
+    loading.dismiss()
   }
 
   ngOnDestroy(): void {
@@ -46,4 +51,28 @@ export class OrdersComponent implements OnInit, OnDestroy {
       this.productsSubscription.unsubscribe()
     }
   }
+
+  async copyToClipboard(url: string): Promise<void> {
+    await Clipboard.write({
+      string: url
+    })
+
+    const alert = await this.alert.create({
+      message: 'Copiado con éxito',
+      duration: 1000,
+      position: 'middle'
+    })
+
+    await alert.present()
+
+  }
+
+  calculateOrderTotal(order: any): number {
+    let total = 0;
+    for (const product of order.items) {
+      total += product.qty * product.product.precio;
+    }
+    return total;
+  }
+  
 }

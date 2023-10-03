@@ -11,6 +11,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
+import { getMessaging, getToken } from '@firebase/messaging';
 
 /////////////////////////////////////////////////////////////////////////////777
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,13 +25,13 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { SwiperModule } from 'swiper/angular';
-import { ImagenesComponent } from './components/imagenes/imagenes.component';
 import { CartComponent } from './components/cart/cart.component';
 import { FooterNavComponent } from './components/footer-nav/footer-nav.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { HistoryOrdersComponent } from './components/history-orders/history-orders.component';
 import { CategoryComponent } from './components/category/category.component';
+import { ProductsSearchedComponent } from './components/products-searched/products-searched.component';
 
 // import { AgmCoreModule } from '@agm/core';
 
@@ -44,13 +45,13 @@ import { CategoryComponent } from './components/category/category.component';
     ProductDetailComponent,
     AddProductComponent,
     SliderComponent,
-    ImagenesComponent,
     CartComponent,
     FooterNavComponent,
     EditProductComponent,
     OrdersComponent,
     HistoryOrdersComponent,
     CategoryComponent,
+    ProductsSearchedComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +70,7 @@ import { CategoryComponent } from './components/category/category.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())  
+    provideStorage(() => getStorage()),
   ],
   providers: [
     Storage,

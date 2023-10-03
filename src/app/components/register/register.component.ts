@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { FirestoreService } from 'src/app/services/firestore.service';
-
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,7 +12,8 @@ export class RegisterComponent implements OnInit {
 
   formReg: FormGroup;
 
-constructor( private authService: AuthService, private router: Router, private firestoreService: FirestoreService){
+constructor( private authService: AuthService, private router: Router, 
+  private userService: UserService, private cdRef: ChangeDetectorRef){
   this.formReg = new FormGroup({
     username: new FormControl(),
     email: new FormControl(),
@@ -21,30 +21,10 @@ constructor( private authService: AuthService, private router: Router, private f
   })
 }
 
-ngOnInit(): void{}
+ngOnInit(): void{
+  this.cdRef.detectChanges()
+}
 
-// async register(){
-
-//   const userData = {
-//     username: this.formReg.value.username,
-//     password: this.formReg.value.password,
-//     email: this.formReg.value.email
-//   }
-
-//   const userRef = {
-//     username: userData.username,
-//     email: userData.email,
-//     uid: this.authService.getCurrentUser()?.uid,
-//     role: 'usuario'
-//   }
-
-//     this.authService.register(userData).then( () => {
-//     this.firestoreService.addUser(userRef)
-//     console.log(userRef)
-//     this.router.navigate(['login'])
-//   } )
-
-// }
 async register() {
 
 const userData = {
@@ -53,7 +33,7 @@ const userData = {
 }
 
   this.authService.register(this.formReg.value).then(response => {
-    const register = this.firestoreService.addUser(userData)
+    const register = this.userService.addUser(userData)
     console.log(response, register)
     this.router.navigate(['/login'])
   }).catch(error => console.log(error))

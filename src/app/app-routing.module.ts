@@ -8,16 +8,16 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { GuardFactoryService } from './guard.guard';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { SliderComponent } from './components/slider/slider.component';
-import { ImagenesComponent } from './components/imagenes/imagenes.component';
 import { CartComponent } from './components/cart/cart.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { HistoryOrdersComponent } from './components/history-orders/history-orders.component';
 import { CategoryComponent } from './components/category/category.component';
+import { ProductsSearchedComponent } from './components/products-searched/products-searched.component';
 
 const routes: Routes = [
 
-  {path: '',component: HomeComponent},
+  {path: '',component: LoginComponent},
   {path: 'home', component: HomeComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
@@ -26,13 +26,12 @@ const routes: Routes = [
   {path: 'add-product', component: AddProductComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'slider', component: SliderComponent},
-  {path: 'img', component: ImagenesComponent},
   {path: 'cart', component: CartComponent},
   {path: 'edit-product/:uid', component: EditProductComponent, canActivate: [GuardFactoryService]},
   {path: 'orders', component: OrdersComponent},
   {path: 'history', component: HistoryOrdersComponent},
-  {path: 'category/:nombre', component: CategoryComponent}
-  
+  {path: 'category/:nombre', component: CategoryComponent},
+  {path: 'search-results', component: ProductsSearchedComponent}  
 ];
 
 @NgModule({

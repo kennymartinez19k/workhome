@@ -3,8 +3,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from "@angular/router"
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/interfaces/user';
-import { FirestoreService } from 'src/app/services/firestore.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { ChangeDetectorRef } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent {
   userdata: User[] = []
   
   constructor( private router: Router, private authService: AuthService, 
-    private firestoreService: FirestoreService, private storageService: StorageService){
+    private userService: UserService, private storageService: StorageService,
+    private cdRef: ChangeDetectorRef){
   this.formLogin = new FormGroup({
     email: new FormControl(),
     password: new FormControl()
@@ -27,7 +29,9 @@ export class LoginComponent {
 
 }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cdRef.detectChanges()
+  }
 
  async login() {
 
@@ -38,7 +42,7 @@ export class LoginComponent {
 
     this.authService.login(userData).then(()=>{
       
-      this.firestoreService.getUser().subscribe(async userdata => {
+      this.userService.getUser().subscribe(async userdata => {
         this.userdata = userdata
         const username = userdata.map(x => x.username)
         const email = userdata.map(x => x.email)
@@ -46,7 +50,7 @@ export class LoginComponent {
         const usuario = {username, email, role}
         await this.storageService.set("usuario", usuario)
         
-        this.router.navigate(['home']).then(()=> {location.reload()})
+        this.router.navigate(['home']).then(()=>{location.reload()})
       })
     })
   }
@@ -58,7 +62,7 @@ export class LoginComponent {
         const usuarioEmail = this.authService.getCurrentUser()?.email
         const userData = {username: usuarioNombre, email: usuarioEmail, role: 'usuario'}
         await this.storageService.set("usuario", userData)
-        this.router.navigate(['home']).then(()=> {location.reload()})
+        this.router.navigate(['home'])
       })
       .catch(error => {
         console.log(error)

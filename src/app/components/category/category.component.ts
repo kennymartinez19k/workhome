@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Firestore, collection, query, where, getDocs } from '@angular/fire/firestore';
+import { StorageService } from 'src/app/services/storage.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -9,13 +13,20 @@ import { Firestore, collection, query, where, getDocs } from '@angular/fire/fire
 export class CategoryComponent implements OnInit {
   products: any[] = []
   category: string | null = null
-  constructor(private firestore: Firestore, private activatedRoute: ActivatedRoute) {}
+  user: any = {}
+  showSuccessMsg = false
+  constructor(private firestore: Firestore, private activatedRoute: ActivatedRoute,
+    private storage: StorageService, private cartService: ShoppingCartService,
+    private cdRef: ChangeDetectorRef) {}
 
-ngOnInit() {
+async ngOnInit() {
+  this.cdRef.detectChanges()
+
   this.activatedRoute.paramMap.subscribe(params => {
     this.category = params.get('nombre')
     this.loadProducts()
   })
+  this.user = await this.storage.get('usuario')
 }
 
 async loadProducts() {
@@ -30,4 +41,17 @@ async loadProducts() {
     console.log('error al cargar el producto', error)
   }
 }
+
+addToCart(product: any): void {
+
+  this.cartService.addProductCart(product)
+  this.showSuccessMsg = true
+  console.log('añadido')
+  
+  setTimeout(() => {
+    this.showSuccessMsg = false
+  }, 1000)
+
+}
+
 }

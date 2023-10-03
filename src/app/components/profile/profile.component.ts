@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit{
   }
 
   async ngOnInit() {
-
+    
     this.userData = await this.storageService.get('usuario')
 
   }

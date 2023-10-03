@@ -1,11 +1,11 @@
   import { Component, OnInit } from '@angular/core';
   import { FormControl, FormGroup } from '@angular/forms';
   import { Router } from '@angular/router';
-  import { FirestoreService } from 'src/app/services/firestore.service';
   import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
   import { Storage, ref, uploadBytes, getDownloadURL} from '@angular/fire/storage';
   import { Firestore, collection, addDoc } from '@angular/fire/firestore';
   import { LoadingController } from '@ionic/angular';
+import { ProductService } from 'src/app/services/product.service';
 
   @Component({
     selector: 'app-add-product',
@@ -19,7 +19,7 @@
     imgUrl: any = null;
     imgName: string | null = null;
 
-    constructor(private firestoreService: FirestoreService, private router: Router,
+    constructor(private productService: ProductService, private router: Router,
       private storage: Storage, private firestore: Firestore, private loading: LoadingController) {
 
       
@@ -46,10 +46,10 @@
       
       if (this.imgUrl) {
 
-        this.firestoreService.addProduct(product).then( (productUid) => {
+        this.productService.addProduct(product).then( (productUid) => {
           console.log(`El producto se ha subido con el id: ${productUid}`)
           product.uid = productUid
-          this.firestoreService.updateProduct(productUid, product).then(() =>{
+          this.productService.updateProduct(productUid, product).then(() =>{
             console.log('producto actualizado en firebase')
           })
           .then(()=>{

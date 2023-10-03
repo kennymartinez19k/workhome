@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Firestore, collection, where, query, getDocs, DocumentData } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,9 +12,11 @@ export class HistoryOrdersComponent implements OnInit {
   orders: DocumentData[] = []
   userId: any
 
-  constructor(private firestore: Firestore, private auth: AuthService){}
+  constructor(private firestore: Firestore, private auth: AuthService, private cdRef: ChangeDetectorRef){}
 
  async ngOnInit() {
+  this.cdRef.detectChanges()
+  
   this.userId = await this.auth.getUserUid()
   const ordersRef = collection(this.firestore, 'pedidos')
   const q = query(ordersRef, where('userId', '==', this.userId))

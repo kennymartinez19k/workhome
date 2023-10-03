@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FirestoreService } from 'src/app/services/firestore.service';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Clipboard } from '@capacitor/clipboard';
 import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
+import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
   selector: 'app-orders',
@@ -15,11 +15,13 @@ export class OrdersComponent implements OnInit, OnDestroy {
   orders: any[] = []
   productsSubscription: Subscription | undefined
 
-  constructor(private firestoreService: FirestoreService, private alert: ToastController,
-    private loading: LoadingController) {}
+  constructor(private orderService: OrdersService, private alert: ToastController,
+    private loading: LoadingController, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.productsSubscription = this.firestoreService.getOrder().subscribe((data) => {
+    this.cdRef.detectChanges()
+    
+    this.productsSubscription = this.orderService.getOrder().subscribe((data) => {
       this.orders = data
       console.log(this.orders)
 
@@ -33,9 +35,9 @@ export class OrdersComponent implements OnInit, OnDestroy {
     await loading.present()
     
     if (orderId) {
-      this.firestoreService.orderSent(orderId).then(() => {
-        location.reload()
+      this.orderService.sentOrder(orderId).then(() => {
         console.log('Colección despachada con éxito');
+        location.reload()
       }).catch((error) => {
         console.error('Error al despachar la colección:', error);
       });
@@ -44,6 +46,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     }
 
     loading.dismiss()
+    
   }
 
   ngOnDestroy(): void {

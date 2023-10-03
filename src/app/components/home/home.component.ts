@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/interfaces/product';
-import { FirestoreService } from 'src/app/services/firestore.service';
 import { SwiperOptions } from 'swiper';
 import { AlertController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
-import { Firestore, collection, query, where, getDocs, orderBy, startAt, endAt } from '@angular/fire/firestore';
+import { ChangeDetectorRef } from '@angular/core';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-home',
@@ -16,14 +16,14 @@ import { Firestore, collection, query, where, getDocs, orderBy, startAt, endAt }
 export class HomeComponent implements OnInit {
 
 products: any[] = []
-usuario: any = {}
+user: any = {}
 showSuccessMsg = false
 searchTerm: string = ''
 searchProduct: any[] = []
 
-  constructor(private router: Router, private firestoreService: FirestoreService, 
+  constructor(private router: Router, private productService: ProductService, 
     private alert: AlertController, private storageService: StorageService,
-    private cartService: ShoppingCartService, private firestore: Firestore){
+    private cartService: ShoppingCartService, private cdRef: ChangeDetectorRef){
     this.products = [{
       nombre: "",
       precio: 0,
@@ -46,8 +46,9 @@ searchProduct: any[] = []
   };
 
    async ngOnInit() {
+    this.cdRef.detectChanges()
 
-    this.firestoreService.getProduct().subscribe(products => {
+    this.productService.getProduct().subscribe(products => {
       this.products = products
       products.forEach(product => {
         if(!product.img){
@@ -59,8 +60,8 @@ searchProduct: any[] = []
       })
     })
     
-   this.usuario = await this.storageService.get("usuario")
-   console.log(this.usuario)
+   this.user = await this.storageService.get("usuario")
+   console.log(this.user)
   }
 
   editProduct(product: Product) {
@@ -72,11 +73,10 @@ searchProduct: any[] = []
   }
 
   deleteProduct(uid: string): void {
-    this.firestoreService.deleteProduct(uid).then( () => {
+    this.productService.deleteProduct(uid).then( () => {
       this.products = this.products.filter(product => product.uid !== uid)
-    }).then( () => {
-      location.reload()
-    } )
+      this.cdRef.detectChanges();
+    })
     .catch(error => {
       console.log("error eliminar producto", error)
     })
@@ -111,24 +111,8 @@ searchProduct: any[] = []
  }
 
  async searchProducts() {
-  const productRef = collection(this.firestore, 'productos')
-  const itemLower = this.searchTerm.toLowerCase()
-  const q = query(
-    productRef,
-    where('nombre', '>=', itemLower),
-    where('nombre', '<=', itemLower + '\uf8ff'),
-    orderBy('nombre'),
-    startAt(itemLower),
-    endAt(itemLower + '\uf8ff')
-  );
-
-  try {
-    const querySnap = await getDocs(q)
-    this.searchProduct = querySnap.docs.map(doc => doc.data())
-    console.log(this.searchProduct)
-  } catch (error) {
-    console.log('error al buscar producto ', error)
-  }
+  this.productService.searchProducts(this.searchTerm)
+  this.router.navigate(['/search-results'])
  }
 
 }

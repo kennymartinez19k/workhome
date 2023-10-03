@@ -1,7 +1,7 @@
 <ion-content class="container ion-padding">
 
   <ion-fab slot="fixed" vertical="top" horizontal="end" routerLink="/add-product"
-    *ngIf="usuario && usuario.role =='admin'">
+    *ngIf="user && user.role =='admin'">
     <ion-fab-button color="success">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
@@ -11,11 +11,11 @@
 
     <div class="header">
       <ion-img src="assets/img/bodega-la-fe.png" alt="logo bodega la fe"></ion-img>
-      <div class="usuario" *ngIf="usuario">
-        <h1>¡Hola {{usuario.username}}!</h1>
-        <em *ngIf="usuario.role == 'usuario'">¡Gracias por comprar con nosotros!</em>
+      <div class="usuario" *ngIf="user">
+        <h1>¡Hola {{user.username}}!</h1>
+        <em *ngIf="user.role == 'usuario'">¡Gracias por comprar con nosotros!</em>
       </div>
-      <div class="usuario" *ngIf="!usuario">
+      <div class="usuario" *ngIf="!user">
         <h1>¡Hola Invitado!</h1>
         <em>¡Gracias por comprar con nosotros!</em>
       </div>
@@ -106,7 +106,7 @@
           <p class=""> Disponible: {{product.stock}}</p>
         </ion-card-header>
 
-        <ion-card-content class="uk-flex uk-flex-between" *ngIf="usuario && usuario.role =='admin'">
+        <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='admin'">
           <div class="buttons-crud">
             <div (click)="editProduct(product)">
               <ion-icon name="create-outline" style="font-size: 30px;"></ion-icon>
@@ -117,7 +117,7 @@
           </div>
         </ion-card-content>
 
-        <ion-card-content class="uk-flex uk-flex-between" *ngIf="usuario && usuario.role =='usuario' || !usuario">
+        <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='usuario' || !user">
           <div class="button-cart" (click)="addToCart(product)" style="display: flex; align-items: center;">
             <ion-icon class="cart" name="cart-outline"></ion-icon>
           </div>

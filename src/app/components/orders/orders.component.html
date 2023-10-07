@@ -8,12 +8,13 @@
       </ion-title>
     </ion-toolbar>
   </ion-header>
+  
+  <ion-content>
 
-  <!-- <ion-content>
     <ion-card class="margin-remove">
       <ion-card-content *ngFor="let order of orders">
         <ion-list>
-          <h3>{{order.fecha}}</h3>
+          <h3>{{order['fecha']}}</h3>
           <ion-item *ngFor="let product of order['items']" class="product-item">
             <ion-thumbnail slot="start">
               <img alt="Silhouette of mountains" [src]="product.product.img"/>
@@ -21,28 +22,36 @@
             <div class="product-details">
               <div class="product-info">
                 <p class="title-card">{{product.product.nombre}}</p>
-                <p class="subtitle-card">${{product.product.precio}}</p>
+                <p class="subtitle-card-price">${{product.product.precio}}</p>
                 <p class="subtitle-card">Cantidad: {{product.qty}}</p>
-                <p class="subtitle-card">Subtotal: ${{product.qty * product.product.precio}}</p>
               </div>            
             </div>
           </ion-item>
-          <p class="total-price">Precio Total: ${{ calculateOrderTotal(order) }}</p>
-        </ion-list>
-        <ion-card-content>
+          <div class="price">
+            <h2 >Subtotal: <span class="subtotal">${{calculateOrderTotal(order)}}</span></h2>
+            <h2> Envio: 
+              <span *ngIf="calculateOrderTotal(order) >= 1000">Gratis</span>
+              <span *ngIf="calculateOrderTotal(order) < 1000">$100</span>
+            </h2>  
+            <div class="total-section">
+              <p class="total-price" *ngIf="calculateOrderTotal(order) >= 1000">
+                Precio Total: <span class="precio">${{ calculateOrderTotal(order) }}</span>
+              </p>
+              <p class="total-price" *ngIf="calculateOrderTotal(order) < 1000">
+                Precio Total: <span class="precio">${{ calculateOrderTotal(order) + 100 }}</span>
+              </p>
+            </div>
+          </div>
           <div class="location" style="display: flex; flex-direction: column;">
             <ion-button [href]="order.ubicacion" target="_blank" style="width: 35%;">Ver en mapa</ion-button>
             <ion-button (click)="copyToClipboard(order.ubicacion)" style="width: 35%;">copiar URL</ion-button>
           </div>
-
-          <button expand="full" class="order-button" (click)="orderSent(order.id)">Despachar pedido</button>
-        </ion-card-content>
+          <ion-button expand="full" class="order-button ion-padding" (click)="orderSent(order.id)">Despachar pedido</ion-button>
+        </ion-list>
       </ion-card-content>
     </ion-card>
-  </ion-content> -->
-  
-  <ion-content>
-    <ion-card class="order-card" *ngFor="let order of orders">
+
+    <!-- <ion-card class="order-card margin-remove" *ngFor="let order of orders">
       <ion-card-header>
         <h3>{{ order.fecha }}</h3>
       </ion-card-header>
@@ -56,14 +65,25 @@
               <p class="title-card">{{ product.product.nombre }}</p>
               <p class="subtitle-card">Precio: <span class="precio">${{ product.product.precio }}</span></p>
               <p class="subtitle-card">Cantidad: {{ product.qty }}</p>
-              <p class="subtitle-card">Subtotal: <span class="precio">${{ product.qty * product.product.precio }}</span></p>
             </div>
           </div>
         </ion-item>
       </ion-list>
       <ion-card-content>
-        <div class="total-section">
-          <p class="total-price">Precio Total: <span class="precio">${{ calculateOrderTotal(order) }}</span></p>
+        <div class="price-section">
+          <h2>Subtotal: ${{calculateOrderTotal(order)}}</h2>
+          <h2> Envio: 
+            <span *ngIf="calculateOrderTotal(order) >= 1000">Gratis</span>
+            <span *ngIf="calculateOrderTotal(order) < 1000">$100</span>
+          </h2>  
+          <div class="total-section">
+            <p class="total-price" *ngIf="calculateOrderTotal(order) >= 1000">
+              Precio Total: <span class="precio">${{ calculateOrderTotal(order) }}</span>
+            </p>
+            <p class="total-price" *ngIf="calculateOrderTotal(order) < 1000">
+              Precio Total: <span class="precio">${{ calculateOrderTotal(order) + 100 }}</span>
+            </p>
+          </div>
         </div>
         <div class="location" style="display: flex; flex-direction: column;">
           <ion-button [href]="order.ubicacion" target="_blank" style="width: 35%;">Ver en mapa</ion-button>
@@ -71,7 +91,7 @@
         </div>
         <ion-button expand="full" class="order-button ion-padding" (click)="orderSent(order.id)">Despachar pedido</ion-button>
       </ion-card-content>
-    </ion-card>
+    </ion-card> -->
   </ion-content>
   
   

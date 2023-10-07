@@ -55,19 +55,30 @@ export class LoginComponent {
     })
   }
 
-    loginGoogle() {
-    this.authService.loginWithGoogle()
-      .then( async () => {
-        const usuarioNombre = this.authService.getCurrentUser()?.displayName
-        const usuarioEmail = this.authService.getCurrentUser()?.email
-        const userData = {username: usuarioNombre, email: usuarioEmail, role: 'usuario'}
-        await this.storageService.set("usuario", userData)
-        this.router.navigate(['home'])
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
+  //   loginGoogle() {
+  //   this.authService.loginWithGoogle()
+  //     .then( async () => {
+  //       const usuarioNombre = this.authService.getCurrentUser()?.displayName
+  //       const usuarioEmail = this.authService.getCurrentUser()?.email
+  //       const userData = {username: usuarioNombre, email: usuarioEmail, role: 'usuario'}
+  //       await this.storageService.set("usuario", userData)
+  //       this.router.navigate(['home'])
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //     })
+  // }
 
+  async loginGoogle() {
+    try {
+      const result = await this.authService.loginWithGoogle().then(()=> {
+        this.router.navigate(['home'])
+        // .then(() => {location.reload()})
+      console.log('logueado', result)
+      })
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
 
 }

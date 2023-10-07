@@ -17,6 +17,14 @@ ion-toolbar {
 }
 
 .producto {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    img {
+        border-radius: 30px;
+        width: 300px;
+    }
     h2{
         font-family: $fuenteDeLetra;
         font-weight: $extraBold;
@@ -31,23 +39,11 @@ ion-toolbar {
     .precio {
         h2{
             font-weight: $extraBold;
-        }
-    }
-    .cantidad {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 18px;
-        ion-icon {
-            font-size: 40px;
-        }
-        .menos {
-            color: red;
-        }
-        .mas {
             color: #02B761;
+            
         }
     }
+
 }
 
 button {
@@ -59,7 +55,7 @@ button {
     justify-content: center;
     color: white;
     font-weight: $extraBold;
-    font-size: 15px;
+    font-size: 25px;
     margin: 30px auto;
     align-items: center;
     ion-icon{
@@ -67,3 +63,26 @@ button {
         padding-left: 5px;
     }
 }
+
+
+/* Agrega estilos al mensaje de éxito */
+.success-message {
+    position: fixed;
+    top: 350px;
+    left: 100px;
+    background-color: #02B761;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    font-family: $fuenteDeLetra;
+  }
+  
+  /* Agrega estilos cuando el mensaje está visible */
+  .success-message.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  

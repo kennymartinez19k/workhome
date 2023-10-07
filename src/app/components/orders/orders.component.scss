@@ -3,6 +3,10 @@ $fuenteDeLetra: 'Poppins', sans-serif;
 $semiBold: 600;
 $extraBold: 800;
 
+* {
+  font-family: $fuenteDeLetra;
+}
+
 ion-toolbar {
     background: #02B761;
     ion-back-button {
@@ -17,25 +21,49 @@ ion-toolbar {
     }
 }
 
-/* En tu archivo de estilos o en el estilo del componente */
-
-.order-card {
-  margin-bottom: 20px;
-  h3, p, ion-button {
-    font-family: $fuenteDeLetra;
-  }
-  .precio {
-    color: #02B761;
-  }
-}
-
+/* Estilo para los detalles del producto */
 .product-item {
-  display: flex;
-  align-items: center;
+    border-bottom: 1px solid #eee; /* Borde inferior de cada elemento de producto */
+    padding: 10px 0; /* Espaciado interior de cada elemento de producto */
+    display: flex; /* Utiliza flexbox para organizar los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+  }
+  
+
+.ion-card-content{
+    display: flex;
+    justify-content: space-between;
 }
 
-.product-details {
-  margin-left: 10px;
+ion-thumbnail{
+    width: 100px;
+    height: 90px;
+    img {
+      border-radius: 10px;
+    }
+}
+
+ion-item{
+    margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 22px;
+}
+
+.title-card {
+  font-weight: $extraBold;
+  font-size: 16px
+}
+
+.subtitle-card-price {
+  color: #02B761;
+  font-weight: $extraBold;
+}
+
+.precio {
+  color: #02B761;
+  font-size: $extraBold;
 }
 
 .total-section {
@@ -44,8 +72,6 @@ ion-toolbar {
 }
 
 .total-price {
-  font-weight: bold;
+  font-weight: $extraBold;
   font-size: 18px;
 }
-
-/* Puedes agregar más estilos según sea necesario */

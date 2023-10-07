@@ -11,22 +11,18 @@
 
 <ion-content class="ion-padding">
     <div class="producto">
-        <ion-img src="assets/img/fanta.png"></ion-img>
-        <h2>Nombre del producto</h2>
+        <img [src]="productDetail.img">
+        <h2>{{productDetail.nombre}}</h2>
     </div>
     <div class="precio-cant">
         <div class="precio">
-            <h2>$100</h2>
-        </div>
-        <div class="cantidad">
-            <ion-icon class="menos" name="remove-circle-outline"></ion-icon>
-            <p>1</p>
-            <ion-icon class="mas" name="add-circle-outline"></ion-icon>
+            <h2>${{productDetail.precio}}</h2>
         </div>
     </div>
-    <button>Añadir al carrito - 
-        <ion-icon name="cart-outline"></ion-icon>
-    </button>
+    <button (click)="addProductCart(productDetail)">Añadir al carrito</button>
+    <div class="success-message" [ngClass]="{'show': showSuccessMsg}">
+        Añadido con éxito al carrito
+    </div>
 </ion-content>
 
 <app-footer-nav currentRoute="/"></app-footer-nav>

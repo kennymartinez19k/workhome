@@ -14,6 +14,7 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { HistoryOrdersComponent } from './components/history-orders/history-orders.component';
 import { CategoryComponent } from './components/category/category.component';
 import { ProductsSearchedComponent } from './components/products-searched/products-searched.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
 
@@ -22,7 +23,7 @@ const routes: Routes = [
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'product-detail', component: ProductDetailComponent},
+  {path: 'product-detail/:uid', component: ProductDetailComponent},
   {path: 'add-product', component: AddProductComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'slider', component: SliderComponent},
@@ -31,7 +32,8 @@ const routes: Routes = [
   {path: 'orders', component: OrdersComponent},
   {path: 'history', component: HistoryOrdersComponent},
   {path: 'category/:nombre', component: CategoryComponent},
-  {path: 'search-results', component: ProductsSearchedComponent}  
+  {path: 'search-results', component: ProductsSearchedComponent},
+  {path: 'reset-password', component: ResetPasswordComponent}
 ];
 
 @NgModule({

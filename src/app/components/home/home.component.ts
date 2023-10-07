@@ -115,5 +115,8 @@ searchProduct: any[] = []
   this.router.navigate(['/search-results'])
  }
 
+ goToProductDetail(product: any) {
+  this.router.navigate(['product-detail', product.uid])
+ }
 }
 

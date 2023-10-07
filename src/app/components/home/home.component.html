@@ -26,17 +26,6 @@
       <ion-icon name="search-outline" style="font-size: 30px;"(click)="searchProducts()"></ion-icon>
     </div>
 
-    <div class="busqueda ion-padding">
-      <ion-list>
-        <ion-item *ngFor="let product of searchProduct">
-          <!-- Mostrar información del producto aquí -->
-          <ion-label>{{ product.nombre }}</ion-label>
-          <ion-label>${{ product.precio }}</ion-label>
-        </ion-item>
-      </ion-list>
-    
-    </div>
-
   </div>
 
   <div class="category-title ion-padding">
@@ -47,48 +36,47 @@
 
       <ng-template swiperSlide class="swiper-slide-swipe">
         <div class="banner-top" [routerLink]="['/category', 'Alimentos Frescos']">
-          <img class="swiperimg" src="../../../assets/img/alimentos-frescos.png" alt="">
+          <img class="swiperimg" src="/assets/img/alimentos-frescos.png" alt="">
           <b>Alimentos Frescos</b>
         </div>
       </ng-template>
 
       <ng-template swiperSlide class="swiper-slide-swipe">
         <div class="banner-top" [routerLink]="['/category', 'Bebidas']">
-          <img class="swiperimg" src="../../../assets//img/bebida.png" alt="">
+          <img class="swiperimg" src="/assets//img/bebida.png" alt="">
           <b>Bebidas</b>
         </div>
       </ng-template>
 
       <ng-template swiperSlide class="swiper-slide-swipe">
         <div class="banner-top" [routerLink]="['/category', 'Enlatados']">
-          <img class="swiperimg" src="../../../assets//img/enlatados.png" alt="">
+          <img class="swiperimg" src="/assets//img/enlatados.png" alt="">
           <b>Enlatados</b>
         </div>
       </ng-template>
 
       <ng-template swiperSlide class="swiper-slide-swipe">
         <div class="banner-top" [routerLink]="['/category', 'Papitas']">
-          <img class="swiperimg" src="../../../assets//img/papita.png" alt="">
+          <img class="swiperimg" src="/assets//img/papita.png" alt="">
           <b>Papitas</b>
         </div>
       </ng-template>
 
       <ng-template swiperSlide class="swiper-slide-swipe">
         <div class="banner-top" [routerLink]="['/category', 'Higiene']">
-          <img class="swiperimg" src="../../../assets//img/higiene.png" alt="">
+          <img class="swiperimg" src="/assets//img/higiene.png" alt="">
           <b>Higiene</b>
         </div>
       </ng-template>
 
       <ng-template swiperSlide class="swiper-slide-swipe">
         <div class="banner-top" [routerLink]="['/category', 'Farmacos']">
-          <img class="swiperimg" src="../../../assets//img/farmacos.png" alt="">
+          <img class="swiperimg" src="/assets//img/farmacos.png" alt="">
           <b>Farmacos</b>
         </div>
       </ng-template>
 
     </swiper>
-
   </div>
 
   <div class="product-title ion-padding">
@@ -97,7 +85,7 @@
   <div class="productos-populares">
     <ion-row *ngFor="let product of products">
       <ion-card class="product-card">
-        <div class="image-container">
+        <div class="image-container" (click)="goToProductDetail(product)">
           <img class="product-img" alt="Silhouette of products" [src]="product.img" />
         </div>
         <ion-card-header class="card-header">

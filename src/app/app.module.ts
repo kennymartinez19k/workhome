@@ -32,6 +32,7 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { HistoryOrdersComponent } from './components/history-orders/history-orders.component';
 import { CategoryComponent } from './components/category/category.component';
 import { ProductsSearchedComponent } from './components/products-searched/products-searched.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 // import { AgmCoreModule } from '@agm/core';
 
@@ -52,6 +53,7 @@ import { ProductsSearchedComponent } from './components/products-searched/produc
     HistoryOrdersComponent,
     CategoryComponent,
     ProductsSearchedComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

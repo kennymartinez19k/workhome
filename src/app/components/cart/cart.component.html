@@ -34,31 +34,15 @@
             </div>
           </div>
         </ion-item>
-        <h2>Total: ${{totalPrice}}</h2>
-
-
-        <!-- <div *ngIf="deliveryFree" class="ion-padding">
-          <ion-item>
-            Subtotal: ${{ totalCartPrice }}
-          </ion-item>
-          <ion-item>
-            Envío: Gratis
-          </ion-item>
-          <ion-item>
-            Total: ${{ totalCartPrice }}
-          </ion-item>
+        <div class="price">
+          <h2>Subtotal: ${{totalPrice}}</h2>
+          <h2> Envio: 
+            <span *ngIf="totalPrice >= 1000">Gratis</span>
+            <span *ngIf="totalPrice < 1000">$100</span>
+          </h2>  
+          <h2 *ngIf="totalPrice >= 1000">Total: ${{totalPrice }}</h2>
+          <h2 *ngIf="totalPrice < 1000">Total: ${{totalPrice + 100}}</h2>
         </div>
-        <div *ngIf="!deliveryFree" class="ion-padding">
-          <ion-item>
-            Subtotal: ${{ totalCartPrice }}
-          </ion-item>
-          <ion-item>
-            Envío: $100
-          </ion-item>
-          <ion-item>
-            Total: ${{ totalCartPrice + 100}}
-          </ion-item>
-        </div> -->
 
       </ion-list>
     </ion-card-content>
@@ -89,22 +73,5 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
-
-<!-- <ion-list>
-  <ion-item *ngFor="let cartItem of cartItems">
-    <ion-thumbnail slot="start">
-      <img [src]="cartItem.product.img" alt="{{ cartItem.product.nombre }}" />
-    </ion-thumbnail>
-    <div class="product-details">
-      <h2>{{ cartItem.product.nombre }}</h2>
-      <p>Precio: ${{ cartItem.product.precio }}</p>
-      <ion-button (click)="decrementQty(cartItem)">-</ion-button>
-      <ion-input [(ngModel)]="cartItem.qty" type="number" min="1"></ion-input>
-      <ion-button (click)="incrementQty(cartItem)">+</ion-button>
-      <p>Total: ${{ cartItem.product.precio * cartItem.qty }}</p>
-    </div>
-  </ion-item>
-</ion-list> -->
-
 
 <app-footer-nav></app-footer-nav>

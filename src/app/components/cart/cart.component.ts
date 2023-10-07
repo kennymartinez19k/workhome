@@ -96,6 +96,7 @@ export class CartComponent implements OnInit {
   calculateTotalPrice(): void {
     this.totalPrice = this.cartItems.reduce((total, cartItem) => {
       return total + cartItem.product.precio * cartItem.qty;
+    
     }, 0);
   }
 
@@ -145,7 +146,7 @@ export class CartComponent implements OnInit {
       console.log('Producto eliminado del carrito con éxito.');
   
       // Forzar un ciclo de detección de cambios
-      this.cdRef.detectChanges();
+    this.cdRef.detectChanges()
     } catch (error) {
       console.error('Error al eliminar el producto del carrito:', error);
     }

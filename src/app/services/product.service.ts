@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, from, map } from 'rxjs';
 import { Product } from '../interfaces/product';
-import { Firestore, collection, addDoc, query, where, getDocs, doc, getDoc, setDoc, deleteDoc, updateDoc, orderBy, startAt, endAt } from '@angular/fire/firestore';
-import { AuthService } from './auth.service';
+import { Firestore, collection, addDoc, query, where, getDocs, doc, getDoc, setDoc, deleteDoc, orderBy, startAt, endAt } from '@angular/fire/firestore';
 import { LoadingController } from '@ionic/angular';
 
 

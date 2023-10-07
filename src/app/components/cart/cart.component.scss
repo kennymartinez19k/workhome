@@ -64,3 +64,9 @@ ion-item{
 .icon-location{
     font-size: 30px;
 }
+
+.price {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

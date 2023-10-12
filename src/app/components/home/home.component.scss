@@ -94,18 +94,18 @@ $extraBold: 800;
     align-items: center;
 }
 
+.banner-top {
+    max-height: 50px;
+}
 .swiperimg{
-    border-radius: 100px;
+    border-radius: 100%;
     width: 50px;
     margin-right: 10px;
-    
 }
 
 .swiper-container{
    display: flex;
    align-items: center;
-   
-   
 }
 .banner-top{
     display: flex;

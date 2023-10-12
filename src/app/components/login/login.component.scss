@@ -60,9 +60,30 @@ ion-content {
 .google {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    img {
-        width: 55px;
-    }
+    padding-bottom: 7px;
+    ion-button {
+        --padding-start: 30px; 
+        --padding-end: 30px; 
+        --padding-top: 15px;
+        --padding-bottom: 15px;
+
+        img {
+            margin-right: 7px;
+        }
+      }
+}
+
+.guest {
+    display: flex;
+    justify-content: center;
+    ion-button {
+        --padding-start: 19px; 
+        --padding-end: 19px;
+        --padding-top: 15px; 
+        --padding-bottom: 15px; 
+
+        img {
+            margin-right: 7px;
+        }
+      }
 }

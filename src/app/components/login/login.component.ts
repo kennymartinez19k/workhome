@@ -6,6 +6,7 @@ import { User } from 'src/app/interfaces/user';
 import { StorageService } from 'src/app/services/storage.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent {
   formLogin: FormGroup;
   userdata: User[] = []
   
-  constructor( private router: Router, private authService: AuthService, 
+  constructor( private router: Router, public authService: AuthService, 
     private userService: UserService, private storageService: StorageService,
     private cdRef: ChangeDetectorRef){
   this.formLogin = new FormGroup({
@@ -55,30 +56,8 @@ export class LoginComponent {
     })
   }
 
-  //   loginGoogle() {
+  // loginGoogle() {
   //   this.authService.loginWithGoogle()
-  //     .then( async () => {
-  //       const usuarioNombre = this.authService.getCurrentUser()?.displayName
-  //       const usuarioEmail = this.authService.getCurrentUser()?.email
-  //       const userData = {username: usuarioNombre, email: usuarioEmail, role: 'usuario'}
-  //       await this.storageService.set("usuario", userData)
-  //       this.router.navigate(['home'])
-  //     })
-  //     .catch(error => {
-  //       console.log(error)
-  //     })
   // }
-
-  async loginGoogle() {
-    try {
-      const result = await this.authService.loginWithGoogle().then(()=> {
-        this.router.navigate(['home'])
-        // .then(() => {location.reload()})
-      console.log('logueado', result)
-      })
-    } catch (error) {
-      console.log('error', error)
-    }
-  }
 
 }

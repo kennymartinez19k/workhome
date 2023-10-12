@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/interfaces/product';
 import { SwiperOptions } from 'swiper';
@@ -7,6 +7,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -118,5 +119,6 @@ searchProduct: any[] = []
  goToProductDetail(product: any) {
   this.router.navigate(['product-detail', product.uid])
  }
+ 
 }
 

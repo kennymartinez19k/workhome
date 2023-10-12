@@ -1,0 +1,36 @@
+{
+    "plugins": {
+        "PushNotifications": {
+            "presentationOptions": [
+                "badge",
+                "sound",
+                "alert"
+            ]
+        },
+        "GoogleAuth": {
+            "scopes": [
+                "profile",
+                "email"
+            ],
+            "serverClientId": "97413658267-kukgef0f3pvit19qrmiq7mmvf9dju2us.apps.googleusercontent.com",
+            "forceCodeForRefreshToken": false
+        }
+    },
+    "appId": "com.ortisoft.bodega_la_fe",
+    "appName": "Bodega La Fe",
+    "webDir": "dist/bodega-la-fe",
+    "server": {
+        "androidScheme": "https"
+    },
+    "cordova": {
+        "preferences": {
+            "ScrollEnabled": false,
+            "BackupWebStorage": "none",
+            "SplashMaintainAspectRatio": true,
+            "FadeSplashScreenDuration": 300,
+            "SplashShowOnlyFirstTime": false,
+            "SplashScreen": "screen",
+            "SplashScreenDelay": 3000
+        }
+    }
+}

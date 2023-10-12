@@ -11,7 +11,6 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
-import { getMessaging, getToken } from '@firebase/messaging';
 
 /////////////////////////////////////////////////////////////////////////////777
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -75,7 +74,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     provideStorage(() => getStorage()),
   ],
   providers: [
-    Storage,
+    Storage
   ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

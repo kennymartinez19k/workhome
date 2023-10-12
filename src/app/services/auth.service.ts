@@ -1,15 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
-  signOut, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, getRedirectResult, UserCredential,
-signInWithRedirect } from '@angular/fire/auth';
+  signOut, sendPasswordResetEmail, GoogleAuthProvider, getAuth, signInWithCredential} from '@angular/fire/auth';
 import { LoadingController, AlertController } from '@ionic/angular';
-
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+// import { GoogleAuthProvider, getAuth, signInWithCredential } from 'firebase/auth';
+import { environment } from 'src/environments/environment';
+import { Platform } from '@ionic/angular';
+import {initializeApp} from 'firebase/app'
+import { StorageService } from './storage.service';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: Auth, private loading: LoadingController, private alert: AlertController) { }
+  isWeb = false
+  firebase: any
+  constructor(private auth: Auth, private loading: LoadingController, private alert: AlertController,
+    private plataform: Platform, private storage: StorageService, private router: Router) {
+      this.firebase = initializeApp(environment.firebase)
+      GoogleAuth.initialize()
+    }
 
   async register({email, password}: any) {
     await createUserWithEmailAndPassword(this.auth, email, password)
@@ -41,17 +52,32 @@ export class AuthService {
   }
 
 
-  async loginWithGoogle(): Promise<UserCredential | any>{
-    const provider = new GoogleAuthProvider()
-    try {
-      await signInWithRedirect(this.auth, provider)
-      const result = await getRedirectResult(this.auth)
-      return result
-    } catch(error) {
-      console.log('error')
-      throw error
+async loginWithGoogle() {
+      const user = await GoogleAuth.signIn();
+      if (user) {
+        const credential = GoogleAuthProvider.credential(user.authentication.idToken);
+        await signInWithCredential(getAuth(this.firebase), credential);
+        const userData = { username: user.name, email: user.email, role: 'usuario' };
+        await this.storage.set("usuario", userData);
+        this.router.navigate(['/home']).then(()=>{location.reload()})
+      } else {
+        console.log('Inicio de sesión con Google cancelado o fallido');
+      }
     }
-  }
+
+
+  // async loginWithGoogle() {
+  //   try {
+  //     const user = await GoogleAuth.signIn()
+  //     if(user) {
+  //       signInWithCredential(getAuth(this.firebase), GoogleAuthProvider.credential(user.authentication.idToken))
+  //       const userData = {username: user.givenName, email: user.email, role: 'usuario'}
+  //       await this.storage.set("usuario", userData)
+  //     }
+  //   }catch(error) {
+  //     console.log(error)
+  //   }
+  // }
 
   async logout() {
     return await signOut(this.auth);

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import SwiperCore, { Keyboard, Pagination, Navigation, Virtual, SwiperOptions, Autoplay } from 'swiper';
+import { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-slider',

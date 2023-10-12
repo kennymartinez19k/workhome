@@ -10,7 +10,7 @@
   <div class="main">
 
     <div class="header">
-      <ion-img src="assets/img/bodega-la-fe.png" alt="logo bodega la fe"></ion-img>
+      <ion-img src="assets/img/bodega-la-fe.png" alt="logo bodega la fe" routerLink="/test"></ion-img>
       <div class="usuario" *ngIf="user">
         <h1>¡Hola {{user.username}}!</h1>
         <em *ngIf="user.role == 'usuario'">¡Gracias por comprar con nosotros!</em>
@@ -43,35 +43,35 @@
 
       <ng-template swiperSlide class="swiper-slide-swipe">
         <div class="banner-top" [routerLink]="['/category', 'Bebidas']">
-          <img class="swiperimg" src="/assets//img/bebida.png" alt="">
+          <img class="swiperimg" src="/assets/img/bebida.png" alt="">
           <b>Bebidas</b>
         </div>
       </ng-template>
 
       <ng-template swiperSlide class="swiper-slide-swipe">
         <div class="banner-top" [routerLink]="['/category', 'Enlatados']">
-          <img class="swiperimg" src="/assets//img/enlatados.png" alt="">
+          <img class="swiperimg" src="/assets/img/enlatados.png" alt="">
           <b>Enlatados</b>
         </div>
       </ng-template>
 
       <ng-template swiperSlide class="swiper-slide-swipe">
         <div class="banner-top" [routerLink]="['/category', 'Papitas']">
-          <img class="swiperimg" src="/assets//img/papita.png" alt="">
+          <img class="swiperimg" src="/assets/img/papita.png" alt="">
           <b>Papitas</b>
         </div>
       </ng-template>
 
       <ng-template swiperSlide class="swiper-slide-swipe">
         <div class="banner-top" [routerLink]="['/category', 'Higiene']">
-          <img class="swiperimg" src="/assets//img/higiene.png" alt="">
+          <img class="swiperimg" src="/assets/img/higiene.png" alt="">
           <b>Higiene</b>
         </div>
       </ng-template>
 
       <ng-template swiperSlide class="swiper-slide-swipe">
         <div class="banner-top" [routerLink]="['/category', 'Farmacos']">
-          <img class="swiperimg" src="/assets//img/farmacos.png" alt="">
+          <img class="swiperimg" src="/assets/img/farmacos.png" alt="">
           <b>Farmacos</b>
         </div>
       </ng-template>

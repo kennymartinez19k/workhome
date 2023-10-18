@@ -1,9 +1,8 @@
 export interface Product {
-    uid?: string
+    productId?: string
     nombre: string
     precio: number
     stock: number
     img: string
-    qty: number
     categoryId: string
 }

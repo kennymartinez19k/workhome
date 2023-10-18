@@ -28,7 +28,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'slider', component: SliderComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'edit-product/:uid', component: EditProductComponent, canActivate: [GuardFactoryService]},
+  {path: 'edit-product/:productId', component: EditProductComponent, canActivate: [GuardFactoryService]},
   {path: 'orders', component: OrdersComponent, canActivate: [GuardFactoryService]},
   {path: 'history', component: HistoryOrdersComponent},
   {path: 'category/:nombre', component: CategoryComponent},

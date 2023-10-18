@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router"
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/interfaces/user';
 import { StorageService } from 'src/app/services/storage.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -22,10 +22,11 @@ export class LoginComponent {
   
   constructor( private router: Router, public authService: AuthService, 
     private userService: UserService, private storageService: StorageService,
-    private cdRef: ChangeDetectorRef){
+    private cdRef: ChangeDetectorRef, private loading: LoadingController,
+    private alert: AlertController){
   this.formLogin = new FormGroup({
-    email: new FormControl(),
-    password: new FormControl()
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required])
   })
 
 }
@@ -41,19 +42,39 @@ export class LoginComponent {
       password: this.formLogin.value.password
     }
 
-    this.authService.login(userData).then(()=>{
+    const loading = await this.loading.create({
+      message: 'Iniciando sesión...',
+    });
+  
+    await loading.present();
+  
+    try {
       
-      this.userService.getUser().subscribe(async userdata => {
-        this.userdata = userdata
-        const username = userdata.map(x => x.username)
-        const email = userdata.map(x => x.email)
-        const role = userdata.map(x => x.role)
-        const usuario = {username, email, role}
-        await this.storageService.set("usuario", usuario)
-        
-        this.router.navigate(['home']).then(()=>{location.reload()})
+      this.authService.login(userData).then( () => {
+      
+        this.userService.getUser().subscribe(async userdata => {
+          this.userdata = userdata
+          const username = userdata.map(x => x.username)
+          const email = userdata.map(x => x.email)
+          const role = userdata.map(x => x.role)
+          const usuario = {username, email, role}
+          await this.storageService.set("usuario", usuario)
+            this.router.navigate(['home']).then(()=>{location.reload()})
+        })
+      }).catch(async () => {
+        const alert = await this.alert.create({
+          header: 'Error',
+          message: 'Las credenciales son incorrectas. Por favor, inténtalo de nuevo.',
+          buttons: ['OK'],
+        });
+    
+        await alert.present();
       })
-    })
+    } catch (error) {
+      console.error(error);
+    }
+    await loading.dismiss();
+    
   }
 
   // loginGoogle() {

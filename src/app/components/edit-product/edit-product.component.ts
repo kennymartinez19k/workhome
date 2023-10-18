@@ -28,7 +28,7 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.cdRef.detectChanges()
-    const productId = this.activatedRoute.snapshot.paramMap.get('uid')
+    const productId = this.activatedRoute.snapshot.paramMap.get('productId')
     if(productId !== null) {
       this.productService.getProductById(productId).then((product) =>{
         if(product) {
@@ -40,12 +40,12 @@ export class EditProductComponent implements OnInit {
   }
 
   editProduct() {
-    if(this.product && this.product.uid) {
+    if(this.product && this.product.productId) {
       const productUpt: Product = {
         ...this.product,
         ...this.formEdit.value
       }
-      this.productService.updateProduct(this.product.uid, productUpt).then( ()=>{
+      this.productService.updateProduct(this.product.productId, productUpt).then( ()=>{
         this.router.navigate(['home']).then(()=>{location.reload()})
       })
     }

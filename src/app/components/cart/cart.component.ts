@@ -36,11 +36,15 @@ export class CartComponent implements OnInit {
   }
 
   incrementQty(cartItem: any): void {
-    cartItem.qty++;
-    this.cartService.updateCartItemQty(cartItem.orderId, cartItem.qty).then(()=>{
-      console.log("incrementado a cantidad: ", cartItem.qty)
-      this.calculateTotalPrice()
-    })
+    if(cartItem.product.stock > cartItem.qty) {
+      cartItem.qty++;
+      this.cartService.updateCartItemQty(cartItem.orderId, cartItem.qty).then(()=>{
+        console.log("incrementado a cantidad: ", cartItem.qty)
+        this.calculateTotalPrice()
+      })
+    } else {
+      console.log('NO HAY STOCK')
+    }
   }
 
   decrementQty(cartItem: any): void {
@@ -60,9 +64,10 @@ export class CartComponent implements OnInit {
     const mapUrl = `https://www.google.com/maps/dir/${this.latitude},${this.longitude}/`
     try {
       await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl)
-
       for (const cartItem of this.cartItems) {
+        const newStock = cartItem.product.stock - cartItem.qty
         await this.cartService.deleteCartItem(cartItem.orderId)
+        await this.cartService.reduceStock(cartItem.product.productId, newStock)
       }
 
       this.cartItems = [];
@@ -92,6 +97,7 @@ export class CartComponent implements OnInit {
     }
     
   }
+
 
   calculateTotalPrice(): void {
     this.totalPrice = this.cartItems.reduce((total, cartItem) => {

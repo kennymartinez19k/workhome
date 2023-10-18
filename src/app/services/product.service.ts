@@ -43,8 +43,8 @@ export class ProductService {
     );
   }
 
-  async getProductById(uid: string): Promise<Product | undefined> {
-    const docRef = doc(this.firestore, 'productos', uid)
+  async getProductById(productId: string): Promise<Product | undefined> {
+    const docRef = doc(this.firestore, 'productos', productId)
     const docSnap = await getDoc(docRef)
     if(docSnap.exists()) {
       return docSnap.data() as Product
@@ -53,14 +53,14 @@ export class ProductService {
     }
   }
 
-  async updateProduct(uid: string, product: Product): Promise <void> {
-    const productRef = doc(this.firestore, 'productos', uid)
+  async updateProduct(productId: string, product: Product): Promise <void> {
+    const productRef = doc(this.firestore, 'productos', productId)
     return setDoc(productRef, product, {merge: true})
   }
 
-  async deleteProduct(uid: string | undefined): Promise<void> {
-    if(uid) {
-      const productRef = doc(this.firestore, 'productos', uid)
+  async deleteProduct(productId: string | undefined): Promise<void> {
+    if(productId) {
+      const productRef = doc(this.firestore, 'productos', productId)
       await deleteDoc(productRef)
     } else {
       console.log("UID de producto no valido")

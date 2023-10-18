@@ -26,31 +26,34 @@ export class AuthService {
     await createUserWithEmailAndPassword(this.auth, email, password)
   }
 
+  // async login({ email, password }: any) {
+  //   const loading = await this.loading.create({
+  //     message: 'Iniciando sesión...',
+  //   });
+  
+  //   await loading.present();
+  
+  //   try {
+  //     await signInWithEmailAndPassword(this.auth, email, password);
+
+  //   } catch (error) {
+  //     console.error(error);
+  
+  //     await loading.dismiss();
+  
+  //     const alert = await this.alert.create({
+  //       header: 'Error',
+  //       message: 'Las credenciales son incorrectas. Por favor, inténtalo de nuevo.',
+  //       buttons: ['OK'],
+  //     });
+  
+  //     await alert.present();
+  //   } 
+  // }
+
   async login({ email, password }: any) {
-    const loading = await this.loading.create({
-      message: 'Iniciando sesión...',
-    });
-  
-    await loading.present();
-  
-    try {
       await signInWithEmailAndPassword(this.auth, email, password);
-
-    } catch (error) {
-      console.error(error);
-  
-      await loading.dismiss();
-  
-      const alert = await this.alert.create({
-        header: 'Error',
-        message: 'Las credenciales son incorrectas. Por favor, inténtalo de nuevo.',
-        buttons: ['OK'],
-      });
-  
-      await alert.present();
-    } 
   }
-
 
 async loginWithGoogle() {
       const user = await GoogleAuth.signIn();
@@ -79,8 +82,8 @@ async loginWithGoogle() {
   //   }
   // }
 
-  async logout() {
-    return await signOut(this.auth);
+  logout() {
+    return signOut(this.auth);
   }
 
   async resetPassword(email: string): Promise<void> {

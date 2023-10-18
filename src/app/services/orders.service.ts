@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, query, where, deleteDoc, doc,
-updateDoc, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, query, where, deleteDoc,
+updateDoc, getDocs, getDoc, doc } from '@angular/fire/firestore';
 import { Product } from '../interfaces/product';
 import { Observable, map, from } from 'rxjs'
 @Injectable({
@@ -34,10 +34,14 @@ export class OrdersService {
         await deleteDoc(doc.ref)
         console.log('Pedido enviado con éxito. ID del pedido:', orderId);
       })
+
+
     } catch (error) {
       console.log('Error al enviar el pedido:', error);
     }
+
   }
+  
 
   async sentOrder(orderId: any): Promise<void> {
     const orderRef = doc(this.firestore, 'pedidos', orderId)

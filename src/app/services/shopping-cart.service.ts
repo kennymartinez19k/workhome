@@ -14,7 +14,7 @@ async addProductCart(product: any): Promise<void> {
   const userId = await this.authService.getUserUid()
   try {
     const cartRef = collection(this.firestore, 'carrito');
-    const q = query(cartRef, where('userId', '==', userId), where('product.uid', '==', product.uid));
+    const q = query(cartRef, where('userId', '==', userId), where('product.productId', '==', product.productId));
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.size > 0) {
@@ -69,6 +69,16 @@ async updateCartItemQty(cartItemId: any, newQty: number): Promise<void> {
     await updateDoc(cartItemRef, {qty: newQty})
   } catch (error) {
     console.error('Error al actualizar la cantidad del producto en el carrito:', error);
+  }
+}
+
+async reduceStock(productId: any, newStock: number): Promise<void> {
+  try {
+    const productRef = doc(this.firestore, 'productos', productId)
+    await updateDoc(productRef, {stock: newStock})
+    console.log('STOCK REDUCIDO A: ', newStock)
+  } catch (error) {
+    
   }
 }
 

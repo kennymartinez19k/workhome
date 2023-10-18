@@ -85,8 +85,6 @@ $extraBold: 800;
    
 }
   
-  
-
 
 .productos{
     display: flex;
@@ -107,6 +105,12 @@ $extraBold: 800;
    display: flex;
    align-items: center;
 }
+
+.banner-top {
+    width: 96%;
+    font-size: 13px
+}
+
 .banner-top{
     display: flex;
     justify-content: center;

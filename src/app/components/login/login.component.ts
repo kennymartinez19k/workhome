@@ -59,7 +59,7 @@ export class LoginComponent {
           const role = userdata.map(x => x.role)
           const usuario = {username, email, role}
           await this.storageService.set("usuario", usuario)
-            this.router.navigate(['home']).then(()=>{location.reload()})
+            this.router.navigate(['home']).then(()=>{})
         })
       }).catch(async () => {
         const alert = await this.alert.create({

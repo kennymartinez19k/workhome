@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Product } from 'src/app/interfaces/product';
 import { SwiperOptions } from 'swiper';
 import { AlertController } from '@ionic/angular';
@@ -7,24 +7,28 @@ import { StorageService } from 'src/app/services/storage.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-import { Subscription } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
 products: any[] = []
 user: any = {}
 showSuccessMsg = false
 searchTerm: string = ''
 searchProduct: any[] = []
-
+cartItems: any = []
+subscription
   constructor(private router: Router, private productService: ProductService, 
     private alert: AlertController, private storageService: StorageService,
-    private cartService: ShoppingCartService, private cdRef: ChangeDetectorRef){
+    private cartService: ShoppingCartService, private cdRef: ChangeDetectorRef,
+    private auth: AuthService,
+    ){
     this.products = [{
       nombre: "",
       precio: 0,
@@ -50,16 +54,20 @@ searchProduct: any[] = []
     this.productService.getProduct().subscribe(products => {
       this.products = products
     })
-    
-   this.user = await this.storageService.get("usuario")
-   console.log(this.user)
+
+    this.subscription = this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd)
+      ).subscribe(async () => {
+        this.user = await this.storageService.get("usuario")
+        let userId = await this.auth.getUserUid()
+        this.cartItems = await this.cartService.getCartItems(userId)
+      })
   }
 
   editProduct(product: Product) {
     if(product.productId) {
       this.router.navigate(['/edit-product', product.productId])
     } else {
-      alert("el uid es null o undefined")
     }
   }
 
@@ -93,13 +101,21 @@ searchProduct: any[] = []
     await alert.present()
   }
 
- addToCart(product: any): void {
-  this.cartService.addProductCart(product)
+ async addToCart(product: any) {
+  console.log(product.qty)
+  product.qty = 0
+  await this.cartService.addProductCart(product)
   this.showSuccessMsg = true
+  let userId = await this.auth.getUserUid()
+  this.cartItems = await this.cartService.getCartItems(userId)
 
-  setTimeout(() => {
-    this.showSuccessMsg = false
-  }, 1000)
+
+ }
+
+ async removeToCard(product){
+  if(product.qty > 0){
+    product.qty--
+  }  
  }
 
  async searchProducts() {
@@ -109,6 +125,17 @@ searchProduct: any[] = []
 
  goToProductDetail(product: any) {
   this.router.navigate(['product-detail', product.productId])
+ }
+
+ addQty(product){
+   if(product.qty < product.stock){
+     product.qty++
+  }
+ }
+
+ ngOnDestroy() {
+    this.subscription ? this.subscription.unsubscribe() : null;
+     
  }
  
 }

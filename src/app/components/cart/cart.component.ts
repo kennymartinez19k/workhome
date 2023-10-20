@@ -144,6 +144,7 @@ export class CartComponent implements OnInit {
   }
 
   async deleteCartItem(cartItem: any): Promise<void> {
+    console.log(cartItem)
     try {
       await this.cartService.deleteCartItem(cartItem.orderId);
   

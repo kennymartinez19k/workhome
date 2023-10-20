@@ -62,7 +62,7 @@ async loginWithGoogle() {
         await signInWithCredential(getAuth(this.firebase), credential);
         const userData = { username: user.name, email: user.email, role: 'usuario' };
         await this.storage.set("usuario", userData);
-        this.router.navigate(['/home']).then(()=>{location.reload()})
+        this.router.navigate(['/home']).then(()=>{})
       } else {
         console.log('Inicio de sesión con Google cancelado o fallido');
       }

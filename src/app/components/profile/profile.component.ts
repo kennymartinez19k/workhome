@@ -20,14 +20,13 @@ export class ProfileComponent implements OnInit{
      logout(){
       this.storageService.remove('usuario').then(() => {
       this.auth.logout()
-      this.router.navigate(['login']).then(()=>{location.reload()})
+      this.router.navigate(['login']).then(()=>{})
     })
   }
 
   async ngOnInit() {
     
     this.userData = await this.storageService.get('usuario')
-
   }
 
   async confirmLogout() {

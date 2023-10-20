@@ -183,6 +183,7 @@
   <div class="productos-populares">
     <ion-row *ngFor="let product of products">
       <ion-card class="product-card">
+        
         <div class="image-container" (click)="goToProductDetail(product)">
           <img class="product-img" alt="Silhouette of products" [src]="product.img" />
         </div>
@@ -205,17 +206,21 @@
         </ion-card-content>
 
         <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='usuario' || !user">
-          <div class="button-cart" (click)="addToCart(product)" style="display: flex; align-items: center;"
+          <div class="button-cart client-cnt"  style="display: flex; align-items: center; margin-rigth: 5px"
           *ngIf="product.stock > 0">
-            <ion-icon class="cart" name="cart-outline"></ion-icon>
+            <ion-icon (click)="removeToCard(product)" name="remove-outline"></ion-icon>
+            <b class="qty-field">{{product.qty}}</b>
+            <ion-icon (click)="addQty(product)" name="add-outline"></ion-icon>
+            
           </div>
         </ion-card-content>
+        <ion-icon *ngIf="product.qty > 0" name="cart" (click)="addToCart(product)" class="floating" style="font-size: 30px;"></ion-icon>
       </ion-card>
     </ion-row>
   </div>
-  <div class="success-message" [ngClass]="{'show': showSuccessMsg}">
+  <!-- <div class="success-message" [ngClass]="{'show': showSuccessMsg}">
     Añadido con éxito al carrito
-  </div>
+  </div> -->
 
 </ion-content>
-<app-footer-nav currentRoute="/"></app-footer-nav>
+<app-footer-nav currentRoute="/" [qtyOrders]="cartItems"></app-footer-nav>

@@ -29,3 +29,14 @@ ion-footer {
     }
 
 }
+
+.notification-mode{
+    position: absolute;
+    right: -2px;
+    color: #fff;
+    background: red;
+    padding: 7px;
+    border-radius: 50px;
+    font-size: 11px;
+    top: -4px;
+}

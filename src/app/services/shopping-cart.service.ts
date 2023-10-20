@@ -38,6 +38,8 @@ async addProductCart(product: any): Promise<void> {
       const orderId = orderRef.id;
       await updateDoc(orderRef, { orderId: orderId });
       console.log('Producto añadido al carrito con ID:', orderId);
+      let products = this.getCartItems(userId)
+      localStorage.setItem("cartItems", JSON.stringify(products))
     }
   } catch (error) {
     console.error('Error al agregar producto al carrito', error);

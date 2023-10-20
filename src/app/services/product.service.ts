@@ -63,7 +63,7 @@ export class ProductService {
       const productRef = doc(this.firestore, 'productos', productId)
       await deleteDoc(productRef)
     } else {
-      console.log("UID de producto no valido")
+      console.log('ERROR al eliminar SERVICIO')
     }
   }
 

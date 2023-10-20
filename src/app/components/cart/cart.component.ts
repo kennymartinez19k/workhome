@@ -63,7 +63,9 @@ export class CartComponent implements OnInit {
     if(userId && userExists){
     const mapUrl = `https://www.google.com/maps/dir/${this.latitude},${this.longitude}/`
     try {
-      await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl)
+      await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl).then(() => {
+        this.router.navigate(['/cart-success'])
+      })
       for (const cartItem of this.cartItems) {
         const newStock = cartItem.product.stock - cartItem.qty
         await this.cartService.deleteCartItem(cartItem.orderId)

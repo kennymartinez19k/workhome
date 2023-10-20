@@ -63,9 +63,10 @@ searchProduct: any[] = []
     }
   }
 
-  deleteProduct(uid: string): void {
-    this.productService.deleteProduct(uid).then( () => {
-      this.products = this.products.filter(product => product.uid !== uid)
+  deleteProduct(productId: string): void {
+    console.log(productId)
+    this.productService.deleteProduct(productId).then( () => {
+      this.products = this.products.filter(product => product.productId !== productId)
       this.cdRef.detectChanges();
     })
     .catch(error => {
@@ -73,7 +74,7 @@ searchProduct: any[] = []
     })
   }
 
-  async confirmDelete(uid: string) {
+  async confirmDelete(productId: string) {
     const alert = await this.alert.create({
       header: 'Eliminar el producto',
       message: '¿Está seguro de eliminar el producto?',
@@ -86,7 +87,7 @@ searchProduct: any[] = []
     {
       text: 'Eliminar',
       handler: () => {
-        this.deleteProduct(uid)}
+        this.deleteProduct(productId)}
     }]
     })
     await alert.present()

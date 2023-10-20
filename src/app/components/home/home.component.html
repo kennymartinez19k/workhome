@@ -189,7 +189,8 @@
         <ion-card-header class="card-header">
           <p class="title-card">{{product.nombre}}</p>
           <p class="subtitle-card">${{product.precio}}</p>
-          <p class=""> Disponible: {{product.stock}}</p>
+          <p *ngIf="product.stock > 0"> Disponible: {{product.stock}}</p>
+          <p *ngIf="product.stock < 1" style="color: red;"> Producto no disponible</p>
         </ion-card-header>
 
         <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='admin'">
@@ -197,14 +198,15 @@
             <div (click)="editProduct(product)">
               <ion-icon name="create-outline" style="font-size: 30px;"></ion-icon>
             </div>
-            <div (click)="product.uid && confirmDelete(product.uid)">
+            <div (click)="product.productId&& confirmDelete(product.productId)">
               <ion-icon name="trash-outline" style="font-size: 30px;"></ion-icon>
             </div>
           </div>
         </ion-card-content>
 
         <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='usuario' || !user">
-          <div class="button-cart" (click)="addToCart(product)" style="display: flex; align-items: center;">
+          <div class="button-cart" (click)="addToCart(product)" style="display: flex; align-items: center;"
+          *ngIf="product.stock > 0">
             <ion-icon class="cart" name="cart-outline"></ion-icon>
           </div>
         </ion-card-content>

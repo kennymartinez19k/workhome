@@ -40,16 +40,16 @@ async addProduct() {
         img: this.imgUrl,
         qty: 0,
         categoryId: this.form.value.categoryId,
-        uid: ''
+        productId: ''
       }
     
       
       if (this.imgUrl) {
 
-        this.productService.addProduct(product).then( (productUid) => {
-          console.log(`El producto se ha subido con el id: ${productUid}`)
-          product.uid = productUid
-          this.productService.updateProduct(productUid, product).then(() =>{
+        this.productService.addProduct(product).then( (productId) => {
+          console.log(`El producto se ha subido con el id: ${productId}`)
+          product.productId = productId
+          this.productService.updateProduct(productId, product).then(() =>{
             console.log('producto actualizado en firebase')
           })
           .then(()=>{
@@ -60,54 +60,6 @@ async addProduct() {
         console.log('No se pudo almacenar la imagen en Firestore.');
       }
 }
-    
-    // async takePhoto() {
-    //   const loading = await this.loading.create({
-    //     message: 'Subiendo imagen...'
-    //   })
-    //   try {
-    //     const image = await Camera.getPhoto({
-    //       resultType: CameraResultType.DataUrl,
-    //       source: CameraSource.Photos, // Cambia a CameraSource.Photos para seleccionar desde la galería
-    //     });
-    
-    //     if (image && image.dataUrl) {
-    //       this.selectedFile = this.dataURLtoFile(
-    //         image.dataUrl,
-    //         `Photo_${new Date().getTime()}` // Nombre del archivo
-    //       );
-    //      await loading.present()
-    
-    //       // Subir la imagen a Firebase Storage
-    //       const path = 'imagenes/' + this.selectedFile.name;
-    //       const storageRef = ref(this.storage, path);
-    //       const uploadTask = uploadBytes(storageRef, this.selectedFile);
-    //       await uploadTask;
-    
-    //       // Obtener la URL de descarga
-    //       const downloadURL = await getDownloadURL(storageRef);
-    //       this.imgUrl = downloadURL;
-
-    //       this.imgName = this.selectedFile.name
-    
-    //       // Almacenar la URL de descarga en Firestore
-    //       const docRef = await addDoc(collection(this.firestore, 'imagenes'), {
-    //         url: this.imgUrl,
-    //         timestamp: new Date(),
-    //       });
-    //       console.log('Imagen almacenada en Firestore con ID:', docRef.id);
-    
-    //     }
-    //   } catch (error) {
-    //     console.error('Error al tomar la foto:', error);
-    //   }finally{
-    //     (await loading).dismiss()
-    //   }
-    // }
-
-    // ...
-
-// ...
 
 async takePhoto() {
   const loading = await this.loading.create({
@@ -119,77 +71,39 @@ async takePhoto() {
     input.type = 'file';
     input.accept = 'image/*';
 
-    // Verificar si el dispositivo es móvil
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    // Simular el clic en el input file
+    input.click();
 
-    if (isMobile) {
-      // Para dispositivos móviles, usar Camera.getPhoto con Prompt
-      const image = await Camera.getPhoto({
-        resultType: CameraResultType.DataUrl,
-        source: CameraSource.Prompt,
+    // Esperar a que el usuario seleccione un archivo
+    const files = await new Promise<FileList | null>((resolve) => {
+      input.addEventListener('change', (event) => {
+        const files = (event.target as HTMLInputElement).files;
+        resolve(files);
       });
+    });
 
-      if (image && image.dataUrl) {
-        this.selectedFile = this.dataURLtoFile(
-          image.dataUrl,
-          `Photo_${new Date().getTime()}` // Nombre del archivo
-        );
-        await loading.present();
+    if (files && files.length > 0) {
+      const selectedFile = files[0];
 
-        // Subir la imagen a Firebase Storage
-        const path = 'imagenes/' + this.selectedFile.name;
-        const storageRef = ref(this.storage, path);
-        const uploadTask = uploadBytes(storageRef, this.selectedFile);
-        await uploadTask;
+      await loading.present();
 
-        // Obtener la URL de descarga
-        const downloadURL = await getDownloadURL(storageRef);
-        this.imgUrl = downloadURL;
-        this.imgName = this.selectedFile.name;
+      // Subir la imagen a Firebase Storage
+      const path = 'imagenes/' + selectedFile.name;
+      const storageRef = ref(this.storage, path);
+      const uploadTask = uploadBytes(storageRef, selectedFile);
+      await uploadTask;
 
-        // Almacenar la URL de descarga en Firestore
-        const docRef = await addDoc(collection(this.firestore, 'imagenes'), {
-          url: this.imgUrl,
-          timestamp: new Date(),
-        });
-        console.log('Imagen almacenada en Firestore con ID:', docRef.id);
-      }
-    } else {
-      // Para dispositivos de escritorio, usar input file
-      // Simular el clic en el input file
-      input.click();
+      // Obtener la URL de descarga
+      const downloadURL = await getDownloadURL(storageRef);
+      this.imgUrl = downloadURL;
+      this.imgName = selectedFile.name;
 
-      // Esperar a que el usuario seleccione un archivo
-      const files = await new Promise<FileList | null>((resolve) => {
-        input.addEventListener('change', (event) => {
-          const files = (event.target as HTMLInputElement).files;
-          resolve(files);
-        });
+      // Almacenar la URL de descarga en Firestore
+      const docRef = await addDoc(collection(this.firestore, 'imagenes'), {
+        url: this.imgUrl,
+        timestamp: new Date(),
       });
-
-      if (files && files.length > 0) {
-        const selectedFile = files[0];
-
-        await loading.present();
-
-        // Subir la imagen a Firebase Storage
-        const path = 'imagenes/' + selectedFile.name;
-        const storageRef = ref(this.storage, path);
-        const uploadTask = uploadBytes(storageRef, selectedFile);
-        await uploadTask;
-
-        // Obtener la URL de descarga
-        const downloadURL = await getDownloadURL(storageRef);
-        this.imgUrl = downloadURL;
-        this.imgName = selectedFile.name;
-
-        // Almacenar la URL de descarga en Firestore
-        const docRef = await addDoc(collection(this.firestore, 'imagenes'), {
-          url: this.imgUrl,
-          timestamp: new Date(),
-        });
-        console.log('Imagen almacenada en Firestore con ID:', docRef.id);
-      }
+      console.log('Imagen almacenada en Firestore con ID:', docRef.id);
     }
   } catch (error) {
     console.error('Error al seleccionar la imagen:', error);
@@ -197,6 +111,95 @@ async takePhoto() {
     await loading.dismiss();
   }
 }
+
+// async takePhoto() {
+//   const loading = await this.loading.create({
+//     message: 'Subiendo imagen...'
+//   });
+
+//   try {
+//     const input = document.createElement('input');
+//     input.type = 'file';
+//     input.accept = 'image/*';
+
+//     // Verificar si el dispositivo es móvil
+//     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+//     if (isMobile) {
+//       // Para dispositivos móviles, usar Camera.getPhoto con Prompt
+//       const image = await Camera.getPhoto({
+//         resultType: CameraResultType.DataUrl,
+//         source: CameraSource.Prompt,
+//       });
+
+//       if (image && image.dataUrl) {
+//         this.selectedFile = this.dataURLtoFile(
+//           image.dataUrl,
+//           `Photo_${new Date().getTime()}` // Nombre del archivo
+//         );
+//         await loading.present();
+
+//         // Subir la imagen a Firebase Storage
+//         const path = 'imagenes/' + this.selectedFile.name;
+//         const storageRef = ref(this.storage, path);
+//         const uploadTask = uploadBytes(storageRef, this.selectedFile);
+//         await uploadTask;
+
+//         // Obtener la URL de descarga
+//         const downloadURL = await getDownloadURL(storageRef);
+//         this.imgUrl = downloadURL;
+//         this.imgName = this.selectedFile.name;
+
+//         // Almacenar la URL de descarga en Firestore
+//         const docRef = await addDoc(collection(this.firestore, 'imagenes'), {
+//           url: this.imgUrl,
+//           timestamp: new Date(),
+//         });
+//         console.log('Imagen almacenada en Firestore con ID:', docRef.id);
+//       }
+//     } else {
+//       // Para dispositivos de escritorio, usar input file
+//       // Simular el clic en el input file
+//       input.click();
+
+//       // Esperar a que el usuario seleccione un archivo
+//       const files = await new Promise<FileList | null>((resolve) => {
+//         input.addEventListener('change', (event) => {
+//           const files = (event.target as HTMLInputElement).files;
+//           resolve(files);
+//         });
+//       });
+
+//       if (files && files.length > 0) {
+//         const selectedFile = files[0];
+
+//         await loading.present();
+
+//         // Subir la imagen a Firebase Storage
+//         const path = 'imagenes/' + selectedFile.name;
+//         const storageRef = ref(this.storage, path);
+//         const uploadTask = uploadBytes(storageRef, selectedFile);
+//         await uploadTask;
+
+//         // Obtener la URL de descarga
+//         const downloadURL = await getDownloadURL(storageRef);
+//         this.imgUrl = downloadURL;
+//         this.imgName = selectedFile.name;
+
+//         // Almacenar la URL de descarga en Firestore
+//         const docRef = await addDoc(collection(this.firestore, 'imagenes'), {
+//           url: this.imgUrl,
+//           timestamp: new Date(),
+//         });
+//         console.log('Imagen almacenada en Firestore con ID:', docRef.id);
+//       }
+//     }
+//   } catch (error) {
+//     console.error('Error al seleccionar la imagen:', error);
+//   } finally {
+//     await loading.dismiss();
+//   }
+// }
 
 // ...
 

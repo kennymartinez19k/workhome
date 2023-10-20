@@ -1,0 +1,50 @@
+
+$fuenteDeLetra: 'Poppins', sans-serif;
+$semiBold: 600;
+$extraBold: 800;
+
+
+ion-content {
+  text-align: center;
+}
+
+.success-container {
+  margin-top: 80px;
+}
+
+ion-button {
+  background: #02B761;
+  font-family: $fuenteDeLetra;
+}
+
+h1 {
+  font-family: $fuenteDeLetra;
+}
+
+.icon-container {
+    text-align: center;
+    margin-top: 20vh;
+    /* Ajusta según sea necesario */
+}
+
+.success-icon {
+    font-size: 10rem;
+    animation: success-icon-animation 1s ease-in-out;
+    color: #02B761;
+    margin: auto;
+  }
+  
+  @keyframes success-icon-animation {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }

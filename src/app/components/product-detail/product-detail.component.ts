@@ -19,7 +19,7 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(){
     this.cdRef.detectChanges()
 
-    const productId = this.route.snapshot.paramMap.get('uid')
+    const productId = this.route.snapshot.paramMap.get('productId')
     if(productId !== null) {
       this.productService.getProductById(productId).then((product) =>{
         if(product) {

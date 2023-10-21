@@ -11,6 +11,7 @@ export class ShoppingCartService {
   constructor(private firestore: Firestore, private authService: AuthService) {}
 
 async addProductCart(product: any): Promise<void> {
+  console.log(product)
   const userId = await this.authService.getUserUid()
   try {
     const cartRef = collection(this.firestore, 'carrito');
@@ -21,7 +22,7 @@ async addProductCart(product: any): Promise<void> {
       // El producto ya existe en el carrito, actualiza la cantidad
       const existingCartItem = querySnapshot.docs[0];
       const existingQty = existingCartItem.data()['qty'] || 0;
-      const newQty = existingQty + 1;
+      const newQty = existingQty + product.qty;
 
       await updateDoc(existingCartItem.ref, { qty: newQty });
       console.log('Producto existente en el carrito, cantidad actualizada:', newQty);
@@ -30,7 +31,7 @@ async addProductCart(product: any): Promise<void> {
       const newCartItem: any = {
         userId: userId,
         product: product,
-        qty: 1,
+        qty: product.qty,
         orderId: ''
       };
 

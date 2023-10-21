@@ -103,8 +103,9 @@ subscription
 
  async addToCart(product: any) {
   console.log(product.qty)
+  let pd = {...product}
+  await this.cartService.addProductCart(pd)
   product.qty = 0
-  await this.cartService.addProductCart(product)
   this.showSuccessMsg = true
   let userId = await this.auth.getUserUid()
   this.cartItems = await this.cartService.getCartItems(userId)

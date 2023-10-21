@@ -205,8 +205,8 @@
           </div>
         </ion-card-content>
 
-        <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='usuario' || !user">
-          <div class="button-cart client-cnt"  style="display: flex; align-items: center; margin-rigth: 5px"
+        <ion-card-content class="uk-flex uk-flex-between" style="width: 100%;" *ngIf="user && user.role =='usuario' || !user">
+          <div class="button-cart client-cnt"  style="display: flex; align-items: center; margin-right: 5px; "
           *ngIf="product.stock > 0">
             <ion-icon (click)="removeToCard(product)" name="remove-outline"></ion-icon>
             <b class="qty-field">{{product.qty}}</b>

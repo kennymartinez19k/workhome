@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Geolocation } from '@capacitor/geolocation';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { OrdersService } from 'src/app/services/orders.service';
@@ -26,7 +26,8 @@ export class CartComponent implements OnInit {
   constructor(private cartService: ShoppingCartService, private auth: AuthService,
     private orderService: OrdersService, private alert: AlertController,
     private cdRef: ChangeDetectorRef, private sanitizer: DomSanitizer,
-    private storage: StorageService, private router: Router) {}
+    private storage: StorageService, private router: Router,
+    private loading: LoadingController) {}
 
   async ngOnInit() {
     this.userId = await this.auth.getUserUid()
@@ -60,8 +61,16 @@ export class CartComponent implements OnInit {
   async saveOrder() {
     const userId = await this.auth.getUserUid()
     const userExists = await this.storage.get('usuario')
+
+    const loading = await this.loading.create({
+      message: 'Realizando pedido...'
+    })
+
     if(userId && userExists){
-    const mapUrl = `https://www.google.com/maps/dir/${this.latitude},${this.longitude}/`
+    // const mapUrl = `https://www.google.com/maps/dir/${this.latitude},${this.longitude}/`
+    const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${this.latitude},${this.longitude}`
+
+    await loading.present()
     try {
       await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl).then(() => {
         this.router.navigate(['/cart-success'])
@@ -97,6 +106,8 @@ export class CartComponent implements OnInit {
       })
       await alert.present()
     }
+
+    await loading.dismiss()
     
   }
 

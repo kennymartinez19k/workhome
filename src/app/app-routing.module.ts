@@ -28,14 +28,14 @@ const routes: Routes = [
   {path: 'add-product', component: AddProductComponent, canActivate: [GuardFactoryService]},
   {path: 'profile', component: ProfileComponent},
   {path: 'slider', component: SliderComponent},
-  {path: 'cart', component: CartComponent},
+  {path: 'cart', component: CartComponent, canActivate: [GuardFactoryService]},
   {path: 'edit-product/:productId', component: EditProductComponent, canActivate: [GuardFactoryService]},
-  {path: 'orders', component: OrdersComponent},
+  {path: 'orders', component: OrdersComponent, canActivate: [GuardFactoryService]},
   {path: 'history', component: HistoryOrdersComponent},
   {path: 'category/:nombre', component: CategoryComponent},
   {path: 'search-results', component: ProductsSearchedComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
-  {path: 'cart-success', component: CartSuccessComponent}
+  {path: 'cart-success', component: CartSuccessComponent, canActivate: [GuardFactoryService]}
 ];
 
 @NgModule({

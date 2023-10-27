@@ -16,6 +16,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { ProductsSearchedComponent } from './components/products-searched/products-searched.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CartSuccessComponent } from './components/cart-success/cart-success.component';
+import { AddPromotionComponent } from './components/add-promotion/add-promotion.component';
 
 const routes: Routes = [
 
@@ -25,12 +26,13 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'product-detail/:productId', component: ProductDetailComponent},
-  {path: 'add-product', component: AddProductComponent, canActivate: [GuardFactoryService]},
+  {path: 'add-product', component: AddProductComponent},
+  {path: 'add-promotion', component: AddPromotionComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'slider', component: SliderComponent},
   {path: 'cart', component: CartComponent, canActivate: [GuardFactoryService]},
   {path: 'edit-product/:productId', component: EditProductComponent, canActivate: [GuardFactoryService]},
-  {path: 'orders', component: OrdersComponent, canActivate: [GuardFactoryService]},
+  {path: 'orders', component: OrdersComponent},
   {path: 'history', component: HistoryOrdersComponent},
   {path: 'category/:nombre', component: CategoryComponent},
   {path: 'search-results', component: ProductsSearchedComponent},

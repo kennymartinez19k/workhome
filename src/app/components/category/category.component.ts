@@ -27,6 +27,7 @@ async ngOnInit() {
     this.loadProducts()
   })
   this.user = await this.storage.get('usuario')
+
 }
 
 async loadProducts() {

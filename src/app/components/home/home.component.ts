@@ -7,8 +7,9 @@ import { StorageService } from 'src/app/services/storage.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-import { Subscription, filter } from 'rxjs';
+import { Subject, Subscription, filter } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { PromotionService } from 'src/app/services/promotion.service';
 
 @Component({
   selector: 'app-home',
@@ -18,16 +19,19 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HomeComponent implements OnInit, OnDestroy {
 
 products: any[] = []
+promotion: any[] = []
 user: any = {}
 showSuccessMsg = false
 searchTerm: string = ''
 searchProduct: any[] = []
 cartItems: any = []
-subscription
+subscription!: Subscription;
+
   constructor(private router: Router, private productService: ProductService, 
     private alert: AlertController, private storageService: StorageService,
     private cartService: ShoppingCartService, private cdRef: ChangeDetectorRef,
-    private auth: AuthService, private loading: LoadingController){
+    private auth: AuthService, private loading: LoadingController,
+    private promotionService: PromotionService){
     this.products = [{
       nombre: "",
       precio: 0,
@@ -50,8 +54,21 @@ subscription
    async ngOnInit() {
     this.cdRef.detectChanges()
 
+        
+    this.productService.refresh$.subscribe(()=> {
+      this.refreshProduct()
+    })
+
     this.productService.getProduct().subscribe(products => {
-      this.products = products
+      this.products = products;
+    });
+
+    this.promotionService.refresh$.subscribe(()=> {
+      this.refreshPromotion()
+    })
+
+    this.promotionService.getPromotion().subscribe(promotion => {
+      this.promotion = promotion
     })
 
     this.subscription = this.router.events.pipe(
@@ -61,6 +78,18 @@ subscription
         let userId = await this.auth.getUserUid()
         this.cartItems = await this.cartService.getCartItems(userId)
       })
+  }
+
+  refreshProduct() {
+    this.productService.getProduct().subscribe(products => {
+      this.products = products
+    })
+  }
+
+  refreshPromotion() {
+    this.promotionService.getPromotion().subscribe(promotion => {
+      this.promotion = promotion
+    })
   }
 
   editProduct(product: Product) {
@@ -81,7 +110,7 @@ subscription
     })
   }
 
-  async confirmDelete(productId: string) {
+  async confirmDeleteProduct(productId: string) {
     const alert = await this.alert.create({
       header: 'Eliminar el producto',
       message: '¿Está seguro de eliminar el producto?',
@@ -100,6 +129,36 @@ subscription
     await alert.present()
   }
 
+  deletePromotion(promotionId: string): void {
+    console.log(promotionId)
+    this.promotionService.deletePromotion(promotionId).then( () => {
+      this.promotion = this.promotion.filter(promotion => promotion.promotionId !== promotionId)
+      this.cdRef.detectChanges();
+    })
+    .catch(error => {
+      console.log("error eliminar producto", error)
+    })
+  }
+
+  async confirmDeletePromotion(promotionId: string) {
+    const alert = await this.alert.create({
+      header: 'Eliminar promoción',
+      message: '¿Está seguro de eliminar la promoción?',
+      buttons: [{
+        text: 'Cancelar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: () => {alert.dismiss()}
+      },
+    {
+      text: 'Eliminar',
+      handler: () => {
+        this.deletePromotion(promotionId)}
+    }]
+    })
+    await alert.present()
+  }
+
  async addToCart(product: any) {
   let userId = await this.auth.getUserUid()
   console.log(product.qty)
@@ -108,8 +167,8 @@ subscription
   const loading = await this.loading.create({
     message: 'Añadiendo al carrito...'
   })
-
-  if(userId) {
+  const userExists = await this.storageService.get('usuario')
+  if(userExists) {
     await loading.present()
     await this.cartService.addProductCart(pd)
     product.qty = 0
@@ -135,6 +194,7 @@ subscription
   }
 
   await loading.dismiss()
+  this.refreshProduct();
   
  }
 
@@ -159,9 +219,8 @@ subscription
   }
  }
 
- ngOnDestroy() {
-    this.subscription ? this.subscription.unsubscribe() : null;
-     
+ ngOnDestroy(): void {
+  this.subscription ? this.subscription.unsubscribe() : null;
  }
  
 }

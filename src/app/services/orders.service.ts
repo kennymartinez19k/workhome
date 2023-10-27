@@ -2,13 +2,19 @@ import { Injectable } from '@angular/core';
 import { Firestore, collection, addDoc, query, where, deleteDoc,
 updateDoc, getDocs, getDoc, doc } from '@angular/fire/firestore';
 import { Product } from '../interfaces/product';
-import { Observable, map, from } from 'rxjs'
+import { Observable, map, from, Subject } from 'rxjs'
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
 
+  private _refresh$ = new Subject <void>()
+
   constructor(private firestore: Firestore) {}
+
+  get refresh$() {
+    return this._refresh$
+  }
 
   async sentOrderToFirestore(userId: any, carritoItems: any[], location: any): Promise <void> {
     try {
@@ -47,6 +53,7 @@ export class OrdersService {
     const orderRef = doc(this.firestore, 'pedidos', orderId)
     try {
       await updateDoc(orderRef, {status_enviado: 'yes'})
+      this._refresh$.next()
       console.log('status actualizado con exito')
     } catch (error) {
       console.error(error)

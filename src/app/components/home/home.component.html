@@ -1,16 +1,25 @@
 <ion-content class="container ion-padding">
 
-  <ion-fab slot="fixed" vertical="top" horizontal="end" routerLink="/add-product"
-    *ngIf="user && user.role =='admin'">
+  <ion-fab slot="fixed" vertical="top" horizontal="start" *ngIf="user && user.role=='admin'">
     <ion-fab-button color="success">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
+    <ion-fab-list side="end">
+      <ion-button routerLink="/add-promotion">
+        PROMO
+      </ion-button>
+      <ion-button routerLink="/add-product">
+        PRODUCTO
+      </ion-button>
+    </ion-fab-list>
   </ion-fab>
+
+
 
   <div class="main">
 
     <div class="header">
-      <ion-img src="assets/img/bodega-la-fe.png" alt="logo bodega la fe" routerLink="/test"></ion-img>
+      <ion-img src="assets/img/bodega-la-fe.png" alt="logo bodega la fe"></ion-img>
       <div class="usuario" *ngIf="user">
         <h1>¡Hola {{user.username}}!</h1>
         <em *ngIf="user.role == 'usuario'">¡Gracias por comprar con nosotros!</em>
@@ -26,6 +35,15 @@
       <ion-icon name="search-outline" style="font-size: 30px;"(click)="searchProducts()"></ion-icon>
     </div>
 
+  </div>
+
+  <div class="promotion" *ngFor="let promo of promotion">
+    <ion-thumbnail>
+      <ion-img [src]="promo.img"></ion-img>
+    </ion-thumbnail>
+    <div style="display: flex; justify-content: end; padding: 5px;" *ngIf="user && user.role=='admin'">
+      <ion-icon  (click)="promo.promotionId&& confirmDeletePromotion(promo.promotionId)" name="trash-outline" style="font-size: 30px;"></ion-icon>
+    </div>
   </div>
 
   <div class="category-title ion-padding">
@@ -196,11 +214,11 @@
 
         <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='admin'">
           <div class="buttons-crud">
-            <div (click)="editProduct(product)">
-              <ion-icon name="create-outline" style="font-size: 30px;"></ion-icon>
+            <div>
+              <ion-icon (click)="editProduct(product)" name="create-outline" style="font-size: 30px;"></ion-icon>
             </div>
-            <div (click)="product.productId&& confirmDelete(product.productId)">
-              <ion-icon name="trash-outline" style="font-size: 30px;"></ion-icon>
+            <div>
+              <ion-icon (click)="product.productId&& confirmDeleteProduct(product.productId)" name="trash-outline" style="font-size: 30px;"></ion-icon>
             </div>
           </div>
         </ion-card-content>
@@ -218,9 +236,6 @@
       </ion-card>
     </ion-row>
   </div>
-  <!-- <div class="success-message" [ngClass]="{'show': showSuccessMsg}">
-    Añadido con éxito al carrito
-  </div> -->
 
 </ion-content>
 <app-footer-nav currentRoute="/" [qtyOrders]="cartItems"></app-footer-nav>

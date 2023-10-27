@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, from, map } from 'rxjs';
+import { BehaviorSubject, Observable, from, map, Subject } from 'rxjs';
 import { Product } from '../interfaces/product';
 import { Firestore, collection, addDoc, query, where, getDocs, doc, getDoc, setDoc, deleteDoc, orderBy, startAt, endAt } from '@angular/fire/firestore';
 import { LoadingController } from '@ionic/angular';
-
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +11,14 @@ export class ProductService {
 
   private searchResults = new BehaviorSubject<any[]>([])
   searchTerm: string = ''
+  private _refresh$ = new Subject<void>()
 
 
   constructor(private firestore: Firestore, private loading: LoadingController) {}
 
+  get refresh$() {
+    return this._refresh$
+  }
 
   async addProduct(product: Product) {
     const loading = await this.loading.create({
@@ -25,6 +28,7 @@ export class ProductService {
     await loading.present()
     const docRef = await addDoc(productRef, product)
     await loading.dismiss()
+    this._refresh$.next()
     return docRef.id
   }
 
@@ -54,7 +58,14 @@ export class ProductService {
   }
 
   async updateProduct(productId: string, product: Product): Promise <void> {
+
+    const loading = await this.loading.create({
+      message: 'Actualizando producto...'
+    })
     const productRef = doc(this.firestore, 'productos', productId)
+    await loading.present()
+    await loading.dismiss()
+    this._refresh$.next()
     return setDoc(productRef, product, {merge: true})
   }
 

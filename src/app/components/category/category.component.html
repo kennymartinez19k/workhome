@@ -12,6 +12,10 @@
 <ion-content class="ion-padding">
   <div class="productos-populares">
     <ion-row *ngFor="let product of products">
+      <div *ngIf="products.length === 0">
+        <!-- Mensaje si no hay productos -->
+        <h2>No hay productos en esta categoría.</h2>
+      </div>
       <ion-card class="product-card">
         <div class="image-container">
           <img class="product-img" alt="Silhouette of products" [src]="product.img" />
@@ -22,17 +26,6 @@
           <p class=""> Disponible: {{product.stock}}</p>
         </ion-card-header>
 
-        <!-- <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='admin'">
-          <div class="buttons-crud">
-            <div (click)="editProduct(product)">
-              <ion-icon name="create-outline" style="font-size: 30px;"></ion-icon>
-            </div>
-            <div (click)="product.uid && confirmDelete(product.uid)">
-              <ion-icon name="trash-outline" style="font-size: 30px;"></ion-icon>
-            </div>
-          </div>
-        </ion-card-content> -->
-
         <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='usuario' || !user">
           <div class="button-cart" style="display: flex; align-items: center;" (click)="addToCart(product)" style="cursor: pointer;">
             <ion-icon class="cart" name="cart-outline" ></ion-icon>
@@ -41,9 +34,14 @@
       </ion-card>
     </ion-row>
   </div>
+
+  <div *ngIf="!products || products.length === 0">
+    <h2>No hay productos en esta categoría.</h2>
+  </div>
+
   <div class="success-message" [ngClass]="{'show': showSuccessMsg}" *ngIf="showSuccessMsg">
     Añadido con éxito al carrito
   </div>
 </ion-content>
 
-<app-footer-nav currentRoute="/"></app-footer-nav>
+<app-footer-nav currentRoute="/home"></app-footer-nav>

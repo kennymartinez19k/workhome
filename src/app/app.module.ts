@@ -33,6 +33,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { ProductsSearchedComponent } from './components/products-searched/products-searched.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CartSuccessComponent } from './components/cart-success/cart-success.component';
+import { AddPromotionComponent } from './components/add-promotion/add-promotion.component';
 
 // import { AgmCoreModule } from '@agm/core';
 
@@ -55,6 +56,7 @@ import { CartSuccessComponent } from './components/cart-success/cart-success.com
     ProductsSearchedComponent,
     ResetPasswordComponent,
     CartSuccessComponent,
+    AddPromotionComponent,
   ],
   imports: [
     BrowserModule,

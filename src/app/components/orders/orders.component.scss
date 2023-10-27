@@ -21,57 +21,80 @@ ion-toolbar {
     }
 }
 
-/* Estilo para los detalles del producto */
-.product-item {
-    border-bottom: 1px solid #eee; /* Borde inferior de cada elemento de producto */
-    padding: 10px 0; /* Espaciado interior de cada elemento de producto */
-    display: flex; /* Utiliza flexbox para organizar los elementos */
-    align-items: center; /* Centra verticalmente los elementos */
-  }
+span {
+  font-weight: $extraBold;
   
-
-.ion-card-content{
-    display: flex;
-    justify-content: space-between;
 }
 
-ion-thumbnail{
-    width: 100px;
-    height: 90px;
-    img {
-      border-radius: 10px;
-    }
+h2 {
+  font-weight: $semiBold !important;
+  font-size: 17px;
 }
 
-ion-item{
-    margin-bottom: 10px;
-}
-
-h3 {
-  font-size: 22px;
-}
-
-.title-card {
-  font-weight: $extraBold;
-  font-size: 16px
-}
-
-.subtitle-card-price {
+.total-price span {
   color: #02B761;
-  font-weight: $extraBold;
 }
 
-.precio {
-  color: #02B761;
-  font-size: $extraBold;
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Ajusta el contenido alineado a lo largo del eje transversal */
 }
 
-.total-section {
-  margin-top: 15px;
-  margin-bottom: 15px;
+.img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20px;
 }
 
-.total-price {
-  font-weight: $extraBold;
-  font-size: 18px;
+ion-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-detail {
+  flex-grow: 1;
+}
+
+.order-detail-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.price-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+ion-button {
+  width: 20%;
+  padding-right: 5px;
+  ion-icon {
+    font-size: 24px;
+  }
+}
+
+.sent-order {
+  --border-color: #02B761;
+  --background: rgba(2, 183, 97, 0.1);
+  --color: #02B761;
+}
+
+.location {
+  --border-color: rgb(0, 157, 255);
+  --background: rgba(0, 157, 255, 0.1);
+  --color: rgb(0, 157, 255);
 }

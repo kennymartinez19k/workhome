@@ -46,7 +46,8 @@ export class EditProductComponent implements OnInit {
         ...this.formEdit.value
       }
       this.productService.updateProduct(this.product.productId, productUpt).then( ()=>{
-        this.router.navigate(['home']).then(()=>{location.reload()})
+        this.router.navigate(['home'])
+        // .then(()=>{location.reload()})
       })
     }
   }

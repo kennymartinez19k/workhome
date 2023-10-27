@@ -53,7 +53,8 @@ async addProduct() {
             console.log('producto actualizado en firebase')
           })
           .then(()=>{
-          this.router.navigate(['home']).then(()=> {location.reload()})
+          this.router.navigate(['home'])
+          // .then(()=> {location.reload()})
           })
         })
       } else {
@@ -75,7 +76,7 @@ async takePhoto() {
     // Verificar si el dispositivo es móvil
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    if (isMobile) {
+    if (!isMobile) {
       // Para dispositivos móviles, usar Camera.getPhoto con Prompt
       const image = await Camera.getPhoto({
         resultType: CameraResultType.DataUrl,
@@ -144,6 +145,7 @@ async takePhoto() {
         console.log('Imagen almacenada en Firestore con ID:', docRef.id);
       }
     }
+    
   } catch (error) {
     console.error('Error al seleccionar la imagen:', error);
   } finally {
@@ -152,7 +154,7 @@ async takePhoto() {
 }
 
 
-    private dataURLtoFile(dataUrl: string, filename: string): File {
+private dataURLtoFile(dataUrl: string, filename: string): File {
       const arr = dataUrl.split(',');
       const mime = arr[0].match(/:(.*?);/)![1];
       const bstr = atob(arr[1]);
@@ -162,7 +164,7 @@ async takePhoto() {
         u8arr[n] = bstr.charCodeAt(n);
       }
       return new File([u8arr], filename, { type: mime });
-    }
+}
 
     ngOnInit(): void {}
 

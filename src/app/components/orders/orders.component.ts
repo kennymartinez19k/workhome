@@ -13,22 +13,32 @@ import { OrdersService } from 'src/app/services/orders.service';
 export class OrdersComponent implements OnInit, OnDestroy {
 
   orders: any[] = []
-  productsSubscription: Subscription | undefined
+  subscription!: Subscription;
 
   constructor(private orderService: OrdersService, private alert: ToastController,
     private loading: LoadingController, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.cdRef.detectChanges()
-    
-    this.productsSubscription = this.orderService.getOrder().subscribe((data) => {
-      this.orders = data
-      console.log(this.orders)
 
+    this.orderService.refresh$.subscribe(()=>{
+      this.orderService.getOrder().subscribe((data) => {
+        this.orders = data
+      })
+    })
+    
+    this.orderService.getOrder().subscribe((data) => {
+      this.orders = data
     })
   }
 
-  async orderSent(orderId: any) {
+  refreshOrders() {
+    this.orderService.getOrder().subscribe((data) => {
+      this.orders = data
+    })
+  }
+
+  async sentOrder(orderId: any) {
     const loading = await this.loading.create({
       message: 'Despachando pedido...'
     })
@@ -37,7 +47,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     if (orderId) {
       this.orderService.sentOrder(orderId).then(() => {
         console.log('Colección despachada con éxito');
-        location.reload()
+        // location.reload()
       }).catch((error) => {
         console.error('Error al despachar la colección:', error);
       });
@@ -50,9 +60,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.productsSubscription) {
-      this.productsSubscription.unsubscribe()
-    }
+    this.subscription ? this.subscription.unsubscribe() : null;
   }
 
   async copyToClipboard(url: string): Promise<void> {

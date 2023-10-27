@@ -77,6 +77,12 @@ export class LoginComponent {
     
   }
 
+  async loginGuest() {
+    await this.storageService.remove('usuario').then(()=>{
+      this.router.navigate(['/home'])
+    })
+  }
+
   // loginGoogle() {
   //   this.authService.loginWithGoogle()
   // }

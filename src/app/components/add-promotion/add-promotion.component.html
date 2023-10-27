@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar color="#">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+      <ion-title>
+        Agregar promoción
+      </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-paddding">
+
+  
+    <form [formGroup]="form" (ngSubmit)="addPromotion()">
+
+        <ion-item>
+            <div (click)="takePhoto()" class="icon-img" style="display: flex; align-items: center; gap: 10px;">
+                <ion-icon name="image-outline" style="font-size: 70px;"></ion-icon>
+                <strong>Seleccione la imagen de la promoción</strong>
+            </div>
+            <em *ngIf="imgName">{{imgName}}</em>
+        </ion-item>
+
+
+        <button type="submit">Agregar promoción</button>
+    </form>
+  
+</ion-content>

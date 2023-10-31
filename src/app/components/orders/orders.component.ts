@@ -18,6 +18,14 @@ export class OrdersComponent implements OnInit, OnDestroy {
   constructor(private orderService: OrdersService, private alert: ToastController,
     private loading: LoadingController, private cdRef: ChangeDetectorRef) {}
 
+    handleRefresh(event) {
+      setTimeout(() => {
+        // Any calls to load data go here
+        this.refreshOrders()
+        event.target.complete();
+      }, 2000);
+    }
+
   ngOnInit(): void {
     this.cdRef.detectChanges()
 

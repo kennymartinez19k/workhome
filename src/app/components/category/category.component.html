@@ -27,9 +27,10 @@
         </ion-card-header>
 
         <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='usuario' || !user">
-          <div class="button-cart" style="display: flex; align-items: center;" (click)="addToCart(product)" style="cursor: pointer;">
+          <div *ngIf="product.stock > 1" class="button-cart" style="display: flex; align-items: center;" (click)="addToCart(product)" style="cursor: pointer;">
             <ion-icon class="cart" name="cart-outline" ></ion-icon>
           </div>
+          <p *ngIf="product.stock < 1" style="color: red;"> Producto no disponible</p>
         </ion-card-content>
       </ion-card>
     </ion-row>

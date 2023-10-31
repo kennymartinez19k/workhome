@@ -120,6 +120,10 @@ export class CartComponent implements OnInit {
   }
 
   async getLocation() {
+    const loading = await this.loading.create({
+      message: 'Obteniendo ubicación...'
+    })
+    loading.present()
     try {
       const position = await Geolocation.getCurrentPosition({
         enableHighAccuracy: true
@@ -131,8 +135,16 @@ export class CartComponent implements OnInit {
       this.urlMap = this.sanitizer.bypassSecurityTrustResourceUrl(url)
       this.location = true
     } catch (error) {
+      loading.dismiss()
+      const alert = await this.alert.create({
+        header: 'Error al obtener ubicación',
+        message: 'Verifique que su ubicación este encendida o que acepto los permisos requeridos.',
+        buttons: ['OK']
+      })
+      alert.present()
       console.error('Error al obtener la ubicación:', error);
     }
+    loading.dismiss()
   }
 
   async confirmDelete(orderId: string) {

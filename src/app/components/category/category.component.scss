@@ -32,19 +32,20 @@ ion-toolbar {
         width: 50%;
         .product-card {
             width: 200px;
-            height: 300px;
+            height: 220px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             .image-container {
-                flex: 1;
                 overflow: hidden;
+                width: 150px;
+                height: 110px;
+                border-radius: 10px;
                 .product-img {
-                    max-width: 100%;
-                    max-height: 100%;
+                    width: 100%;
+                    height: 100%;
                     object-fit: cover;
-                    border-radius: 10px;
                 }
             }
             ion-card-title, ion-card-subtitle, ion-card-content {
@@ -59,7 +60,6 @@ ion-toolbar {
         }
     }
 }
-
 
 .titulo{
     display: flex;
@@ -122,6 +122,8 @@ ion-toolbar {
 
 .card-header{
     padding: 0px 15px;
+    display: flex;
+    gap: 3px;
 }
 
 .card-header > *{

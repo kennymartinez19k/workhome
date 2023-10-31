@@ -34,17 +34,6 @@ $extraBold: 800;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            // .image-container {
-            //     flex: 1;
-            //     overflow: hidden;
-            //     .product-img {
-            //         max-width: 100%;
-            //         max-height: 100%;
-            //         object-fit: cover;
-            //         border-radius: 10px;
-            //     }
-            // }
-
             .image-container {
                 overflow: hidden;
                 width: 150px;
@@ -69,7 +58,6 @@ $extraBold: 800;
     }
 }
 
-
 .titulo{
     display: flex;
     justify-content: center;
@@ -90,6 +78,7 @@ $extraBold: 800;
     
     
 }
+
 .cardPadre{
     display: flex;
     flex-wrap: wrap;
@@ -97,7 +86,6 @@ $extraBold: 800;
    
 }
   
-
 .productos{
     display: flex;
     justify-content: space-between;
@@ -135,6 +123,8 @@ $extraBold: 800;
 
 .card-header{
     padding: 0px 15px;
+    display: flex;
+    gap: 3px;
 }
 
 .card-header > *{

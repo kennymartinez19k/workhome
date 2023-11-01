@@ -3,6 +3,6 @@ export interface Product {
     nombre: string
     precio: number
     stock: number
-    img: string
+    img: string | null
     categoryId: string
 }

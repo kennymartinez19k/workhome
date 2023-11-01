@@ -53,6 +53,9 @@ ion-toolbar {
 ion-thumbnail{
     width: 100px;
     height: 70px;
+    img {
+        border-radius: 10px;
+    }
 }
 ion-item{
     margin-bottom: 10px;

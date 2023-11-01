@@ -1,0 +1,77 @@
+<ion-header>
+    <ion-toolbar color="#">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/profile"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        Historial de pedidos
+      </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+  <ion-content *ngIf="user && user.role == 'usuario'">
+    <ion-card class="margin-remove">
+      <ion-card-content *ngFor="let order of orders">
+        <ion-list>
+          <h3>{{order['fecha']}}</h3>
+          <ion-item *ngFor="let product of order['items']" class="product-item">
+            <ion-thumbnail slot="start">
+              <img alt="Silhouette of mountains" [src]="product.product.img"/>
+            </ion-thumbnail>
+            <div class="product-details">
+              <div class="product-info">
+                <p class="title-card">{{product.product.nombre}}</p>
+                <p class="subtitle-card-price">${{product.product.precio}}</p>
+                <p class="subtitle-card">Cantidad: {{product.qty}}</p>
+              </div>            
+            </div>
+          </ion-item>
+          <div class="price">
+            <h2 >Subtotal: <span class="subtotal">${{calcularPrecioTotal(order)}}</span></h2>
+            <h2> Envio: 
+              <span *ngIf="calcularPrecioTotal(order) >= 1000">Gratis</span>
+              <span *ngIf="calcularPrecioTotal(order) < 1000">$100</span>
+            </h2>  
+            <div class="total-section">
+              <p class="total-price" *ngIf="calcularPrecioTotal(order) >= 1000">
+                Precio Total: <span class="precio">${{ calcularPrecioTotal(order) }}</span>
+              </p>
+              <p class="total-price" *ngIf="calcularPrecioTotal(order) < 1000">
+                Precio Total: <span class="precio">${{ calcularPrecioTotal(order) + 100 }}</span>
+              </p>
+            </div>
+          </div>
+          <div class="status" style="padding: 10px;
+          background: red; color: white; font-size: 12px;
+           border-radius: 10px; margin-top: 10px; text-align: center;" 
+          *ngIf="order['status_enviado'] == 'no'">
+            <p>
+                Estado del pedido: No enviado
+            </p>
+          </div>
+          <div class="status" style="padding: 10px;
+          background: #02B761; color: white; font-size: 12px;
+           border-radius: 10px; margin-top: 10px; text-align: center;" 
+          *ngIf="order['status_enviado'] == 'yes'">
+            <p>
+                Estado del pedido: Enviado
+            </p>
+          </div>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <div *ngIf="!orders || orders.length === 0">
+      <h2 style="text-align: center;">El historial está vacio.</h2>
+    </div>
+  </ion-content>
+
+  <ion-content *ngIf="user && user.role == 'admin'">
+    <div *ngIf="!orders || orders.length === 0">
+      <h2 style="text-align: center;">El historial está vacio.</h2>
+    </div>
+  </ion-content>
+  
+
+
+  <app-footer-nav></app-footer-nav>

@@ -1,0 +1,30 @@
+<ion-content class="ion-paddding">
+
+  <div class="ion-padding">
+    <ion-img style="width: 200px; margin: auto;" src="assets/img/bodega-la-fe.png" alt="logo bodega la fe"></ion-img>
+      <p>
+        Cree su cuenta ahora
+      </p>
+  </div>
+
+  <form [formGroup]="formReg" (ngSubmit)="register()">
+      <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input type="text" maxlength="30" placeholder="Ingresa tu nombre" formControlName="username" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" placeholder="Ingresa tu correo" formControlName="email" required></ion-input>
+      </ion-item>
+      
+      <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" minLenght="8" maxlength="17" placeholder="Ingresa tu contraseña" formControlName="password" required></ion-input>
+      </ion-item>
+
+      <button type="submit">Registrarse</button>
+      <p class="exists">¿Ya tienes una cuenta? <span routerLink="/login">Inicia Sesión</span></p>
+  </form>
+
+</ion-content>

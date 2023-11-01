@@ -1,0 +1,25 @@
+<ion-footer>
+  <ion-toolbar color="#">
+    <div class="footer">
+      <div class="home" [ngClass]="{'active': isRouteActive('/home') }">
+        <ion-icon name="home-outline" routerLink="/home"></ion-icon>
+        <p>Inicio</p>
+      </div>
+      <div class="carrito" style="position: relative;" [ngClass]="{'active': isRouteActive('/cart') }" routerLink="/cart"
+       *ngIf=" user && user.role == 'usuario' || user.role == 'invitado'">
+        <ion-icon name="cart-outline"></ion-icon>
+        <p>Carrito</p>
+        <div class="notification-mode" *ngIf="qtyOrders.length > 0">{{qtyOrders.length}}</div>
+
+      </div>
+      <div class="carrito"  [ngClass]="{'active': isRouteActive('/orders') }" routerLink="/orders" *ngIf="user.role == 'admin'">
+        <ion-icon name="cart-outline"></ion-icon>
+        <p>Pedidos</p>
+      </div>
+      <div class="perfil" [ngClass]="{'active': isRouteActive('/profile') }" routerLink="/profile">
+        <ion-icon name="person-outline"></ion-icon>
+        <p>Perfil</p>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

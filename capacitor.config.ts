@@ -1,8 +1,17 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.bodegalafe.app',
-  appName: 'bodega-la-fe',
+
+  plugins: {
+    GoogleAuth: {
+      scopes: ["profile", "email"],
+      serverClientId: "",
+      forceCodeForRefreshToken: true
+    }
+  },
+
+  appId: 'com.ortizsoft.bodega_la_fe',
+  appName: 'Bodega La Fe',
   webDir: 'dist/bodega-la-fe',
   server: {
     androidScheme: 'https'

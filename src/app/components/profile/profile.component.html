@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-toolbar color="#">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+      <ion-title>
+        Mi perfil
+      </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding persons">
+    <div class="person" *ngIf="userData">
+        <h1>{{userData.username}}</h1>
+        <p>{{userData.email}}</p>
+    </div>
+    <div class="person" *ngIf="!userData">
+        <h1>INVITADO</h1>
+    </div>
+    
+    <div class="options">
+        <ion-item class="option" routerLink="/history">
+            <ion-icon name="cart-outline"></ion-icon>
+            <p>Historial de pedidos</p>
+        </ion-item>
+
+        <ion-item class="option" (click)="confirmLogout()">
+            <ion-icon name="log-out-outline"></ion-icon>
+            <p>Cerrar sesión</p>
+        </ion-item>
+    </div>
+
+</ion-content>
+
+<app-footer-nav currentRoute="/profile"></app-footer-nav>

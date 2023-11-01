@@ -1,4 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
-*{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://unpkg.com/leaflet@1.7.1/dist/leaflet.css');
+
+ion-button{
+ 
+    --background: #01b763;
+}
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
+
+$fuenteDeLetra: 'Poppins', sans-serif;
+$semiBold: 600;
+$extraBold: 800;
+
+.uk-flex{
+    display: flex !important;
+}
+.uk-flex-center{
+    justify-content: center! important ;  /* align horizontal */
+}
+
+.align-items-center{
+    align-items: center !important;
+}
+.uk-flex-between{
+    justify-content: space-between;
+}
+.w-100{
+    width: 100%;
+}
+
+
+.w-90{
+    width: 90%;
+}
+
+.padding-remove{
+    padding: 0px;
+}
+
+.margin-remove{
+    margin: 0px;
+}
+.mt-10{
+    margin-top: 10px;
+}
+
+.mt-5{
+    margin-top: 5px;
+}
+
+.uk-text-center{
+    text-align: center;
 }

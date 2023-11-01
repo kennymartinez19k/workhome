@@ -1,0 +1,184 @@
+$fuenteDeLetra: 'Poppins', sans-serif;
+$semiBold: 600;
+$extraBold: 800;
+
+* {
+    font-family: $fuenteDeLetra;
+}
+
+ion-toolbar {
+    background: #02B761;
+    ion-back-button {
+        color: white;
+        position: absolute;
+    }
+    ion-title {
+        font-family: $fuenteDeLetra;
+        font-weight: $extraBold;
+        color: white;
+        text-align: center;
+    }
+}
+
+.productos-populares {
+    display: flex;
+    flex-wrap: wrap;
+    .buttons-crud {
+        display: flex;
+        margin: auto;
+        gap: 30px;
+    }
+    ion-row {
+        width: 50%;
+        .product-card {
+            width: 200px;
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            .image-container {
+                overflow: hidden;
+                width: 150px;
+                height: 110px;
+                border-radius: 10px;
+                .product-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            ion-card-title, ion-card-subtitle, ion-card-content {
+                font-weight: $extraBold;
+            }
+        }
+    }
+
+    @media (min-width: 600px){
+        ion-row{
+            width: 33%;
+        }
+    }
+}
+
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(184, 178, 178);
+    padding: 25px;
+    margin: 0px 0px 20px;
+    border-radius: 40px;
+}
+
+.category{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card{
+    width: 45%;
+    
+    
+}
+.cardPadre{
+    display: flex;
+    flex-wrap: wrap;
+    
+   
+}
+
+.productos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.swiperimg{
+    border-radius: 100px;
+    width: 50px;
+    margin-right: 10px;
+    
+}
+
+.swiper-container{
+   display: flex;
+   align-items: center;
+   
+   
+}
+.banner-top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 50px ;
+    padding: 10px 20px;
+    margin: 0px 15px;
+}
+
+.card-header{
+    padding: 0px 15px;
+    display: flex;
+    gap: 3px;
+}
+
+.card-header > *{
+    margin: 0px;
+}
+.title-card{
+    font-size: 16px;
+    font-weight: 700;
+}
+.subtitle-card{
+    font-size: 14px;
+    color: green;
+}
+.field-qty{
+    width: 45px;
+    border: 0px;
+    border-bottom: 1px solid #b9b6b6;
+    text-align: center;
+}
+
+.field-qty:focus-visible{
+    border: 0px;
+    outline: #fff;
+    border-bottom: 1px solid #b9b6b6;
+
+}
+.ion-card-content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart{
+    color: green;
+    font-size: 28px;
+}
+.qty-icon{
+    font-size: 25px;
+}
+
+/* Agrega estilos al mensaje de éxito */
+.success-message {
+    position: fixed;
+    top: 350px;
+    left: 100px;
+    background-color: #02B761;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    font-family: $fuenteDeLetra;
+  }
+  
+  /* Agrega estilos cuando el mensaje está visible */
+  .success-message.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  

@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="#">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Mi carrito
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="margin-remove">
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let product of cartItems">
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" [src]="product.product.img" />
+          </ion-thumbnail>
+          <div class="uk-flex uk-flex-between w-100">
+            <div>
+              <div>
+                <p class="title-card">{{product.product.nombre}}</p>
+                <p class="subtitle-card">${{product.product.precio}}</p>
+              </div>
+              <div class="mt-5 uk-flex align-items-center">
+                <ion-icon (click)="decrementQty(product)" class="qty-icon" name="remove-outline"></ion-icon>
+                <input class="field-qty" type="number" [value]="product.qty" min="1" name="" id="">
+                <ion-icon class="qty-icon" name="add-outline" (click)="incrementQty(product)"></ion-icon>
+              </div>
+            </div>
+            <div (click)="confirmDelete(product)">
+              <ion-icon class="icon-close" name="trash"></ion-icon>
+            </div>
+          </div>
+        </ion-item>
+        <div class="price" *ngIf="cartItems.length !== 0">
+          <h2>Subtotal: ${{totalPrice}}</h2>
+          <h2> Envio:
+            <span *ngIf="totalPrice >= 1000">Gratis</span>
+            <span *ngIf="totalPrice < 1000">$100</span>
+          </h2>
+          <h2 *ngIf="totalPrice >= 1000">Total: ${{totalPrice }}</h2>
+          <h2 *ngIf="totalPrice < 1000">Total: ${{totalPrice + 100}}</h2>
+        </div>
+
+      </ion-list>
+
+    </ion-card-content>
+      <button class="button-location" (click)="getLocation()">
+        <div class="svg-wrapper-1">
+          <div class="svg-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+            </svg>
+          </div>
+        </div>
+        <span>Ubicación</span>
+      </button>
+    <ion-card-content>
+
+      <div id="map">
+        <iframe *ngIf="location" width="100%" height="200" frameborder="0" scrolling="no" marginheight="0"
+          marginwidth="0" [src]="urlMap" allowfullscreen></iframe>
+      </div>
+      <ion-button *ngIf="cartItems.length > 0" expand="full" (click)="saveOrder()" style="padding-top: 20px;">Hacer
+        Pedido</ion-button>
+      <ion-button *ngIf="cartItems.length < 1" expand="full" [disabled]="true" style="padding-top: 20px;">Hacer
+        Pedido</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<app-footer-nav></app-footer-nav>

@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-toolbar color="#">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+      <ion-title>
+        Producto
+      </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <div class="producto">
+        <div class="product-img">
+            <img [src]="productDetail.img">
+        </div>
+        <div class="product-title">
+            <h2>{{productDetail.nombre}}</h2>
+        </div>
+    </div>
+    <div class="precio-cant">
+        <div class="precio">
+            <h2>${{productDetail.precio}}</h2>
+        </div>
+    </div>
+    <div class="no-stock" *ngIf="productDetail.stock < 1">
+        <h2 style="color: red; text-align: center;">Producto no disponible</h2>
+    </div>
+    <button *ngIf="productDetail.stock > 0" (click)="addProductCart(productDetail)">Añadir al carrito</button>
+    <div class="success-message" [ngClass]="{'show': showSuccessMsg}">
+        Añadido con éxito al carrito
+    </div>
+</ion-content>
+
+<app-footer-nav currentRoute="/"></app-footer-nav>

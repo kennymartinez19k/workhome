@@ -38,6 +38,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.orderService.getOrder().subscribe((data) => {
       this.orders = data
     })
+
+    console.log(this.orders)
   }
 
   refreshOrders() {

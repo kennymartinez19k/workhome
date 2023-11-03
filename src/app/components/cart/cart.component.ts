@@ -22,6 +22,7 @@ export class CartComponent implements OnInit {
   longitude: any
   location = false
   urlMap: SafeResourceUrl | undefined
+  locationName: any
 
   constructor(private cartService: ShoppingCartService, private auth: AuthService,
     private orderService: OrdersService, private alert: AlertController,
@@ -58,9 +59,15 @@ export class CartComponent implements OnInit {
     }
   }
 
+
   async saveOrder() {
     const userId = await this.auth.getUserUid()
     const userExists = await this.storage.get('usuario')
+    const locationNameID = (document.getElementById('locationName') as HTMLInputElement).value;
+
+    if(locationNameID) {
+      this.locationName = locationNameID
+    }
 
     const loading = await this.loading.create({
       message: 'Realizando pedido...'
@@ -72,7 +79,7 @@ export class CartComponent implements OnInit {
 
     await loading.present()
     try {
-      await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl).then(() => {
+      await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl, this.locationName).then(() => {
         this.router.navigate(['/cart-success'])
       })
       for (const cartItem of this.cartItems) {

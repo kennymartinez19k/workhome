@@ -57,11 +57,15 @@ export class LoginComponent {
           const username = userdata.map(x => x.username)
           const email = userdata.map(x => x.email)
           const role = userdata.map(x => x.role)
-          const usuario = {username, email, role}
+          const tel = userdata.map(x => x.tel)
+          const usuario = {username, email, role, tel}
           await this.storageService.set("usuario", usuario)
-            this.router.navigate(['home']).then(()=>{})
+          await loading.dismiss()
+            this.router.navigate(['home'])
         })
       }).catch(async () => {
+      await loading.dismiss()
+
         const alert = await this.alert.create({
           header: 'Error',
           message: 'Las credenciales son incorrectas. Por favor, inténtalo de nuevo.',
@@ -72,10 +76,9 @@ export class LoginComponent {
       })
     } catch (error) {
       console.error(error);
+      await loading.dismiss()
     }
-    await loading.dismiss();
-    
-  }
+    }
 
   async loginGuest() {
     await this.storageService.remove('usuario').then(()=>{

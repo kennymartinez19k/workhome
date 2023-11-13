@@ -11,14 +11,15 @@ export class UserService {
 
   constructor(private auth: AuthService, private firestore: Firestore) {}
 
-  async addUser({username, email, role}: any): Promise<void> {
+  async addUser({username, email, role, tel}: any): Promise<void> {
     const user = await this.auth.getUserUid()
     if(user) {
       const userRef = collection(this.firestore, 'usuarios')
       const userData = {
         uid: user,
         username, email,
-        role: 'usuario'
+        role: 'usuario',
+        tel: tel
       }
       await addDoc(userRef, userData)
     }

@@ -19,7 +19,7 @@ export class GuardFactoryService {
     }else {
       const alert = await this.alert.create({
         header: 'Acceso denegado',
-        message: 'Inicie sesión para ver su perfil.',
+        message: 'Inicie sesión para acceder a esta área.',
         buttons: ['OK']
       })
       await alert.present()

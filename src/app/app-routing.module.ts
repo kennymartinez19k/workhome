@@ -25,7 +25,7 @@ const routes: Routes = [
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'product-detail/:productId', component: ProductDetailComponent},
+  {path: 'product-detail/:productId', component: ProductDetailComponent, canActivate: [GuardFactoryService]},
   {path: 'add-product', component: AddProductComponent},
   {path: 'add-promotion', component: AddPromotionComponent},
   {path: 'profile', component: ProfileComponent},

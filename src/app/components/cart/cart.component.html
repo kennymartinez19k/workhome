@@ -38,10 +38,10 @@
           <h2>Subtotal: ${{totalPrice}}</h2>
           <h2> Envio:
             <span *ngIf="totalPrice >= 1000">Gratis</span>
-            <span *ngIf="totalPrice < 1000">$100</span>
+            <span *ngIf="totalPrice < 1000">$50</span>
           </h2>
           <h2 *ngIf="totalPrice >= 1000">Total: ${{totalPrice }}</h2>
-          <h2 *ngIf="totalPrice < 1000">Total: ${{totalPrice + 100}}</h2>
+          <h2 *ngIf="totalPrice < 1000">Total: ${{totalPrice + 50}}</h2>
         </div>
 
       </ion-list>

@@ -24,7 +24,8 @@ constructor( private authService: AuthService, private router: Router,
   this.formReg = new FormGroup({
     username: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    tel: new FormControl('', Validators.required)
   })
 }
 
@@ -37,7 +38,8 @@ async register() {
   if(this.formReg.valid) {
     const userData = {
       username: this.formReg.value.username,
-      email: this.formReg.value.email
+      email: this.formReg.value.email,
+      tel: this.formReg.value.tel
     }
 
     const loading = await this.loading.create({
@@ -52,12 +54,25 @@ async register() {
       const username = userdata.map(x => x.username)
       const email = userdata.map(x => x.email)
       const role = userdata.map(x => x.role)
-      const usuario = {username, email, role}
+      const tel = userdata.map(x => x.tel)
+      const usuario = {username, email, role, tel}
       await this.storage.set('usuario', usuario)
+      await loading.dismiss()
       this.router.navigate(['home']).then(()=>{location.reload()})
     })
 
-  }).catch(error => console.log(error))
+  }).catch(async (error) => {
+    console.log(error)
+    await loading.dismiss()
+
+    const alert = await this.alert.create({
+      header: 'Error',
+      message: 'Posiblemente el correo electrónico ya esté en uso.',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  })
   } else {
     const alert = await this.alert.create({
       header: 'Error',
@@ -67,8 +82,6 @@ async register() {
 
     await alert.present();
   }
-  
-  await this.loading.dismiss()
 }
 
 }

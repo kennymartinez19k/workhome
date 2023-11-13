@@ -32,14 +32,16 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.orderService.refresh$.subscribe(()=>{
       this.orderService.getOrder().subscribe((data) => {
         this.orders = data
+    console.log(this.orders)
+
       })
     })
     
     this.orderService.getOrder().subscribe((data) => {
       this.orders = data
-    })
-
     console.log(this.orders)
+
+    })
   }
 
   refreshOrders() {
@@ -96,4 +98,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     return total;
   }
   
+  goToWhatsApp(param: any) {
+    location.href = `${param}`
+  }
 }

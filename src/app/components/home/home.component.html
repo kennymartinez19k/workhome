@@ -1,5 +1,9 @@
 <ion-content class="container ion-padding">
 
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-fab slot="fixed" vertical="top" horizontal="start" *ngIf="user && user.role=='admin'">
     <ion-fab-button color="success">
       <ion-icon name="add"></ion-icon>

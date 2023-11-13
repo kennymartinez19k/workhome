@@ -51,6 +51,14 @@ subscription!: Subscription;
     loop:true
   };
 
+  handleRefresh(event) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.refreshProduct()
+      event.target.complete();
+    }, 2000);
+  }
+
    async ngOnInit() {
     this.cdRef.detectChanges()
 

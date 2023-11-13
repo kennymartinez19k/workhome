@@ -28,7 +28,7 @@ export class CartComponent implements OnInit {
     private orderService: OrdersService, private alert: AlertController,
     private cdRef: ChangeDetectorRef, private sanitizer: DomSanitizer,
     private storage: StorageService, private router: Router,
-    private loading: LoadingController) {}
+    private loading: LoadingController) { }
 
   async ngOnInit() {
     this.userId = await this.auth.getUserUid()
@@ -38,9 +38,9 @@ export class CartComponent implements OnInit {
   }
 
   incrementQty(cartItem: any): void {
-    if(cartItem.product.stock > cartItem.qty) {
+    if (cartItem.product.stock > cartItem.qty) {
       cartItem.qty++;
-      this.cartService.updateCartItemQty(cartItem.orderId, cartItem.qty).then(()=>{
+      this.cartService.updateCartItemQty(cartItem.orderId, cartItem.qty).then(() => {
         console.log("incrementado a cantidad: ", cartItem.qty)
         this.calculateTotalPrice()
       })
@@ -52,8 +52,8 @@ export class CartComponent implements OnInit {
   decrementQty(cartItem: any): void {
     if (cartItem.qty > 1) {
       cartItem.qty--;
-      this.cartService.updateCartItemQty(cartItem.orderId, cartItem.qty).then(()=> {
-      console.log("disminuido a cantidad: ", cartItem.qty)
+      this.cartService.updateCartItemQty(cartItem.orderId, cartItem.qty).then(() => {
+        console.log("disminuido a cantidad: ", cartItem.qty)
         this.calculateTotalPrice()
       });
     }
@@ -65,7 +65,7 @@ export class CartComponent implements OnInit {
     const userExists = await this.storage.get('usuario')
     const locationNameID = (document.getElementById('locationName') as HTMLInputElement).value;
 
-    if(locationNameID) {
+    if (locationNameID) {
       this.locationName = locationNameID
     }
 
@@ -73,29 +73,31 @@ export class CartComponent implements OnInit {
       message: 'Realizando pedido...'
     })
 
-    if(userId && userExists){
-    // const mapUrl = `https://www.google.com/maps/dir/${this.latitude},${this.longitude}/`
-    const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${this.latitude},${this.longitude}`
+    if (userId && userExists) {
+      const msgWelcome = `🤝Saludos ${userExists.username}, 💫Bienvenido a Bodega La FE, En Breve estaremos atendiendo su Pedido.✨Gracias por Preferirnos!!!🙂`
+      const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${this.latitude},${this.longitude}`
+      const whatsapp = `https://api.whatsapp.com/send?phone=+1${userExists.tel}&text=${msgWelcome}`
+      await loading.present()
+      try {
+        await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl, this.locationName,
+          userExists.username, userExists.tel, whatsapp).then(async () => {
+            await loading.dismiss()
+            this.router.navigate(['/cart-success'])
+          })
+        for (const cartItem of this.cartItems) {
+          const newStock = cartItem.product.stock - cartItem.qty
+          await this.cartService.deleteCartItem(cartItem.orderId)
+          await this.cartService.reduceStock(cartItem.product.productId, newStock)
+        }
 
-    await loading.present()
-    try {
-      await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl, this.locationName).then(() => {
-        this.router.navigate(['/cart-success'])
-      })
-      for (const cartItem of this.cartItems) {
-        const newStock = cartItem.product.stock - cartItem.qty
-        await this.cartService.deleteCartItem(cartItem.orderId)
-        await this.cartService.reduceStock(cartItem.product.productId, newStock)
+        this.cartItems = [];
+        this.totalPrice = 0;
+        console.log('Pedido enviado y carrito limpiado con éxito');
+
+      } catch (error) {
+        console.error('Error al enviar el pedido y limpiar el carrito', error);
       }
-
-      this.cartItems = [];
-      this.totalPrice = 0;
-      console.log('Pedido enviado y carrito limpiado con éxito');
-
-    } catch (error) {
-      console.error('Error al enviar el pedido y limpiar el carrito', error);
-    }
-    }else {
+    } else {
       const alert = await this.alert.create({
         header: 'Debe iniciar sesión para poder comprar',
         message: 'Pulse Ok para ser redirigido al inicio de sesión',
@@ -103,26 +105,24 @@ export class CartComponent implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: () => {alert.dismiss()}
+          handler: () => { alert.dismiss() }
         },
-      {
-        text: 'Ok',
-        handler: () => {
-          this.router.navigate(['login'])}
-      }]
+        {
+          text: 'Ok',
+          handler: () => {
+            this.router.navigate(['login'])
+          }
+        }]
       })
       await alert.present()
     }
-
-    await loading.dismiss()
-    
   }
 
 
   calculateTotalPrice(): void {
     this.totalPrice = this.cartItems.reduce((total, cartItem) => {
       return total + cartItem.product.precio * cartItem.qty;
-    
+
     }, 0);
   }
 
@@ -137,7 +137,7 @@ export class CartComponent implements OnInit {
       })
       this.latitude = position.coords.latitude
       this.longitude = position.coords.longitude
-      console.log('latitud: ',this.latitude, 'longitud: ',this.longitude)
+      console.log('latitud: ', this.latitude, 'longitud: ', this.longitude)
       const url = `https://www.google.com/maps/embed/v1/place?q=${this.latitude},${this.longitude}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`
       this.urlMap = this.sanitizer.bypassSecurityTrustResourceUrl(url)
       this.location = true
@@ -162,13 +162,14 @@ export class CartComponent implements OnInit {
         text: 'Cancelar',
         role: 'cancel',
         cssClass: 'secondary',
-        handler: () => {alert.dismiss()}
+        handler: () => { alert.dismiss() }
       },
-    {
-      text: 'Eliminar',
-      handler: () => {
-        this.deleteCartItem(orderId)}
-    }]
+      {
+        text: 'Eliminar',
+        handler: () => {
+          this.deleteCartItem(orderId)
+        }
+      }]
     })
     await alert.present()
   }
@@ -177,15 +178,15 @@ export class CartComponent implements OnInit {
     console.log(cartItem)
     try {
       await this.cartService.deleteCartItem(cartItem.orderId);
-  
+
       // Filtrar la lista de cartItems para quitar el elemento eliminado
       this.cartItems = this.cartItems.filter(item => item.orderId !== cartItem.orderId);
-  
+
       this.calculateTotalPrice();
       console.log('Producto eliminado del carrito con éxito.');
-  
+
       // Forzar un ciclo de detección de cambios
-    this.cdRef.detectChanges()
+      this.cdRef.detectChanges()
     } catch (error) {
       console.error('Error al eliminar el producto del carrito:', error);
     }

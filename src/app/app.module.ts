@@ -34,6 +34,8 @@ import { ProductsSearchedComponent } from './components/products-searched/produc
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CartSuccessComponent } from './components/cart-success/cart-success.component';
 import { AddPromotionComponent } from './components/add-promotion/add-promotion.component';
+import { ModalPromotionsComponent } from './components/modal-promotions/modal-promotions.component';
+import { TestHomeComponent } from './components/test-home/test-home.component';
 
 // import { AgmCoreModule } from '@agm/core';
 
@@ -57,13 +59,17 @@ import { AddPromotionComponent } from './components/add-promotion/add-promotion.
     ResetPasswordComponent,
     CartSuccessComponent,
     AddPromotionComponent,
+    ModalPromotionsComponent,
+    TestHomeComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      innerHTMLTemplatesEnabled: true
+    }),
     // IonicStorageModule.forRoot(),
     ReactiveFormsModule,
     SwiperModule,

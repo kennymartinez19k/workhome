@@ -12,7 +12,45 @@
 <ion-content class="ion-padding">
   <div class="productos-populares">
     <ion-row *ngFor="let product of products">
-      <ion-card class="product-card">
+      
+      <ion-card class="product-card" *ngIf="product.stock > 0">
+        <div class="image-container">
+          <img class="product-img" alt="Silhouette of products" [src]="product.img" />
+        </div>
+        <ion-card-header class="card-header">
+          <p class="title-card">{{product.nombre}}</p>
+          <p class="subtitle-card">${{product.precio}}</p>
+          <p class=""> Disponible: {{product.stock}}</p>
+        </ion-card-header>
+
+        <ion-card-content class="uk-flex uk-flex-between" style="width: 100%;"
+          *ngIf="user && user.role =='usuario' || !user">
+          <div class="button-cart client-cnt" style="display: flex; align-items: center; margin-right: 5px; "
+            *ngIf="product.stock > 0">
+            <ion-icon (click)="removeToCart(product)" name="remove-outline"></ion-icon>
+            <b class="qty-field">{{product.qty}}</b>
+            <ion-icon (click)="addQty(product)" name="add-outline"></ion-icon>
+          </div>
+          <p *ngIf="product.stock < 1" style="color: red;"> Producto no disponible</p>
+        </ion-card-content>
+        <ion-icon *ngIf="product.qty > 0" name="cart" (click)="addToCart(product)" class="floating"
+          style="font-size: 30px;"></ion-icon>
+
+
+        <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='admin'">
+          <div class="buttons-crud">
+            <div>
+              <ion-icon (click)="editProduct(product)" name="create-outline" style="font-size: 30px;"></ion-icon>
+            </div>
+            <div>
+              <ion-icon (click)="product.productId&& confirmDeleteProduct(product.productId)" name="trash-outline"
+                style="font-size: 30px;"></ion-icon>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="product-card no-stock" *ngIf="product.stock < 1">
         <div class="image-container">
           <img class="product-img" alt="Silhouette of products" [src]="product.img" />
         </div>
@@ -20,15 +58,22 @@
           <p class="title-card">{{product.nombre}}</p>
           <p class="subtitle-card" style="color: #02B761;">${{product.precio}}</p>
           <p class=""> Disponible: {{product.stock}}</p>
-          <p *ngIf="product.stock < 1" style="color: red;"> Producto no disponible</p>
+          <p class="no-stock-text"> Producto no disponible</p>
         </ion-card-header>
 
-        <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='usuario'">
-          <div *ngIf="product.stock > 0" class="button-cart" style="display: flex; align-items: center;" (click)="addToCart(product)" style="cursor: pointer;">
-            <ion-icon class="cart" name="cart-outline" ></ion-icon>
+        <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='admin'">
+          <div class="buttons-crud">
+            <div>
+              <ion-icon (click)="editProduct(product)" name="create-outline" style="font-size: 30px;"></ion-icon>
+            </div>
+            <div>
+              <ion-icon (click)="product.productId&& confirmDeleteProduct(product.productId)" name="trash-outline"
+                style="font-size: 30px;"></ion-icon>
+            </div>
           </div>
         </ion-card-content>
       </ion-card>
+
     </ion-row>
   </div>
 

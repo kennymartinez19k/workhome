@@ -7,9 +7,11 @@ import { StorageService } from 'src/app/services/storage.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-import { Subject, Subscription, filter } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { PromotionService } from 'src/app/services/promotion.service';
+import { ModalPromotionsComponent } from '../modal-promotions/modal-promotions.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +33,7 @@ subscription!: Subscription;
     private alert: AlertController, private storageService: StorageService,
     private cartService: ShoppingCartService, private cdRef: ChangeDetectorRef,
     private auth: AuthService, private loading: LoadingController,
-    private promotionService: PromotionService){
+    private promotionService: PromotionService, private modal: ModalController){
     this.products = [{
       nombre: "",
       precio: 0,
@@ -60,6 +62,7 @@ subscription!: Subscription;
   }
 
    async ngOnInit() {
+
     this.cdRef.detectChanges()
 
         
@@ -206,7 +209,7 @@ subscription!: Subscription;
   
  }
 
- async removeToCard(product){
+ async removeToCart(product){
   if(product.qty > 0){
     product.qty--
   }  
@@ -230,6 +233,7 @@ subscription!: Subscription;
  ngOnDestroy(): void {
   this.subscription ? this.subscription.unsubscribe() : null;
  }
+
  
 }
 

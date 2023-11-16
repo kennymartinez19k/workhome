@@ -1,0 +1,14 @@
+ion-app.no-scroll {
+    ion-router-outlet {
+      pointer-events: none;
+    }
+  
+    ion-backdrop {
+      display: none;
+    }
+  
+    ion-content {
+      overflow: hidden;
+    }
+  }
+  

@@ -18,7 +18,7 @@ export class PromotionService {
 
   async addPromotion(promotion: Promotion) {
     const loading = await this.loading.create({
-      message: 'Agregando producto...'
+      message: 'Agregando promoción...'
     })
     const productRef = collection(this.firestore, 'promocion');
     await loading.present()

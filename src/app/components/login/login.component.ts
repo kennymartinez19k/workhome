@@ -7,6 +7,9 @@ import { StorageService } from 'src/app/services/storage.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { ModalPromotionsComponent } from '../modal-promotions/modal-promotions.component';
+import { PromotionService } from 'src/app/services/promotion.service';
 
 @Component({
   selector: 'app-login',
@@ -19,11 +22,13 @@ export class LoginComponent {
 
   formLogin: FormGroup;
   userdata: User[] = []
+  promotion: any
   
   constructor( private router: Router, public authService: AuthService, 
     private userService: UserService, private storageService: StorageService,
     private cdRef: ChangeDetectorRef, private loading: LoadingController,
-    private alert: AlertController){
+    private alert: AlertController, private modal: ModalController,
+    private promotionService: PromotionService){
   this.formLogin = new FormGroup({
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
@@ -33,6 +38,22 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.cdRef.detectChanges()
+
+    this.promotionService.refresh$.subscribe(()=> {
+      this.refreshPromotion()
+      console.log(this.promotion)
+    })
+
+    this.promotionService.getPromotion().subscribe(promotion => {
+      this.promotion = promotion
+      console.log(this.promotion)
+    })
+  }
+
+  refreshPromotion() {
+    this.promotionService.getPromotion().subscribe(promotion => {
+      this.promotion = promotion
+    })
   }
 
  async login() {
@@ -61,7 +82,9 @@ export class LoginComponent {
           const usuario = {username, email, role, tel}
           await this.storageService.set("usuario", usuario)
           await loading.dismiss()
-            this.router.navigate(['home'])
+            this.router.navigate(['home']).then(() => {
+              this.presentCustomModal()
+            })
         })
       }).catch(async () => {
       await loading.dismiss()
@@ -86,8 +109,20 @@ export class LoginComponent {
     })
   }
 
-  // loginGoogle() {
-  //   this.authService.loginWithGoogle()
-  // }
+  async presentCustomModal() {
+    const modal = await this.modal.create({
+      component: ModalPromotionsComponent,
+      cssClass: 'alert-modal',
+      componentProps: {
+        data: {
+          img: this.promotion[0].img,
+          title: this.promotion[0].title,
+          description: this.promotion[0].description
+        }
+      }
+    });
+  
+    return await modal.present();
+  }
 
 }

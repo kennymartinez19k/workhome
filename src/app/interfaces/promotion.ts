@@ -1,4 +1,6 @@
 export interface Promotion {
-    img: string
-    promotionId: string
+    img: string;
+    title: string;
+    description: string;
+    promotionId: string;
 }

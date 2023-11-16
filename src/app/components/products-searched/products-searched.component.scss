@@ -32,11 +32,13 @@ ion-toolbar {
         width: 50%;
         .product-card {
             width: 200px;
-            height: 220px;
+            min-height: 220px;
+            max-height: 290px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            padding-bottom: 10px;
             .image-container {
                 overflow: hidden;
                 width: 150px;
@@ -82,32 +84,39 @@ ion-toolbar {
     
     
 }
+
 .cardPadre{
     display: flex;
     flex-wrap: wrap;
     
    
 }
-
+  
 .productos{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.banner-top {
+    max-height: 50px;
+}
 .swiperimg{
-    border-radius: 100px;
+    border-radius: 100%;
     width: 50px;
     margin-right: 10px;
-    
 }
 
 .swiper-container{
    display: flex;
    align-items: center;
-   
-   
 }
+
+.banner-top {
+    width: 96%;
+    font-size: 13px
+}
+
 .banner-top{
     display: flex;
     justify-content: center;
@@ -182,3 +191,122 @@ ion-toolbar {
     transform: translateY(0);
   }
   
+  .qty-field{
+    margin: 0px 15px;
+  }
+
+  .client-cnt{
+    ion-icon{
+        font-size: 25px;
+    }
+  }
+
+  .floating {  
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    margin-left: 30px;
+    margin-top: 5px;
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+}
+
+@keyframes floating {
+    from { transform: translate(0,  0px); }
+    65%  { transform: translate(5px, 0px); color:  green; }
+    to   { transform: translate(0, -0px); }    
+}
+
+.promotion {
+    width: 100%;
+    ion-thumbnail {
+        width: 100%;
+        height: 120px;
+        ion-img {
+            object-fit: cover;
+        }
+    }
+}
+
+
+
+.custom-alert {
+    .alert-message {
+      background-color: white; // Fondo blanco
+      color: black; // Texto negro (ajusta según tus necesidades)
+    }
+  
+    .alert-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .alert-image {
+      width: 100px; // Ajusta el tamaño de la imagen según tus necesidades
+      height: 100px;
+      margin-bottom: 10px;
+    }
+  
+    .alert-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  
+    .alert-description {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  }
+  
+
+  .categories-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+  
+    .category {
+      background: #02B761;;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      gap: 20px;
+  
+      img {
+        max-width: 80%; // Puedes ajustar este valor según tus preferencias
+        max-height: 100px; // Puedes ajustar este valor según tus preferencias
+        object-fit: contain;  // Esto asegura que la imagen se adapte sin distorsiones
+        border-radius: 50%;
+      }
+  
+      p {
+        margin-top: auto; // Esto asegura que el texto se mantenga en la parte inferior
+        font-family: $fuenteDeLetra;
+        font-weight: $semiBold;
+        color: white;
+      }
+    }
+  }
+
+  .no-stock img{
+    filter: grayscale(100%);
+  }
+  
+  .no-stock-text {
+    width: 100%;
+    color: white;
+    padding: 5px;
+    background: red;
+    border-radius: 4px;
+    font-family: $fuenteDeLetra;
+    font-weight: $extraBold;
+  }

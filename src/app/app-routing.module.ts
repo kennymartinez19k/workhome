@@ -17,6 +17,7 @@ import { ProductsSearchedComponent } from './components/products-searched/produc
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CartSuccessComponent } from './components/cart-success/cart-success.component';
 import { AddPromotionComponent } from './components/add-promotion/add-promotion.component';
+import { TestHomeComponent } from './components/test-home/test-home.component';
 
 const routes: Routes = [
 
@@ -37,7 +38,8 @@ const routes: Routes = [
   {path: 'category/:nombre', component: CategoryComponent},
   {path: 'search-results', component: ProductsSearchedComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
-  {path: 'cart-success', component: CartSuccessComponent, canActivate: [GuardFactoryService]}
+  {path: 'cart-success', component: CartSuccessComponent, canActivate: [GuardFactoryService]},
+  {path: 'test', component: TestHomeComponent}
 ];
 
 @NgModule({

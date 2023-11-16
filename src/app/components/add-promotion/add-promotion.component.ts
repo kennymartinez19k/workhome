@@ -23,14 +23,18 @@ export class AddPromotionComponent {
   constructor(private firestore: Firestore, private loading: LoadingController,
     private router: Router, private storage: Storage, private promotion: PromotionService){
       this.form = new FormGroup({
-        img: new FormControl()
+        img: new FormControl(),
+        titleProm: new FormControl(),
+        description: new FormControl()
       })
     }
 
   async addPromotion() {
     const promotion = {
       img: this.imgUrl,
-      promotionId: ''
+      promotionId: '',
+      title: this.form.value.titleProm,
+      description: this.form.value.description
     }
     if(this.imgUrl) {
       this.promotion.addPromotion(promotion).then((promotionId) => {

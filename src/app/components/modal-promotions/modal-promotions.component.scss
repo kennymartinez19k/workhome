@@ -1,0 +1,47 @@
+$fuenteDeLetra: 'Poppins', sans-serif;
+$semiBold: 600;
+$extraBold: 800;
+
+* {
+    font-family: $fuenteDeLetra;
+}
+
+.container {
+    background: white;
+    width: 85%;
+    padding: 20px;
+    margin: auto;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+        width: 97%;
+    }
+
+    h1 {
+        font-size: 20px;
+        font-weight: $semiBold;
+        text-align: center;
+    }
+    
+    p {
+        text-align: center;
+    }
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding-top: 20px;
+
+    a {
+        color: #02B761;
+        text-decoration: underline;
+    }
+}

@@ -24,6 +24,7 @@ export class CartComponent implements OnInit {
   urlMap: SafeResourceUrl | undefined
   locationName: any
 
+
   constructor(private cartService: ShoppingCartService, private auth: AuthService,
     private orderService: OrdersService, private alert: AlertController,
     private cdRef: ChangeDetectorRef, private sanitizer: DomSanitizer,
@@ -35,6 +36,7 @@ export class CartComponent implements OnInit {
     this.cartItems = await this.cartService.getCartItems(this.userId)
     console.log(this.cartItems)
     this.calculateTotalPrice()
+
   }
 
   incrementQty(cartItem: any): void {
@@ -61,61 +63,73 @@ export class CartComponent implements OnInit {
 
 
   async saveOrder() {
+
     const userId = await this.auth.getUserUid()
     const userExists = await this.storage.get('usuario')
     const locationNameID = (document.getElementById('locationName') as HTMLInputElement).value;
 
-    if (locationNameID) {
-      this.locationName = locationNameID
-    }
-
-    const loading = await this.loading.create({
-      message: 'Realizando pedido...'
-    })
-
-    if (userId && userExists) {
-      const msgWelcome = `🤝Saludos ${userExists.username}, 💫Bienvenido a Bodega La FE, En Breve estaremos atendiendo su Pedido.✨Gracias por Preferirnos!!!🙂`
-      const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${this.latitude},${this.longitude}`
-      const whatsapp = `https://api.whatsapp.com/send?phone=+1${userExists.tel}&text=${msgWelcome}`
-      await loading.present()
-      try {
-        await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl, this.locationName,
-          userExists.username, userExists.tel, whatsapp).then(async () => {
-            await loading.dismiss()
-            this.router.navigate(['/cart-success'])
-          })
-        for (const cartItem of this.cartItems) {
-          const newStock = cartItem.product.stock - cartItem.qty
-          await this.cartService.deleteCartItem(cartItem.orderId)
-          await this.cartService.reduceStock(cartItem.product.productId, newStock)
-        }
-
-        this.cartItems = [];
-        this.totalPrice = 0;
-        console.log('Pedido enviado y carrito limpiado con éxito');
-
-      } catch (error) {
-        console.error('Error al enviar el pedido y limpiar el carrito', error);
-      }
-    } else {
+    if(locationNameID == '') {
       const alert = await this.alert.create({
-        header: 'Debe iniciar sesión para poder comprar',
-        message: 'Pulse Ok para ser redirigido al inicio de sesión',
-        buttons: [{
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => { alert.dismiss() }
-        },
-        {
-          text: 'Ok',
-          handler: () => {
-            this.router.navigate(['login'])
-          }
-        }]
+        header: 'Error al realizar el pedido',
+        message: 'Por favor, ingrese su dirección manualmente.',
+        buttons: ['OK']
       })
       await alert.present()
+    } else {
+      if (locationNameID) {
+        this.locationName = locationNameID
+      }
+  
+      const loading = await this.loading.create({
+        message: 'Realizando pedido...'
+      })
+  
+      if (userId && userExists) {
+        const msgWelcome = `🤝Saludos ${userExists.username}, 💫Bienvenido a Bodega La FE, En Breve estaremos atendiendo su Pedido.✨Gracias por Preferirnos!!!🙂`
+        const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${this.latitude},${this.longitude}`
+        const whatsapp = `https://api.whatsapp.com/send?phone=+1${userExists.tel}&text=${msgWelcome}`
+        await loading.present()
+        try {
+          await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl, this.locationName,
+            userExists.username, userExists.tel, whatsapp).then(async () => {
+              await loading.dismiss()
+              this.router.navigate(['/cart-success'])
+            })
+          for (const cartItem of this.cartItems) {
+            const newStock = cartItem.product.stock - cartItem.qty
+            await this.cartService.deleteCartItem(cartItem.orderId)
+            await this.cartService.reduceStock(cartItem.product.productId, newStock)
+          }
+  
+          this.cartItems = [];
+          this.totalPrice = 0;
+          console.log('Pedido enviado y carrito limpiado con éxito');
+  
+        } catch (error) {
+          console.error('Error al enviar el pedido y limpiar el carrito', error);
+        }
+      } else {
+        const alert = await this.alert.create({
+          header: 'Debe iniciar sesión para poder comprar',
+          message: 'Pulse Ok para ser redirigido al inicio de sesión',
+          buttons: [{
+            text: 'Cancelar',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => { alert.dismiss() }
+          },
+          {
+            text: 'Ok',
+            handler: () => {
+              this.router.navigate(['login'])
+            }
+          }]
+        })
+        await alert.present()
+      }
     }
+
+   
   }
 
 

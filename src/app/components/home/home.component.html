@@ -1,9 +1,5 @@
 <ion-content class="container ion-padding">
 
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-
   <ion-fab slot="fixed" vertical="top" horizontal="start" *ngIf="user && user.role=='admin'">
     <ion-fab-button color="success">
       <ion-icon name="add"></ion-icon>
@@ -51,6 +47,11 @@
   </div>
 
   <div class="categories-container">
+
+    <div class="category" [routerLink]="['/category', 'Ofertas']">
+      <img src="/assets/img/ofertas.webp" alt="Categoría">
+      <p>Ofertas</p>
+    </div>
 
     <div class="category" [routerLink]="['/category', 'Alimentos']">
       <img src="/assets/img/alimentos-frescos.png" alt="Categoría">
@@ -153,197 +154,6 @@
     </div>
 
   </div>
-
-  <!-- <div class="category-title ion-padding">
-    <h3>Categorias</h3>
-  </div>
-  <div class="categoria">
-    <swiper [config]="config" class="swiper-container">
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Alimentos']">
-          <img class="swiperimg" src="/assets/img/alimentos-frescos.png" alt="">
-          <b>Alimentos</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Vegetales']">
-          <img class="swiperimg" src="/assets/img/vegetales.webp" alt="">
-          <b>Vegetales</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Panaderia']">
-          <img class="swiperimg" src="/assets/img/pan.webp" alt="">
-          <b>Panaderia</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Bebidas']">
-          <img class="swiperimg" src="/assets/img/bebida.png" alt="">
-          <b>Bebidas</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Cerveza_Romo']">
-          <img class="swiperimg" src="/assets/img/cerveza.webp" alt="">
-          <b>Cerveza y Romo</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Embutidos']">
-          <img class="swiperimg" src="/assets/img/embutidos.webp" alt="">
-          <b>Embutidos</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Enlatados']">
-          <img class="swiperimg" src="/assets/img/enlatados.png" alt="">
-          <b>Enlatados</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Pastas']">
-          <img class="swiperimg" src="/assets/img/pastas.webp" alt="">
-          <b>Pastas</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Especias']">
-          <img class="swiperimg" src="/assets/img/especias.webp" alt="">
-          <b>Especias</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Papitas']">
-          <img class="swiperimg" src="/assets/img/papita.png" alt="">
-          <b>Papitas</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Dulces']">
-          <img class="swiperimg" src="/assets/img/dulces.webp" alt="">
-          <b>Dulces</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Higiene']">
-          <img class="swiperimg" src="/assets/img/higiene.png" alt="">
-          <b>Higiene</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Farmacos']">
-          <img class="swiperimg" src="/assets/img/farmacos.png" alt="">
-          <b>Farmacos</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Deshechables']">
-          <img class="swiperimg" src="/assets/img/deshechables.webp" alt="">
-          <b>Deshechables</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Electronica']">
-          <img class="swiperimg" src="/assets/img/electronica.webp" alt="">
-          <b>Electrónica</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Ferreteria']">
-          <img class="swiperimg" src="/assets/img/ferreteria.webp" alt="">
-          <b>Ferretería</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Papeleria']">
-          <img class="swiperimg" src="/assets/img/papeleria.webp" alt="">
-          <b>Papelería</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Cigarros']">
-          <img class="swiperimg" src="/assets/img/cigarros.webp" alt="">
-          <b>Cigarros</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Viveres']">
-          <img class="swiperimg" src="/assets/img/viveres.webp" alt="">
-          <b>Viveres</b>
-        </div>
-      </ng-template>
-
-      <ng-template swiperSlide class="swiper-slide-swipe">
-        <div class="banner-top" [routerLink]="['/category', 'Variedades']">
-          <img class="swiperimg" src="/assets/img/variedades.webp" alt="">
-          <b>Variedades</b>
-        </div>
-      </ng-template>
-
-    </swiper>
-  </div>
-
-  <div class="product-title ion-padding">
-    <h3>Productos</h3>
-  </div>
-  <div class="productos-populares">
-    <ion-row *ngFor="let product of products">
-      <ion-card class="product-card">
-        
-        <div class="image-container" (click)="goToProductDetail(product)">
-          <img class="product-img" alt="Silhouette of products" [src]="product.img" />
-        </div>
-        <ion-card-header class="card-header">
-          <p class="title-card">{{product.nombre}}</p>
-          <p class="subtitle-card">${{product.precio}}</p>
-          <p *ngIf="product.stock > 0"> Disponible: {{product.stock}}</p>
-          <p *ngIf="product.stock < 1" style="color: red;"> Producto no disponible</p>
-        </ion-card-header>
-
-        <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='admin'">
-          <div class="buttons-crud">
-            <div>
-              <ion-icon (click)="editProduct(product)" name="create-outline" style="font-size: 30px;"></ion-icon>
-            </div>
-            <div>
-              <ion-icon (click)="product.productId&& confirmDeleteProduct(product.productId)" name="trash-outline" style="font-size: 30px;"></ion-icon>
-            </div>
-          </div>
-        </ion-card-content>
-
-        <ion-card-content class="uk-flex uk-flex-between" style="width: 100%;" *ngIf="user && user.role =='usuario' || !user">
-          <div class="button-cart client-cnt"  style="display: flex; align-items: center; margin-right: 5px; "
-          *ngIf="product.stock > 0">
-            <ion-icon (click)="removeToCard(product)" name="remove-outline"></ion-icon>
-            <b class="qty-field">{{product.qty}}</b>
-            <ion-icon (click)="addQty(product)" name="add-outline"></ion-icon>
-            
-          </div>
-        </ion-card-content>
-        <ion-icon *ngIf="product.qty > 0" name="cart" (click)="addToCart(product)" class="floating" style="font-size: 30px;"></ion-icon>
-      </ion-card>
-    </ion-row>
-  </div> -->
 
 </ion-content>
 <app-footer-nav currentRoute="/" [qtyOrders]="cartItems"></app-footer-nav>

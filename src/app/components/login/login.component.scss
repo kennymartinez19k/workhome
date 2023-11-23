@@ -2,6 +2,7 @@ $fuenteDeLetra: 'Poppins', sans-serif;
 $semiBold: 600;
 $extraBold: 800;
 
+
 ion-toolbar {
     background: #02B761;
     ion-back-button {
@@ -56,6 +57,7 @@ ion-content {
     color: #02B761 !important;
     font-weight: $extraBold;
 }
+
 
 .google {
     display: flex;

@@ -20,7 +20,7 @@ export class ModalPromotionsComponent {
   }
 
   goToPromotion(){
-    this.router.navigate(['category/Alimentos'])
+    this.router.navigate(['category/Ofertas'])
     this.closeModal()
   }
 

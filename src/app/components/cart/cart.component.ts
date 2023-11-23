@@ -22,8 +22,6 @@ export class CartComponent implements OnInit {
   longitude: any
   location = false
   urlMap: SafeResourceUrl | undefined
-  locationName: any
-
 
   constructor(private cartService: ShoppingCartService, private auth: AuthService,
     private orderService: OrdersService, private alert: AlertController,
@@ -66,19 +64,6 @@ export class CartComponent implements OnInit {
 
     const userId = await this.auth.getUserUid()
     const userExists = await this.storage.get('usuario')
-    const locationNameID = (document.getElementById('locationName') as HTMLInputElement).value;
-
-    if(locationNameID == '') {
-      const alert = await this.alert.create({
-        header: 'Error al realizar el pedido',
-        message: 'Por favor, ingrese su dirección manualmente.',
-        buttons: ['OK']
-      })
-      await alert.present()
-    } else {
-      if (locationNameID) {
-        this.locationName = locationNameID
-      }
   
       const loading = await this.loading.create({
         message: 'Realizando pedido...'
@@ -90,7 +75,7 @@ export class CartComponent implements OnInit {
         const whatsapp = `https://api.whatsapp.com/send?phone=+1${userExists.tel}&text=${msgWelcome}`
         await loading.present()
         try {
-          await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl, this.locationName,
+          await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl,
             userExists.username, userExists.tel, whatsapp).then(async () => {
               await loading.dismiss()
               this.router.navigate(['/cart-success'])
@@ -127,7 +112,7 @@ export class CartComponent implements OnInit {
         })
         await alert.present()
       }
-    }
+
 
    
   }

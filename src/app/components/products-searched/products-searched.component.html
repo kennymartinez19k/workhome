@@ -14,7 +14,7 @@
     <ion-row *ngFor="let product of products">
       
       <ion-card class="product-card" *ngIf="product.stock > 0">
-        <div class="image-container">
+        <div class="image-container" (click)="goToProductDetail(product)">
           <img class="product-img" alt="Silhouette of products" [src]="product.img" />
         </div>
         <ion-card-header class="card-header">
@@ -81,9 +81,6 @@
     <h2>No hay productos con este nombre</h2>
   </div>
 
-  <div class="success-message" [ngClass]="{'show': showSuccessMsg}" *ngIf="showSuccessMsg">
-    Añadido con éxito al carrito
-  </div>
 </ion-content>
 
-<app-footer-nav currentRoute="/"></app-footer-nav>
+<app-footer-nav currentRoute="/" [qtyOrders]="cartItems"></app-footer-nav>

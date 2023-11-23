@@ -7,7 +7,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { GuardFactoryService } from './guard.guard';
 import { AddProductComponent } from './components/add-product/add-product.component';
-import { SliderComponent } from './components/slider/slider.component';
 import { CartComponent } from './components/cart/cart.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { OrdersComponent } from './components/orders/orders.component';
@@ -17,7 +16,6 @@ import { ProductsSearchedComponent } from './components/products-searched/produc
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CartSuccessComponent } from './components/cart-success/cart-success.component';
 import { AddPromotionComponent } from './components/add-promotion/add-promotion.component';
-import { TestHomeComponent } from './components/test-home/test-home.component';
 
 const routes: Routes = [
 
@@ -30,7 +28,6 @@ const routes: Routes = [
   {path: 'add-product', component: AddProductComponent},
   {path: 'add-promotion', component: AddPromotionComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'slider', component: SliderComponent},
   {path: 'cart', component: CartComponent, canActivate: [GuardFactoryService]},
   {path: 'edit-product/:productId', component: EditProductComponent, canActivate: [GuardFactoryService]},
   {path: 'orders', component: OrdersComponent},
@@ -39,7 +36,6 @@ const routes: Routes = [
   {path: 'search-results', component: ProductsSearchedComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
   {path: 'cart-success', component: CartSuccessComponent, canActivate: [GuardFactoryService]},
-  {path: 'test', component: TestHomeComponent}
 ];
 
 @NgModule({

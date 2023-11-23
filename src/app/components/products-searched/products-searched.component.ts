@@ -27,6 +27,10 @@ export class ProductsSearchedComponent implements OnInit {
     private loading: LoadingController) { }
 
   async ngOnInit() {
+
+    let userId = await this.auth.getUserUid()
+    this.cartItems = await this.cartService.getCartItems(userId)
+    
     this.cdRef.detectChanges()
 
     this.productService.getSearchResults().subscribe(results => {

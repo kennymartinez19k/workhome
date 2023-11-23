@@ -52,9 +52,6 @@
               <span *ngIf="calculateOrderTotal(order) < 1000">$50</span>
             </h2>
             <div class="total-section">
-              <h2 style="width: 100%;">
-                Dirección: <span class="subtotal">{{ order.locationName }}</span>
-              </h2>
               <h2 class="total-price" *ngIf="calculateOrderTotal(order) >= 1000">
                 Precio Total: <span class="precio">${{ calculateOrderTotal(order) }}</span>
               </h2>

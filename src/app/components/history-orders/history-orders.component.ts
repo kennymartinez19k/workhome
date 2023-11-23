@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { Subscription } from 'rxjs';
 import { OrdersService } from 'src/app/services/orders.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 @Component({
   selector: 'app-history-orders',
@@ -17,11 +18,15 @@ export class HistoryOrdersComponent implements OnInit {
   user: any
   ordersAdmin: any[] = []
   productsSubscription: Subscription | undefined
+  cartItems: any = []
+
   constructor(private firestore: Firestore, private auth: AuthService, private cdRef: ChangeDetectorRef,
-    private storage: StorageService){}
+    private storage: StorageService, private cartService: ShoppingCartService){}
 
  async ngOnInit() {
+  this.userId = await this.auth.getUserUid()
 
+  this.cartItems = await this.cartService.getCartItems(this.userId)
   this.cdRef.detectChanges()
 
   this.user = await this.storage.get('usuario')
@@ -37,7 +42,6 @@ export class HistoryOrdersComponent implements OnInit {
     console.log(this.ordersAdmin)
   }
   
-  this.userId = await this.auth.getUserUid()
   const ordersRef = collection(this.firestore, 'pedidos')
   const q = query(ordersRef, where('userId', '==', this.userId))
   const querySnap = await getDocs(q)

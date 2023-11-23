@@ -1,23 +1,24 @@
 <ion-header>
     <ion-toolbar color="#">
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/home"></ion-back-button>
-    </ion-buttons>
-      <ion-title>
-        Agregar producto
-      </ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/home"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            Agregar producto
+        </ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-paddding">
 
-  
+
     <form [formGroup]="form" (ngSubmit)="addProduct()">
         <ion-item>
             <ion-label position="floating">Nombre del producto</ion-label>
-            <ion-input type="text" placeholder="Ingresa el nombre del producto" required formControlName="nombre"></ion-input>
+            <ion-input type="text" placeholder="Ingresa el nombre del producto" required
+                formControlName="nombre"></ion-input>
         </ion-item>
-        
+
         <ion-item>
             <ion-label position="floating">Precio</ion-label>
             <ion-input type="number" placeholder="Ingresa el precio" required formControlName="precio"></ion-input>
@@ -25,31 +26,34 @@
 
         <ion-item>
             <ion-label position="floating">Cantidad en Stock</ion-label>
-            <ion-input type="number" placeholder="Ingresa la cantidad en stock" required formControlName="stock"></ion-input>
+            <ion-input type="number" placeholder="Ingresa la cantidad en stock" required
+                formControlName="stock"></ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-select label="Categoría del producto" placeholder="Categoría" formControlName="categoryId" style="font-weight: 800;">
-              <ion-select-option value="Alimentos">Alimentos</ion-select-option>
-              <ion-select-option value="Frutas y Vegetales">Frutas y Vegetales</ion-select-option>
-              <ion-select-option value="Panaderia">Panaderia</ion-select-option>
-              <ion-select-option value="Bebidas">Bebidas</ion-select-option>
-              <ion-select-option value="Cerveza y Romo">Cerveza y Romo</ion-select-option>
-              <ion-select-option value="Embutidos">Embutidos</ion-select-option>
-              <ion-select-option value="Enlatados">Enlatados</ion-select-option>
-              <ion-select-option value="Pastas">Pastas</ion-select-option>
-              <ion-select-option value="Especias">Especias</ion-select-option>
-              <ion-select-option value="Papitas">Papitas</ion-select-option>
-              <ion-select-option value="Dulces">Dulces</ion-select-option>
-              <ion-select-option value="Higiene">Higiene</ion-select-option>
-              <ion-select-option value="Farmacos">Farmacos</ion-select-option>
-              <ion-select-option value="Deshechables">Deshechables</ion-select-option>
-              <ion-select-option value="Electronica">Electronica</ion-select-option>
-              <ion-select-option value="Ferreteria">Ferreteria</ion-select-option>
-              <ion-select-option value="Papeleria">Papeleria</ion-select-option>
-              <ion-select-option value="Cigarros">Cigarros</ion-select-option>
-              <ion-select-option value="Viveres">Viveres</ion-select-option>
-              <ion-select-option value="Variedades">Variedades</ion-select-option>
+            <ion-select label="Categoría del producto" placeholder="Categoría" formControlName="categoryId"
+                style="font-weight: 800;">
+                <ion-select-option value="Ofertas">Ofertas</ion-select-option>
+                <ion-select-option value="Alimentos">Alimentos</ion-select-option>
+                <ion-select-option value="Frutas y Vegetales">Frutas y Vegetales</ion-select-option>
+                <ion-select-option value="Panaderia">Panaderia</ion-select-option>
+                <ion-select-option value="Bebidas">Bebidas</ion-select-option>
+                <ion-select-option value="Cerveza y Romo">Cerveza y Romo</ion-select-option>
+                <ion-select-option value="Embutidos">Embutidos</ion-select-option>
+                <ion-select-option value="Enlatados">Enlatados</ion-select-option>
+                <ion-select-option value="Pastas">Pastas</ion-select-option>
+                <ion-select-option value="Especias">Especias</ion-select-option>
+                <ion-select-option value="Papitas">Papitas</ion-select-option>
+                <ion-select-option value="Dulces">Dulces</ion-select-option>
+                <ion-select-option value="Higiene">Higiene</ion-select-option>
+                <ion-select-option value="Farmacos">Farmacos</ion-select-option>
+                <ion-select-option value="Deshechables">Deshechables</ion-select-option>
+                <ion-select-option value="Electronica">Electronica</ion-select-option>
+                <ion-select-option value="Ferreteria">Ferreteria</ion-select-option>
+                <ion-select-option value="Papeleria">Papeleria</ion-select-option>
+                <ion-select-option value="Cigarros">Cigarros</ion-select-option>
+                <ion-select-option value="Viveres">Viveres</ion-select-option>
+                <ion-select-option value="Variedades">Variedades</ion-select-option>
             </ion-select>
         </ion-item>
 
@@ -64,5 +68,5 @@
 
         <button type="submit">Agregar producto</button>
     </form>
-  
+
 </ion-content>

@@ -16,7 +16,7 @@ export class OrdersService {
     return this._refresh$
   }
 
-  async sentOrderToFirestore(userId: any, carritoItems: any[], location: any, locationName: any,
+  async sentOrderToFirestore(userId: any, carritoItems: any[], location: any,
     username: any, tel: number, whatsapp: any): Promise <void> {
     try {
       const ordersRef = collection(this.firestore, 'pedidos')
@@ -27,7 +27,6 @@ export class OrdersService {
         ubicacion: location,
         status_enviado: 'no',
         id: '',
-        locationName: locationName,
         username: username,
         tel: tel,
         whatsapp: whatsapp

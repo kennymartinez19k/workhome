@@ -31,6 +31,8 @@ export class CategoryComponent implements OnInit {
     private loading: LoadingController) { }
 
   async ngOnInit() {
+    this.user = await this.storage.get('usuario')
+    let userId = await this.auth.getUserUid()
     this.cdRef.detectChanges()
 
     this.activatedRoute.paramMap.subscribe(params => {
@@ -38,13 +40,11 @@ export class CategoryComponent implements OnInit {
       this.loadProducts()
     })
 
-    this.user = await this.storage.get('usuario')
+    this.cartItems = await this.cartService.getCartItems(userId)
 
     this.subscription = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd)
     ).subscribe(async () => {
-      this.user = await this.storage.get("usuario")
-      let userId = await this.auth.getUserUid()
       this.cartItems = await this.cartService.getCartItems(userId)
     })
 

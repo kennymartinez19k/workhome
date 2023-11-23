@@ -22,7 +22,6 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
-import { SliderComponent } from './components/slider/slider.component';
 import { SwiperModule } from 'swiper/angular';
 import { CartComponent } from './components/cart/cart.component';
 import { FooterNavComponent } from './components/footer-nav/footer-nav.component';
@@ -35,7 +34,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { CartSuccessComponent } from './components/cart-success/cart-success.component';
 import { AddPromotionComponent } from './components/add-promotion/add-promotion.component';
 import { ModalPromotionsComponent } from './components/modal-promotions/modal-promotions.component';
-import { TestHomeComponent } from './components/test-home/test-home.component';
+import { ImageModalComponent } from './components/image-modal/image-modal.component';
 
 // import { AgmCoreModule } from '@agm/core';
 
@@ -48,7 +47,6 @@ import { TestHomeComponent } from './components/test-home/test-home.component';
     ProfileComponent,
     ProductDetailComponent,
     AddProductComponent,
-    SliderComponent,
     CartComponent,
     FooterNavComponent,
     EditProductComponent,
@@ -60,7 +58,7 @@ import { TestHomeComponent } from './components/test-home/test-home.component';
     CartSuccessComponent,
     AddPromotionComponent,
     ModalPromotionsComponent,
-    TestHomeComponent,
+    ImageModalComponent,
   ],
   imports: [
     BrowserModule,

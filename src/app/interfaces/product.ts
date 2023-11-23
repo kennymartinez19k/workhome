@@ -4,5 +4,6 @@ export interface Product {
     precio: number
     stock: number
     img: string | null
+    imageName: string;
     categoryId: string
 }

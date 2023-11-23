@@ -19,6 +19,7 @@ export class AddPromotionComponent {
   form: FormGroup
   selectedFile: File | null = null;
   imgName: string | null = null;
+  imageNameStorage: any
 
   constructor(private firestore: Firestore, private loading: LoadingController,
     private router: Router, private storage: Storage, private promotion: PromotionService){
@@ -27,15 +28,18 @@ export class AddPromotionComponent {
         titleProm: new FormControl(),
         description: new FormControl()
       })
+      console.log('test')
     }
 
   async addPromotion() {
     const promotion = {
       img: this.imgUrl,
+      imageName: this.imageNameStorage,
       promotionId: '',
       title: this.form.value.titleProm,
       description: this.form.value.description
     }
+
     if(this.imgUrl) {
       this.promotion.addPromotion(promotion).then((promotionId) => {
         console.log(`la promocion se añadio con id ${promotionId}`)
@@ -84,6 +88,7 @@ export class AddPromotionComponent {
         const downloadURL = await getDownloadURL(storageRef);
         this.imgUrl = downloadURL;
         this.imgName = selectedFile.name;
+        this.imageNameStorage = storageRef.name
   
         // Almacenar la URL de descarga en Firestore
         const docRef = await addDoc(collection(this.firestore, 'imagenes'), {

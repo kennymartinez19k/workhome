@@ -16,8 +16,5 @@ export class CartSuccessComponent {
 
   backHome() {
     this.router.navigate(['/home'])
-    .then( () => {
-      location.reload()
-    })
   }
 }

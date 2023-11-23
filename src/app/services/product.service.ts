@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, from, map, Subject } from 'rxjs';
 import { Product } from '../interfaces/product';
 import { Firestore, collection, addDoc, query, where, getDocs, doc, getDoc, setDoc, deleteDoc, orderBy, startAt, endAt } from '@angular/fire/firestore';
 import { LoadingController } from '@ionic/angular';
+import { Storage, deleteObject, ref } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class ProductService {
   private _refresh$ = new Subject<void>()
 
 
-  constructor(private firestore: Firestore, private loading: LoadingController) {}
+  constructor(private firestore: Firestore, private loading: LoadingController,
+    private storage: Storage) {}
 
   get refresh$() {
     return this._refresh$
@@ -69,10 +71,14 @@ export class ProductService {
     return setDoc(productRef, product, {merge: true})
   }
 
-  async deleteProduct(productId: string | undefined): Promise<void> {
-    if(productId) {
+  async deleteProduct(productId: string | undefined, imageName: string | undefined): Promise<void> {
+    if(productId && imageName) {
       const productRef = doc(this.firestore, 'productos', productId)
       await deleteDoc(productRef)
+
+      const storageRef = ref(this.storage, 'imagenes/' + imageName)
+      await deleteObject(storageRef)
+      console.log('eliminado con exito:',storageRef.name)
     } else {
       console.log('ERROR al eliminar SERVICIO')
     }

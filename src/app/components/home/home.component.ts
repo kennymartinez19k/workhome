@@ -60,9 +60,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
 
-  deletePromotion(promotionId: string): void {
-    console.log(promotionId)
-    this.promotionService.deletePromotion(promotionId).then(() => {
+  deletePromotion(promotionId: string, imageName: string): void {
+    console.log(promotionId, imageName)
+    this.promotionService.deletePromotion(promotionId, imageName).then(() => {
       this.promotion = this.promotion.filter(promotion => promotion.promotionId !== promotionId)
       this.cdRef.detectChanges();
     })
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       })
   }
 
-  async confirmDeletePromotion(promotionId: string) {
+  async confirmDeletePromotion(promotionId: string, imageName: string) {
     const alert = await this.alert.create({
       header: 'Eliminar promoción',
       message: '¿Está seguro de eliminar la promoción?',
@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       {
         text: 'Eliminar',
         handler: () => {
-          this.deletePromotion(promotionId)
+          this.deletePromotion(promotionId, imageName)
         }
       }]
     })

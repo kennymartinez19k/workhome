@@ -30,14 +30,14 @@
             <h2 >Subtotal: <span class="subtotal">${{calcularPrecioTotal(order)}}</span></h2>
             <h2> Envio: 
               <span *ngIf="calcularPrecioTotal(order) >= 1000">Gratis</span>
-              <span *ngIf="calcularPrecioTotal(order) < 1000">$100</span>
+              <span *ngIf="calcularPrecioTotal(order) < 1000">$50</span>
             </h2>  
             <div class="total-section">
               <p class="total-price" *ngIf="calcularPrecioTotal(order) >= 1000">
                 Precio Total: <span class="precio">${{ calcularPrecioTotal(order) }}</span>
               </p>
               <p class="total-price" *ngIf="calcularPrecioTotal(order) < 1000">
-                Precio Total: <span class="precio">${{ calcularPrecioTotal(order) + 100 }}</span>
+                Precio Total: <span class="precio">${{ calcularPrecioTotal(order) + 50 }}</span>
               </p>
             </div>
           </div>

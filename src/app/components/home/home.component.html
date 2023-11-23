@@ -42,7 +42,7 @@
       <ion-img [src]="promo.img"></ion-img>
     </ion-thumbnail>
     <div style="display: flex; justify-content: end; padding: 5px;" *ngIf="user && user.role=='admin'">
-      <ion-icon  (click)="promo.promotionId&& confirmDeletePromotion(promo.promotionId)" name="trash-outline" style="font-size: 30px;"></ion-icon>
+      <ion-icon  (click)="promo.promotionId&& confirmDeletePromotion(promo.promotionId, promo.imageName)" name="trash-outline" style="font-size: 30px;"></ion-icon>
     </div>
   </div>
 

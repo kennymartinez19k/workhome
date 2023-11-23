@@ -3,6 +3,7 @@ import { Firestore, collection, addDoc, setDoc, doc, query, getDocs, deleteDoc }
 import { LoadingController } from '@ionic/angular';
 import { Promotion } from '../interfaces/promotion';
 import { Observable, map, from, Subject } from 'rxjs'
+import { Storage, deleteObject, ref } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { Observable, map, from, Subject } from 'rxjs'
 export class PromotionService {
   private _refresh$ = new Subject<void>()
 
-  constructor(private firestore: Firestore, private loading: LoadingController) { }
+  constructor(private firestore: Firestore, private loading: LoadingController,
+    private storage: Storage) { }
 
   get refresh$() {
     return this._refresh$
@@ -48,10 +50,14 @@ export class PromotionService {
     );
   }
 
-  async deletePromotion(promotionId: string | undefined): Promise<void> {
-    if(promotionId) {
+  async deletePromotion(promotionId: string | undefined, imageName: string | undefined): Promise<void> {
+    if(promotionId && imageName) {
       const productRef = doc(this.firestore, 'promocion', promotionId)
       await deleteDoc(productRef)
+
+      const storageRef = ref(this.storage, 'imagenes/' + imageName)
+      await deleteObject(storageRef)
+      console.log('eliminado con exito:',storageRef.name)
     } else {
       console.log('ERROR al eliminar Promocion')
     }

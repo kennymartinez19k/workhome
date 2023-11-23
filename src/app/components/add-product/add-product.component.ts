@@ -34,125 +34,6 @@ export class AddProductComponent implements OnInit {
     });
   }
 
-// async addProduct() {
-
-//         const product = {
-//           nombre: this.form.value.nombre.toLowerCase(),
-//           precio: this.form.value.precio,
-//           stock: this.form.value.stock,
-//           img: this.imgUrl,
-//           qty: 0,
-//           categoryId: this.form.value.categoryId,
-//           productId: ''
-//         }
-
-//         if (this.imgUrl) {
-
-//           this.productService.addProduct(product).then( (productId) => {
-//             console.log(`El producto se ha subido con el id: ${productId}`)
-//             product.productId = productId
-//             this.productService.updateProduct(productId, product).then(() =>{
-//               console.log('producto actualizado en firebase')
-//             })
-//             .then(()=>{
-//             this.router.navigate(['home'])
-//             })
-//           })
-//         } else {
-//           console.log('No se pudo almacenar la imagen en Firestore.');
-//         }
-//   }
-
-
-// async takePhoto() {
-//     const loading = await this.loading.create({
-//       message: 'Subiendo imagen...'
-//     });
-
-//     try {
-//       const input = document.createElement('input');
-//       input.type = 'file';
-//       input.accept = 'image/*';
-
-//       // Verificar si el dispositivo es móvil
-//       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-//       if (!isMobile) {
-//         // Para dispositivos móviles, usar Camera.getPhoto con Prompt
-//         const image = await Camera.getPhoto({
-//           resultType: CameraResultType.DataUrl,
-//           source: CameraSource.Prompt,
-//         });
-
-//         if (image && image.dataUrl) {
-//           this.selectedFile = this.dataURLtoFile(
-//             image.dataUrl,
-//             `Photo_${new Date().getTime()}` // Nombre del archivo
-//           );
-//           await loading.present();
-
-//           // Subir la imagen a Firebase Storage
-//           const path = 'imagenes/' + this.selectedFile.name;
-//           const storageRef = ref(this.storage, path);
-//           const uploadTask = uploadBytes(storageRef, this.selectedFile);
-//           await uploadTask;
-
-//           // Obtener la URL de descarga
-//           const downloadURL = await getDownloadURL(storageRef);
-//           this.imgUrl = downloadURL;
-//           this.imgName = this.selectedFile.name;
-
-//           // Almacenar la URL de descarga en Firestore
-//           const docRef = await addDoc(collection(this.firestore, 'imagenes'), {
-//             url: this.imgUrl,
-//             timestamp: new Date(),
-//           });
-//           console.log('Imagen almacenada en Firestore con ID:', docRef.id);
-//         }
-//       } else {
-//         // Para dispositivos de escritorio, usar input file
-//         // Simular el clic en el input file
-//         input.click();
-
-//         // Esperar a que el usuario seleccione un archivo
-//         const files = await new Promise<FileList | null>((resolve) => {
-//           input.addEventListener('change', (event) => {
-//             const files = (event.target as HTMLInputElement).files;
-//             resolve(files);
-//           });
-//         });
-
-//         if (files && files.length > 0) {
-//           const selectedFile = files[0];
-
-//           await loading.present();
-
-//           // Subir la imagen a Firebase Storage
-//           const path = 'imagenes/' + selectedFile.name;
-//           const storageRef = ref(this.storage, path);
-//           const uploadTask = uploadBytes(storageRef, selectedFile);
-//           await uploadTask;
-
-//           // Obtener la URL de descarga
-//           const downloadURL = await getDownloadURL(storageRef);
-//           this.imgUrl = downloadURL;
-//           this.imgName = selectedFile.name;
-
-//           // Almacenar la URL de descarga en Firestore
-//           const docRef = await addDoc(collection(this.firestore, 'imagenes'), {
-//             url: this.imgUrl,
-//             timestamp: new Date(),
-//           });
-//           console.log('Imagen almacenada en Firestore con ID:', docRef.id);
-//         }
-//       }
-
-//     } catch (error) {
-//       console.error('Error al seleccionar la imagen:', error);
-//     } finally {
-//       await loading.dismiss();
-//     }
-//   }
 
 async addProduct() {
   if (this.areAllFieldsFilled() && this.imgUrlTemp !== null) {
@@ -183,6 +64,7 @@ async addProduct() {
         precio: this.form.value.precio,
         stock: this.form.value.stock,
         img: downloadURL, // Utilizar la URL de descarga
+        imageName: storageRef.name,
         qty: 0,
         categoryId: this.form.value.categoryId,
         productId: ''
@@ -227,7 +109,7 @@ async takePhoto() {
     // Verificar si el dispositivo es móvil
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    if (isMobile) {
+    if (!isMobile) {
       // Para dispositivos móviles, usar Camera.getPhoto con Prompt
       const image = await Camera.getPhoto({
         resultType: CameraResultType.DataUrl,

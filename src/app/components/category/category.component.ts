@@ -71,9 +71,9 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  deleteProduct(productId: string): void {
+  deleteProduct(productId: string, imageName: string): void {
     console.log(productId)
-    this.productService.deleteProduct(productId).then(() => {
+    this.productService.deleteProduct(productId, imageName).then(() => {
       this.products = this.products.filter(product => product.productId !== productId)
       this.cdRef.detectChanges();
     })
@@ -82,7 +82,7 @@ export class CategoryComponent implements OnInit {
       })
   }
 
-  async confirmDeleteProduct(productId: string) {
+  async confirmDeleteProduct(productId: string, imageName: string) {
     const alert = await this.alert.create({
       header: 'Eliminar el producto',
       message: '¿Está seguro de eliminar el producto?',
@@ -95,7 +95,7 @@ export class CategoryComponent implements OnInit {
       {
         text: 'Eliminar',
         handler: () => {
-          this.deleteProduct(productId)
+          this.deleteProduct(productId, imageName)
         }
       }]
     })

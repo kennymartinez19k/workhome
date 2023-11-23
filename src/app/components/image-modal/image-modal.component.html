@@ -1,0 +1,10 @@
+<div class="container">
+    <swiper [config]="config">
+        <ng-template swiperSlide>
+            <div class="swiper-zoom-container">
+                <img src="{{imageUrl}}" alt="img">
+            </div>
+        </ng-template>
+    </swiper>
+    <ion-button (click)="closeModal()">CERRAR</ion-button>
+</div>

@@ -4,10 +4,12 @@ $extraBold: 800;
 
 ion-toolbar {
     background: #02B761;
+
     ion-back-button {
         color: white;
         position: absolute;
     }
+
     ion-title {
         font-family: $fuenteDeLetra;
         font-weight: $extraBold;
@@ -16,14 +18,17 @@ ion-toolbar {
     }
 }
 
+
 .producto {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+
     .product-img {
         width: 300px;
         height: 230px;
+
         img {
             width: 100%;
             height: 100%;
@@ -31,7 +36,8 @@ ion-toolbar {
             border-radius: 20px !important;
         }
     }
-    h2{
+
+    h2 {
         font-family: $fuenteDeLetra;
         font-weight: $extraBold;
     }
@@ -42,11 +48,12 @@ ion-toolbar {
     display: flex;
     justify-content: space-between;
     font-family: $fuenteDeLetra;
+
     .precio {
-        h2{
+        h2 {
             font-weight: $extraBold;
             color: #02B761;
-            
+
         }
     }
 
@@ -64,31 +71,73 @@ button {
     font-size: 25px;
     margin: 30px auto;
     align-items: center;
-    ion-icon{
+
+    ion-icon {
         font-size: 25px;
         padding-left: 5px;
     }
 }
 
+.add-cart {
+    padding-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-/* Agrega estilos al mensaje de éxito */
-.success-message {
-    position: fixed;
-    top: 350px;
-    left: 100px;
-    background-color: #02B761;
-    color: white;
-    border-radius: 5px;
-    padding: 10px;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    font-family: $fuenteDeLetra;
-  }
-  
-  /* Agrega estilos cuando el mensaje está visible */
-  .success-message.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
+.field-qty {
+    width: 45px;
+    border: 0px;
+    border-bottom: 1px solid #b9b6b6;
+    text-align: center;
+}
+
+.field-qty:focus-visible {
+    border: 0px;
+    outline: #fff;
+    border-bottom: 1px solid #b9b6b6;
+
+}
+
+.cart {
+    color: green;
+    font-size: 35px;
+}
+
+.qty-icon {
+    font-size: 25px;
+}
+
+.qty-field {
+    margin: 0px 15px;
+}
+
+.client-cnt {
+    ion-icon {
+        font-size: 35px;
+    }
+}
+
+.floating {
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    font-size: 35px;
+}
+
+@keyframes floating {
+    from {
+        transform: translate(0, 0px);
+    }
+
+    65% {
+        transform: translate(5px, 0px);
+        color: green;
+    }
+
+    to {
+        transform: translate(0, -0px);
+    }
+}

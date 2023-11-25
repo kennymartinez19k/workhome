@@ -1,87 +1,63 @@
-
-$fuenteDeLetra: 'Poppins', sans-serif;
-$semiBold: 600;
-$extraBold: 800;
-
-
 ion-toolbar {
-    background: #02B761;
-    ion-back-button {
-        color: white;
-        position: absolute;
-    }
-    ion-title {
-        font-family: $fuenteDeLetra;
-        font-weight: $extraBold;
-        color: white;
-        text-align: center;
-    }
+    background: #02b761;
 }
-
-
-.field-qty{
+ion-toolbar ion-back-button {
+    color: white;
+    position: absolute;
+}
+ion-toolbar ion-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    color: white;
+    text-align: center;
+}
+.field-qty {
     width: 30%;
     border: 0px;
     border-bottom: 1px solid #b9b6b6;
     text-align: center;
 }
-
-.field-qty:focus-visible{
+.field-qty:focus-visible {
     border: 0px;
     outline: #fff;
     border-bottom: 1px solid #b9b6b6;
     font-size: 14px;
-
 }
-.ion-card-content{
-    display: flex;
-    justify-content: space-between;
-}
-
-.cart{
-    color: green;
-    font-size: 28px;
-}
-.qty-icon{
+.qty-icon {
     font-size: 20px;
 }
-.title-card{
+.title-card {
     font-size: 16px;
     font-weight: 700;
 }
-.subtitle-card{
+.subtitle-card {
     font-size: 14px;
     color: green;
 }
-ion-thumbnail{
+ion-thumbnail {
     width: 100px;
     height: 70px;
-    img {
-        border-radius: 10px;
-    }
 }
-ion-item{
+ion-thumbnail img {
+    border-radius: 10px;
+}
+ion-item {
     margin-bottom: 10px;
 }
-.icon-close{
-    font-size:24px;
-    color: rgb(160, 0, 0);
+.icon-close {
+    font-size: 24px;
+    color: #a00000;
 }
-.icon-location{
-    font-size: 30px;
-}
-
 .price {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-
 .button-location {
     margin: 10px;
     font-family: inherit;
     font-size: 18px;
-    background: linear-gradient(to bottom, #02B761 0%, #4dc7d9 100%);
+    background: linear-gradient(to bottom, #02b761 0%, #4dc7d9 100%);
     color: white;
     padding: 0.8em 1.2em;
     display: flex;
@@ -91,33 +67,28 @@ ion-item{
     border-radius: 25px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s;
-  }
-  
+}
 .button-location:hover {
     transform: translateY(-3px);
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-  }
-  
+}
 .button-location:active {
     transform: scale(0.95);
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
+}
 .button-location span {
     display: block;
     margin-left: 0.4em;
     transition: all 0.3s;
-    font-family: $fuenteDeLetra;
-    font-weight: $semiBold;
-  }
-  
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
 .button-location svg {
     width: 18px;
     height: 18px;
     fill: white;
     transition: all 0.3s;
-  }
-  
+}
 .button-location .svg-wrapper {
     display: flex;
     align-items: center;
@@ -128,14 +99,10 @@ ion-item{
     background-color: rgba(255, 255, 255, 0.2);
     margin-right: 0.5em;
     transition: all 0.3s;
-  }
-  
+}
 .button-location:hover .svg-wrapper {
     background-color: rgba(255, 255, 255, 0.5);
-  }
-  
+}
 .button-location:hover svg {
     transform: rotate(45deg);
-  }
-  
-  
+}

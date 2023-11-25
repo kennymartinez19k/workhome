@@ -1,50 +1,33 @@
-$fuenteDeLetra: 'Poppins', sans-serif;
-$semiBold: 600;
-$extraBold: 800;
-
-ion-toolbar {
-    background: #02B761;
-    ion-back-button {
-        color: white;
-        position: absolute;
-    }
-    ion-title {
-        font-family: $fuenteDeLetra;
-        font-weight: $extraBold;
-        color: white;
-        text-align: center;
-    }
+ion-content {
+    font-family: 'Poppins', sans-serif;
 }
 
-ion-content {
-    font-family: $fuenteDeLetra;
-    h1{
-        font-weight: $extraBold;
-        font-size: 30px;
-    }
-    p{
-        color: gray;
-    }
-    ion-label {
-        font-weight: $extraBold;
-    }
-    button {
-        background: #02B761;
-        padding: 18px;
-        width: 95%;
-        border-radius: 30px;
-        display: flex;
-        justify-content: center;
-        color: white;
-        font-weight: $extraBold;
-        font-size: 15px;
-        margin: 30px auto;
-    }
-    .exists{
-        text-align: center;
-        span {
-            color: #02B761;
-            font-weight: $extraBold;
-        }
-    }
+ion-content p {
+    color: gray;
+}
+
+ion-content ion-label {
+    font-weight: 800;
+}
+
+ion-content button {
+    background: #02b761;
+    padding: 18px;
+    width: 95%;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: 15px;
+    margin: 30px auto;
+}
+
+ion-content .exists {
+    text-align: center;
+}
+
+ion-content .exists span {
+    color: #02b761;
+    font-weight: 800;
 }

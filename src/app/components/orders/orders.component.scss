@@ -1,44 +1,41 @@
-
-$fuenteDeLetra: 'Poppins', sans-serif;
-$semiBold: 600;
-$extraBold: 800;
-
 * {
-  font-family: $fuenteDeLetra;
+  font-family: 'Poppins', sans-serif;
 }
 
 ion-toolbar {
-    background: #02B761;
-    ion-back-button {
-        color: white;
-        position: absolute;
-    }
-    ion-title {
-        font-family: $fuenteDeLetra;
-        font-weight: $extraBold;
-        color: white;
-        text-align: center;
-    }
+  background: #02b761;
+}
+
+ion-toolbar ion-back-button {
+  color: white;
+  position: absolute;
+}
+
+ion-toolbar ion-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  color: white;
+  text-align: center;
 }
 
 span {
-  font-weight: $extraBold;
-  
+  font-weight: 800;
 }
 
 h2 {
-  font-weight: $semiBold !important;
+  font-weight: 600 !important;
   font-size: 17px;
 }
 
 .total-price span {
-  color: #02B761;
+  color: #02b761;
 }
 
 .card-content {
   display: flex;
   flex-direction: column;
-  align-items: stretch; /* Ajusta el contenido alineado a lo largo del eje transversal */
+  align-items: stretch;
+  /* Ajusta el contenido alineado a lo largo del eje transversal */
 }
 
 .img {
@@ -72,34 +69,6 @@ ion-img {
   padding-left: 10px;
 }
 
-// .price-buttons {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   margin-top: 10px;
-// }
-
-// ion-button {
-//   width: 20%;
-//   padding-right: 5px;
-//   ion-icon {
-//     font-size: 24px;
-//   }
-// }
-
-// .sent-order {
-//   --border-color: #02B761;
-//   --background: rgba(2, 183, 97, 0.1);
-//   --color: #02B761;
-// }
-
-// .location {
-//   --border-color: rgb(0, 157, 255);
-//   --background: rgba(0, 157, 255, 0.1);
-//   --color: rgb(0, 157, 255);
-// }
-
-
 .price-buttons {
   display: flex;
   flex-direction: column;
@@ -110,32 +79,35 @@ ion-img {
   display: flex;
   gap: 5px;
   flex-direction: column;
-  width: 100%; /* Ajusta el ancho según sea necesario */
+  width: 100%;
+  /* Ajusta el ancho según sea necesario */
   padding: 10px 20px;
-  ion-button {
-    display: block;
-  }
+}
+
+.button-container ion-button {
+  display: block;
 }
 
 .price {
   text-align: center;
-  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+  margin-top: 20px;
+  /* Ajusta el margen superior según sea necesario */
   padding-bottom: 20px;
 }
 
 .location {
-  --border-color: rgb(0, 157, 255);
+  --border-color: #009dff;
   --background: rgba(0, 157, 255, 0.1);
-  --color: rgb(0, 157, 255);
+  --color: #009dff;
 }
 
 .whatsapp {
-  --border-color: rgb(0, 157, 255);
+  --border-color: #009dff;
   --background: rgba(0, 157, 255, 0.1);
-  --color: #02B761;
+  --color: #02b761;
 }
 
 .no-order {
-  font-family: $fuenteDeLetra;
+  font-family: 'Poppins', sans-serif;
   text-align: center;
 }

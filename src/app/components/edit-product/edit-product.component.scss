@@ -1,51 +1,36 @@
-$fuenteDeLetra: 'Poppins', sans-serif;
-$semiBold: 600;
-$extraBold: 800;
-
 ion-toolbar {
-    background: #02B761;
-    ion-back-button {
-        color: white;
-        position: absolute;
-    }
-    ion-title {
-        font-family: $fuenteDeLetra;
-        font-weight: $extraBold;
-        color: white;
-        text-align: center;
-    }
+    background: #02b761;
 }
 
+ion-toolbar ion-back-button {
+    color: white;
+    position: absolute;
+}
 
+ion-toolbar ion-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    color: white;
+    text-align: center;
+}
 
 ion-content {
-    font-family: $fuenteDeLetra;
-    h1{
-        font-weight: $extraBold;
-        font-size: 30px;
-    }
-    p{
-        color: gray;
-    }
-    ion-label {
-        font-weight: $extraBold;
-    }
-    button {
-        background: #02B761;
-        padding: 18px;
-        width: 95%;
-        border-radius: 30px;
-        display: flex;
-        justify-content: center;
-        color: white;
-        font-weight: $extraBold;
-        font-size: 15px;
-        margin: 30px auto;
-    }
+    font-family: 'Poppins', sans-serif;
 }
 
-.icon-paste{
-    width: 30px;
-    height: 30px;
-    margin-left: 5px;
+ion-content ion-label {
+    font-weight: 800;
+}
+
+ion-content button {
+    background: #02b761;
+    padding: 18px;
+    width: 95%;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: 15px;
+    margin: 30px auto;
 }

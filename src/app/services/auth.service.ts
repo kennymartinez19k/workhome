@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
-  signOut, sendPasswordResetEmail, GoogleAuthProvider, getAuth, signInWithCredential} from '@angular/fire/auth';
-import { LoadingController, AlertController } from '@ionic/angular';
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
-// import { GoogleAuthProvider, getAuth, signInWithCredential } from 'firebase/auth';
+import {
+  Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  signOut, sendPasswordResetEmail
+} from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
-import { Platform } from '@ionic/angular';
-import {initializeApp} from 'firebase/app'
-import { StorageService } from './storage.service';
-import { Router } from '@angular/router';
+import { initializeApp } from 'firebase/app'
 @Injectable({
   providedIn: 'root'
 })
@@ -16,71 +12,18 @@ export class AuthService {
 
   isWeb = false
   firebase: any
-  constructor(private auth: Auth, private loading: LoadingController, private alert: AlertController,
-    private plataform: Platform, private storage: StorageService, private router: Router) {
-      this.firebase = initializeApp(environment.firebase)
-      GoogleAuth.initialize()
-    }
+  constructor(private auth: Auth) {
+    this.firebase = initializeApp(environment.firebase)
+  }
 
-  async register({email, password}: any) {
+  async register({ email, password }: any) {
     await createUserWithEmailAndPassword(this.auth, email, password)
   }
 
-  // async login({ email, password }: any) {
-  //   const loading = await this.loading.create({
-  //     message: 'Iniciando sesión...',
-  //   });
-  
-  //   await loading.present();
-  
-  //   try {
-  //     await signInWithEmailAndPassword(this.auth, email, password);
-
-  //   } catch (error) {
-  //     console.error(error);
-  
-  //     await loading.dismiss();
-  
-  //     const alert = await this.alert.create({
-  //       header: 'Error',
-  //       message: 'Las credenciales son incorrectas. Por favor, inténtalo de nuevo.',
-  //       buttons: ['OK'],
-  //     });
-  
-  //     await alert.present();
-  //   } 
-  // }
-
   async login({ email, password }: any) {
-      await signInWithEmailAndPassword(this.auth, email, password);
+    await signInWithEmailAndPassword(this.auth, email, password);
   }
 
-async loginWithGoogle() {
-      const user = await GoogleAuth.signIn();
-      if (user) {
-        const credential = GoogleAuthProvider.credential(user.authentication.idToken);
-        await signInWithCredential(getAuth(this.firebase), credential);
-        const userData = { username: user.name, email: user.email, role: 'usuario' };
-        await this.storage.set("usuario", userData);
-        this.router.navigate(['/home']).then(()=>{})
-      } else {
-        console.log('Inicio de sesión con Google cancelado o fallido');
-      }
-    }
-
-
-  // async loginWithGoogle() {
-  //   try {
-  //     const user = await GoogleAuth.signIn()
-  //     if(user) {
-  //       signInWithCredential(getAuth(this.firebase), GoogleAuthProvider.credential(user.authentication.idToken))
-  //       const userData = {username: user.givenName, email: user.email, role: 'usuario'}
-  //       await this.storage.set("usuario", userData)
-  //     }
-  //   }catch(error) {
-  //     console.log(error)
-  //   }
-  // }
 
   logout() {
     return signOut(this.auth);
@@ -95,18 +38,18 @@ async loginWithGoogle() {
     }
   }
 
-  getCurrentUser(){
+  getCurrentUser() {
     return this.auth.currentUser;
   }
 
- async getUserUid() {
-  const user = await this.auth.currentUser
-  if(user) {
-    return user.uid
-  }else {
-    return null
+  async getUserUid() {
+    const user = await this.auth.currentUser
+    if (user) {
+      return user.uid
+    } else {
+      return null
+    }
   }
- }
- 
+
 
 }

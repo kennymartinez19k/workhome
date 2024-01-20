@@ -7,9 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 //MODULOS  DE FIREBASE
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { provideStorage,getStorage } from '@angular/fire/storage';
+import {
+  provideAuth,
+  getAuth,
+  initializeAuth,
+  indexedDBLocalPersistence,
+} from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 
 /////////////////////////////////////////////////////////////////////////////777
@@ -35,6 +40,7 @@ import { CartSuccessComponent } from './components/cart-success/cart-success.com
 import { AddPromotionComponent } from './components/add-promotion/add-promotion.component';
 import { ModalPromotionsComponent } from './components/modal-promotions/modal-promotions.component';
 import { ImageModalComponent } from './components/image-modal/image-modal.component';
+import { Capacitor } from '@capacitor/core';
 
 // import { AgmCoreModule } from '@agm/core';
 
@@ -62,12 +68,13 @@ import { ImageModalComponent } from './components/image-modal/image-modal.compon
   ],
   imports: [
     BrowserModule,
+    IonicModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    IonicModule.forRoot({
-      innerHTMLTemplatesEnabled: true
-    }),
+    // IonicModule.forRoot({
+    //   innerHTMLTemplatesEnabled: true,
+    // }),
     // IonicStorageModule.forRoot(),
     ReactiveFormsModule,
     SwiperModule,
@@ -76,16 +83,21 @@ import { ImageModalComponent } from './components/image-modal/image-modal.compon
     //   // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
     //   apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'
     // }),
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirebaseApp(() => {
+      const app = initializeApp(environment.firebase);
+      if (Capacitor.isNativePlatform()) {
+        initializeAuth(app, {
+          persistence: indexedDBLocalPersistence,
+        });
+      }
+      return app;
+    }),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
   ],
-  providers: [
-    Storage
-  ],
+  providers: [Storage],
   bootstrap: [AppComponent],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
-
+export class AppModule {}

@@ -1,5 +1,5 @@
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 ion-toolbar {
@@ -8,14 +8,16 @@ ion-toolbar {
 
 ion-toolbar ion-back-button {
   color: white;
-  position: absolute;
+  // position: absolute;
+  margin-top: 2rem;
 }
 
 ion-toolbar ion-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 800;
   color: white;
   text-align: center;
+  margin-top: 1rem;
 }
 
 /* Estilo para los detalles del producto */

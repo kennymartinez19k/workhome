@@ -1,33 +1,37 @@
 ion-footer ion-toolbar {
-	 background: #02b761;
+  background: #02b761;
 }
- ion-footer .footer {
-	 display: flex;
-	 justify-content: space-evenly;
-	 align-items: center;
+ion-footer .footer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
- ion-footer .footer .home, ion-footer .footer .carrito, ion-footer .footer .perfil {
-	 font-family: 'Poppins', sans-serif;
-	 display: flex;
-	 align-items: center;
-	 flex-direction: column;
-	 line-height: 0;
-	 margin-top: 0.5em;
+ion-footer .footer .home,
+ion-footer .footer .carrito,
+ion-footer .footer .perfil {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  line-height: 0;
+  margin-top: 0.5em;
 }
- ion-footer .footer .home ion-icon, ion-footer .footer .carrito ion-icon, ion-footer .footer .perfil ion-icon {
-	 font-size: 25px;
+ion-footer .footer .home ion-icon,
+ion-footer .footer .carrito ion-icon,
+ion-footer .footer .perfil ion-icon {
+  font-size: 25px;
 }
- .notification-mode {
-	 position: absolute;
-	 right: -2px;
-	 color: #fff;
-	 background: red;
-	 padding: 7px;
-	 border-radius: 50px;
-	 font-size: 11px;
-	 top: -4px;
+.notification-mode {
+  // position: absolute;
+  right: -2px;
+  color: #fff;
+  background: red;
+  padding: 7px;
+  border-radius: 50px;
+  font-size: 11px;
+  top: -4px;
 }
 
 .active {
-    color: white;
+  color: white;
 }

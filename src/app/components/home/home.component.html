@@ -1,28 +1,31 @@
 <ion-content class="container ion-padding">
-
-  <ion-fab slot="fixed" vertical="top" horizontal="start" *ngIf="user && user.role=='admin'">
+  <ion-fab
+    slot="fixed"
+    vertical="top"
+    horizontal="start"
+    *ngIf="user && user.role == 'admin'"
+  >
     <ion-fab-button color="success">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="end">
-      <ion-button routerLink="/add-promotion">
-        PROMO
-      </ion-button>
-      <ion-button routerLink="/add-product">
-        PRODUCTO
-      </ion-button>
+      <ion-button routerLink="/add-promotion"> PROMO </ion-button>
+      <ion-button routerLink="/add-product"> PRODUCTO </ion-button>
     </ion-fab-list>
   </ion-fab>
 
-
-
   <div class="main">
-
     <div class="header">
-      <ion-img src="assets/img/bodega-la-fe.png" alt="logo bodega la fe"></ion-img>
+      <ion-img
+        src="assets/img/bodega-la-fe.png"
+        style="margin-top: 1rem"
+        alt="logo bodega la fe"
+      ></ion-img>
       <div class="usuario" *ngIf="user">
-        <h1>¡Hola {{user.username}}!</h1>
-        <em *ngIf="user.role == 'usuario'">¡Gracias por comprar con nosotros!</em>
+        <h1>¡Hola {{ user.username }}!</h1>
+        <em *ngIf="user.role == 'usuario'"
+          >¡Gracias por comprar con nosotros!</em
+        >
       </div>
       <div class="usuario" *ngIf="!user">
         <h1>¡Hola Invitado!</h1>
@@ -30,130 +33,147 @@
       </div>
     </div>
 
-    <div class="busqueda ion-padding" style="display: flex; align-items: center;">
-      <ion-searchbar animated="true" placeholder="Buscar producto..." [(ngModel)]="searchTerm"></ion-searchbar>
-      <ion-icon name="search-outline" style="font-size: 30px;"(click)="searchProducts()"></ion-icon>
+    <div
+      class="busqueda ion-padding"
+      style="display: flex; align-items: center"
+    >
+      <ion-searchbar
+        animated="true"
+        placeholder="Buscar producto..."
+        [(ngModel)]="searchTerm"
+      ></ion-searchbar>
+      <ion-icon
+        name="search-outline"
+        style="font-size: 30px"
+        (click)="searchProducts()"
+      ></ion-icon>
     </div>
-
   </div>
 
   <div class="promotion" *ngFor="let promo of promotion">
     <ion-thumbnail>
       <ion-img [src]="promo.img"></ion-img>
     </ion-thumbnail>
-    <div style="display: flex; justify-content: end; padding: 5px;" *ngIf="user && user.role=='admin'">
-      <ion-icon  (click)="promo.promotionId&& confirmDeletePromotion(promo.promotionId, promo.imageName)" name="trash-outline" style="font-size: 30px;"></ion-icon>
+    <div
+      style="display: flex; justify-content: end; padding: 5px"
+      *ngIf="user && user.role == 'admin'"
+    >
+      <ion-icon
+        (click)="
+          promo.promotionId &&
+            confirmDeletePromotion(promo.promotionId, promo.imageName)
+        "
+        name="trash-outline"
+        style="font-size: 30px"
+      ></ion-icon>
     </div>
   </div>
 
   <div class="categories-container">
-
     <div class="category" [routerLink]="['/category', 'Ofertas']">
-      <img src="/assets/img/ofertas.webp" alt="Categoría">
+      <img src="/assets/img/ofertas.webp" alt="Categoría" />
       <p>Ofertas</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Alimentos']">
-      <img src="/assets/img/alimentos-frescos.png" alt="Categoría">
+      <img src="/assets/img/alimentos-frescos.png" alt="Categoría" />
       <p>Alimentos</p>
     </div>
-    
+
     <div class="category" [routerLink]="['/category', 'Frutas y Vegetales']">
-      <img src="/assets/img/vegetales.webp" alt="Categoría">
+      <img src="/assets/img/vegetales.webp" alt="Categoría" />
       <p>Frutas y Vegetales</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Panaderia']">
-      <img src="/assets/img/pan.webp" alt="Categoría">
+      <img src="/assets/img/pan.webp" alt="Categoría" />
       <p>Panaderia</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Bebidas']">
-      <img src="/assets/img/bebida.png" alt="Categoría">
+      <img src="/assets/img/bebida.png" alt="Categoría" />
       <p>Bebidas</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Cerveza y Romo']">
-      <img src="/assets/img/cerveza.webp" alt="Categoría">
+      <img src="/assets/img/cerveza.webp" alt="Categoría" />
       <p>Cervezas y Romos</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Embutidos']">
-      <img src="/assets/img/embutidos.webp" alt="Categoría">
+      <img src="/assets/img/embutidos.webp" alt="Categoría" />
       <p>Embutidos</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Enlatados']">
-      <img src="/assets/img/enlatados.png" alt="Categoría">
+      <img src="/assets/img/enlatados.png" alt="Categoría" />
       <p>Enlatados</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Pastas']">
-      <img src="/assets/img/pastas.webp" alt="Categoría">
+      <img src="/assets/img/pastas.webp" alt="Categoría" />
       <p>Pastas</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Especias']">
-      <img src="/assets/img/especias.webp" alt="Categoría">
+      <img src="/assets/img/especias.webp" alt="Categoría" />
       <p>Especias</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Papitas']">
-      <img src="/assets/img/papita.png" alt="Categoría">
+      <img src="/assets/img/papita.png" alt="Categoría" />
       <p>Papitas</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Dulces']">
-      <img src="/assets/img/dulces.webp" alt="Categoría">
+      <img src="/assets/img/dulces.webp" alt="Categoría" />
       <p>Dulces</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Higiene']">
-      <img src="/assets/img/higiene.png" alt="Categoría">
+      <img src="/assets/img/higiene.png" alt="Categoría" />
       <p>Higiene</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Farmacos']">
-      <img src="/assets/img/farmacos.png" alt="Categoría">
+      <img src="/assets/img/farmacos.png" alt="Categoría" />
       <p>Farmacos</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Deshechables']">
-      <img src="/assets/img/deshechables.webp" alt="Categoría">
+      <img src="/assets/img/deshechables.webp" alt="Categoría" />
       <p>Deshechables</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Electronica']">
-      <img src="/assets/img/electronica.webp" alt="Categoría">
+      <img src="/assets/img/electronica.webp" alt="Categoría" />
       <p>Electrónica</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Ferreteria']">
-      <img src="/assets/img/ferreteria.webp" alt="Categoría">
+      <img src="/assets/img/ferreteria.webp" alt="Categoría" />
       <p>Ferretería</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Papeleria']">
-      <img src="/assets/img/papeleria.webp" alt="Categoría">
+      <img src="/assets/img/papeleria.webp" alt="Categoría" />
       <p>Papelería</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Cigarros']">
-      <img src="/assets/img/cigarros.webp" alt="Categoría">
+      <img src="/assets/img/cigarros.webp" alt="Categoría" />
       <p>Cigarros</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Viveres']">
-      <img src="/assets/img/viveres.webp" alt="Categoría">
+      <img src="/assets/img/viveres.webp" alt="Categoría" />
       <p>Viveres</p>
     </div>
 
     <div class="category" [routerLink]="['/category', 'Variedades']">
-      <img src="/assets/img/variedades.webp" alt="Categoría">
+      <img src="/assets/img/variedades.webp" alt="Categoría" />
       <p>Variedades</p>
     </div>
-
   </div>
-
 </ion-content>
 <app-footer-nav currentRoute="/" [qtyOrders]="cartItems"></app-footer-nav>

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {
   Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  signOut, sendPasswordResetEmail
+  signOut, sendPasswordResetEmail, deleteUser
 } from '@angular/fire/auth';
+import { Firestore, collection, getDocs, query, where, doc, deleteDoc } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { initializeApp } from 'firebase/app'
 @Injectable({
@@ -12,7 +13,7 @@ export class AuthService {
 
   isWeb = false
   firebase: any
-  constructor(private auth: Auth) {
+  constructor(private auth: Auth, private firestore: Firestore) {
     this.firebase = initializeApp(environment.firebase)
   }
 
@@ -51,5 +52,39 @@ export class AuthService {
     }
   }
 
+  async deleteAccount(): Promise<void> {
+    try {
+      const user = await this.auth.currentUser;
+
+      if (user) {
+
+        await this.deleteUserDocuments(user.uid);
+        await deleteUser(user);
+        console.log('Cuenta eliminada con éxito');
+      }
+    } catch (error) {
+      console.error('Error al eliminar la cuenta:', error);
+    }
+  }
+
+  private async deleteUserDocuments(uid: string): Promise<void> {
+    const collectionsToDelete = ['usuarios', 'carrito', 'pedidos'];
+
+    for (const collectionName of collectionsToDelete) {
+      const currentCollection = collection(this.firestore, collectionName);
+
+      try {
+        const q = query(currentCollection, where('uid', '==', uid));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach(async (doc) => {
+          await deleteDoc(doc.ref);
+          console.log(`Documento eliminado de ${collectionName}: ${doc.id}`);
+        });
+      } catch (error) {
+        console.error(`Error al eliminar documentos de ${collectionName} en Firestore:`, error);
+      }
+    }
+  }
 
 }

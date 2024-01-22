@@ -16,12 +16,12 @@ export class OrdersService {
     return this._refresh$
   }
 
-  async sentOrderToFirestore(userId: any, carritoItems: any[], location: any,
+  async sentOrderToFirestore(uid: any, carritoItems: any[], location: any,
     username: any, tel: number, whatsapp: any): Promise <void> {
     try {
       const ordersRef = collection(this.firestore, 'pedidos')
       const newOrder = {
-        userId: userId,
+        uid: uid,
         items: carritoItems,
         fecha: new Date().toLocaleDateString(),
         ubicacion: location,
@@ -37,7 +37,7 @@ export class OrdersService {
 
       //eliminar productos del carrito del usuario despues de ser enviados
       const cartRef = collection(this.firestore, 'carrito')
-      const q =  query(cartRef, where('userId', '==', userId))
+      const q =  query(cartRef, where('uid', '==', uid))
       const querySnap = await getDocs(q)
 
       querySnap.forEach(async (doc) => {

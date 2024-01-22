@@ -14,7 +14,7 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 export class HistoryOrdersComponent implements OnInit {
 
   orders: DocumentData[] = []
-  userId: any
+  uid: any
   user: any
   ordersAdmin: any[] = []
   productsSubscription: Subscription | undefined
@@ -24,9 +24,9 @@ export class HistoryOrdersComponent implements OnInit {
     private storage: StorageService, private cartService: ShoppingCartService){}
 
  async ngOnInit() {
-  this.userId = await this.auth.getUserUid()
+  this.uid = await this.auth.getUserUid()
 
-  this.cartItems = await this.cartService.getCartItems(this.userId)
+  this.cartItems = await this.cartService.getCartItems(this.uid)
   this.cdRef.detectChanges()
 
   this.user = await this.storage.get('usuario')
@@ -43,7 +43,7 @@ export class HistoryOrdersComponent implements OnInit {
   }
   
   const ordersRef = collection(this.firestore, 'pedidos')
-  const q = query(ordersRef, where('userId', '==', this.userId))
+  const q = query(ordersRef, where('uid', '==', this.uid))
   const querySnap = await getDocs(q)
 
   querySnap.forEach((doc) => {

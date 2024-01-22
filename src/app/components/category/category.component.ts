@@ -32,7 +32,7 @@ export class CategoryComponent implements OnInit {
 
   async ngOnInit() {
     this.user = await this.storage.get('usuario')
-    let userId = await this.auth.getUserUid()
+    let uid = await this.auth.getUserUid()
     this.cdRef.detectChanges()
 
     this.activatedRoute.paramMap.subscribe(params => {
@@ -40,12 +40,12 @@ export class CategoryComponent implements OnInit {
       this.loadProducts()
     })
 
-    this.cartItems = await this.cartService.getCartItems(userId)
+    this.cartItems = await this.cartService.getCartItems(uid)
 
     this.subscription = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd)
     ).subscribe(async () => {
-      this.cartItems = await this.cartService.getCartItems(userId)
+      this.cartItems = await this.cartService.getCartItems(uid)
     })
 
   }
@@ -103,7 +103,7 @@ export class CategoryComponent implements OnInit {
   }
 
   async addToCart(product: any) {
-    let userId = await this.auth.getUserUid()
+    let uid = await this.auth.getUserUid()
     console.log(product.qty)
     let pd = { ...product }
 
@@ -116,7 +116,7 @@ export class CategoryComponent implements OnInit {
       await this.cartService.addProductCart(pd)
       product.qty = 0
       this.showSuccessMsg = true
-      this.cartItems = await this.cartService.getCartItems(userId)
+      this.cartItems = await this.cartService.getCartItems(uid)
     } else {
       const alert = await this.alert.create({
         header: 'Debe iniciar sesión para poder comprar',

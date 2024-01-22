@@ -12,10 +12,10 @@ export class ShoppingCartService {
 
 async addProductCart(product: any): Promise<void> {
   console.log(product)
-  const userId = await this.authService.getUserUid()
+  const uid = await this.authService.getUserUid()
   try {
     const cartRef = collection(this.firestore, 'carrito');
-    const q = query(cartRef, where('userId', '==', userId), where('product.productId', '==', product.productId));
+    const q = query(cartRef, where('uid', '==', uid), where('product.productId', '==', product.productId));
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.size > 0) {
@@ -29,7 +29,7 @@ async addProductCart(product: any): Promise<void> {
     } else {
       // El producto no existe en el carrito, agrégalo
       const newCartItem: any = {
-        userId: userId,
+        uid: uid,
         product: product,
         qty: product.qty,
         orderId: ''
@@ -39,7 +39,7 @@ async addProductCart(product: any): Promise<void> {
       const orderId = orderRef.id;
       await updateDoc(orderRef, { orderId: orderId });
       console.log('Producto añadido al carrito con ID:', orderId);
-      let products = this.getCartItems(userId)
+      let products = this.getCartItems(uid)
       localStorage.setItem("cartItems", JSON.stringify(products))
     }
   } catch (error) {
@@ -48,9 +48,9 @@ async addProductCart(product: any): Promise<void> {
 }
 
 
-async getCartItems(userId: any): Promise<any[]> {
+async getCartItems(uid: any): Promise<any[]> {
   try {
-    const q = query(collection(this.firestore, 'carrito'), where('userId', '==', userId))
+    const q = query(collection(this.firestore, 'carrito'), where('uid', '==', uid))
     const querySnap = await getDocs(q)
     const cartItems: any[] = []
 

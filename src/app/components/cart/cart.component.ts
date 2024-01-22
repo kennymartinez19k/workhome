@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class CartComponent implements OnInit {
   cartItems: any[] = [];
-  userId: any
+  uid: any
   totalPrice: number = 0
   latitude: any
   longitude: any
@@ -30,8 +30,8 @@ export class CartComponent implements OnInit {
     private loading: LoadingController) { }
 
   async ngOnInit() {
-    this.userId = await this.auth.getUserUid()
-    this.cartItems = await this.cartService.getCartItems(this.userId)
+    this.uid = await this.auth.getUserUid()
+    this.cartItems = await this.cartService.getCartItems(this.uid)
     console.log(this.cartItems)
     this.calculateTotalPrice()
 
@@ -62,20 +62,20 @@ export class CartComponent implements OnInit {
 
   async saveOrder() {
 
-    const userId = await this.auth.getUserUid()
+    const uid = await this.auth.getUserUid()
     const userExists = await this.storage.get('usuario')
   
       const loading = await this.loading.create({
         message: 'Realizando pedido...'
       })
   
-      if (userId && userExists) {
+      if (uid && userExists) {
         const msgWelcome = `🤝Saludos ${userExists.username}, 💫Bienvenido a Bodega La FE, En Breve estaremos atendiendo su Pedido.✨Gracias por Preferirnos!!!🙂`
         const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${this.latitude},${this.longitude}`
         const whatsapp = `https://api.whatsapp.com/send?phone=+1${userExists.tel}&text=${msgWelcome}`
         await loading.present()
         try {
-          await this.orderService.sentOrderToFirestore(userId, this.cartItems, mapUrl,
+          await this.orderService.sentOrderToFirestore(uid, this.cartItems, mapUrl,
             userExists.username, userExists.tel, whatsapp).then(async () => {
               await loading.dismiss()
               this.router.navigate(['/cart-success'])

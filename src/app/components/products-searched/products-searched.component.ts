@@ -28,8 +28,8 @@ export class ProductsSearchedComponent implements OnInit {
 
   async ngOnInit() {
 
-    let userId = await this.auth.getUserUid()
-    this.cartItems = await this.cartService.getCartItems(userId)
+    let uid = await this.auth.getUserUid()
+    this.cartItems = await this.cartService.getCartItems(uid)
     
     this.cdRef.detectChanges()
 
@@ -43,13 +43,13 @@ export class ProductsSearchedComponent implements OnInit {
       filter((event) => event instanceof NavigationEnd)
     ).subscribe(async () => {
       this.user = await this.storage.get("usuario")
-      let userId = await this.auth.getUserUid()
-      this.cartItems = await this.cartService.getCartItems(userId)
+      let uid = await this.auth.getUserUid()
+      this.cartItems = await this.cartService.getCartItems(uid)
     })
   }
 
   async addToCart(product: any) {
-    let userId = await this.auth.getUserUid()
+    let uid = await this.auth.getUserUid()
     console.log(product.qty)
     let pd = { ...product }
 
@@ -62,7 +62,7 @@ export class ProductsSearchedComponent implements OnInit {
       await loading.present()
       await this.cartService.addProductCart(pd)
       product.qty = 0
-      this.cartItems = await this.cartService.getCartItems(userId)
+      this.cartItems = await this.cartService.getCartItems(uid)
     } else {
       const alert = await this.alert.create({
         header: 'Debe iniciar sesión para poder comprar',

@@ -26,6 +26,18 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+<string>Necesitamos acceder a tu ubicación para proporcionar servicios basados en la ubicación.</string>
+
+<key>NSCameraUsageDescription</key>
+<string>Necesitamos acceder a tu cámara para tomar fotos y videos.</string>
+
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Necesitamos acceder a tu biblioteca de fotos para seleccionar imágenes.</string>
+
+<key>NSPasteboardUsageDescription</key>
+<string>Necesitamos acceder al portapapeles para realizar ciertas operaciones.</string>
+
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

@@ -1,145 +1,147 @@
 * {
-    font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 ion-toolbar {
-    background: #02b761;
+  background: #02b761;
 }
 
 ion-toolbar ion-back-button {
-    color: white;
-    position: absolute;
+  color: white;
+  // position: absolute;
+  margin-top: 2rem;
 }
 
 ion-toolbar ion-title {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    color: white;
-    text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  color: white;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 .productos-populares {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .productos-populares .buttons-crud {
-    display: flex;
-    margin: auto;
-    gap: 30px;
+  display: flex;
+  margin: auto;
+  gap: 30px;
 }
 
 .productos-populares ion-row {
-    width: 50%;
+  width: 50%;
 }
 
 .productos-populares ion-row .product-card {
-    width: 200px;
-    min-height: 220px;
-    max-height: 290px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding-bottom: 10px;
+  width: 200px;
+  min-height: 220px;
+  max-height: 290px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 .productos-populares ion-row .product-card .image-container {
-    overflow: hidden;
-    width: 150px;
-    height: 110px;
-    border-radius: 10px;
+  overflow: hidden;
+  width: 150px;
+  height: 110px;
+  border-radius: 10px;
 }
 
 .productos-populares ion-row .product-card .image-container .product-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .productos-populares ion-row .product-card ion-card-content {
-    font-weight: 800;
+  font-weight: 800;
 }
 
 @media (min-width: 600px) {
-    .productos-populares ion-row {
-        width: 33%;
-    }
+  .productos-populares ion-row {
+    width: 33%;
+  }
 }
 
 .card-header {
-    padding: 0px 15px;
-    display: flex;
-    gap: 3px;
+  padding: 0px 15px;
+  display: flex;
+  gap: 3px;
 }
 
-.card-header>* {
-    margin: 0px;
+.card-header > * {
+  margin: 0px;
 }
 
 .title-card {
-    font-size: 16px;
-    font-weight: 700;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .subtitle-card {
-    font-size: 14px;
-    color: green;
+  font-size: 14px;
+  color: green;
 }
 
 .field-qty:focus-visible {
-    border: 0px;
-    outline: #fff;
-    border-bottom: 1px solid #b9b6b6;
+  border: 0px;
+  outline: #fff;
+  border-bottom: 1px solid #b9b6b6;
 }
 
 /* Agrega estilos al mensaje de éxito */
 /* Agrega estilos cuando el mensaje está visible */
 .qty-field {
-    margin: 0px 15px;
+  margin: 0px 15px;
 }
 
 .client-cnt ion-icon {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .floating {
-    animation-name: floating;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-    margin-left: 30px;
-    margin-top: 5px;
-    position: absolute;
-    bottom: 10px;
-    right: 5px;
+  animation-name: floating;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  margin-left: 30px;
+  margin-top: 5px;
+  // position: absolute;
+  bottom: 10px;
+  right: 5px;
 }
 
 @keyframes floating {
-    from {
-        transform: translate(0, 0px);
-    }
+  from {
+    transform: translate(0, 0px);
+  }
 
-    65% {
-        transform: translate(5px, 0px);
-        color: green;
-    }
+  65% {
+    transform: translate(5px, 0px);
+    color: green;
+  }
 
-    to {
-        transform: translate(0, 0px);
-    }
+  to {
+    transform: translate(0, 0px);
+  }
 }
 
 .no-stock img {
-    filter: grayscale(100%);
+  filter: grayscale(100%);
 }
 
 .no-stock-text {
-    width: 100%;
-    color: white;
-    padding: 5px;
-    background: red;
-    border-radius: 4px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
+  width: 100%;
+  color: white;
+  padding: 5px;
+  background: red;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
 }

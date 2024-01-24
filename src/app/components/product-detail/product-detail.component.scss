@@ -1,96 +1,98 @@
 ion-toolbar {
-    background: #02b761;
+  background: #02b761;
 }
 
 ion-toolbar ion-back-button {
-    color: white;
-    position: absolute;
+  color: white;
+  // position: absolute;
+  margin-top: 2rem;
 }
 
 ion-toolbar ion-title {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    color: white;
-    text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  color: white;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 .producto {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .producto .product-img {
-    width: 300px;
-    height: 230px;
+  width: 300px;
+  height: 230px;
 }
 
 .producto .product-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 20px !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px !important;
 }
 
 .producto h2 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
 }
 
 .precio-cant {
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Poppins', sans-serif;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Poppins", sans-serif;
 }
 
 .precio-cant .precio h2 {
-    font-weight: 800;
-    color: #02b761;
+  font-weight: 800;
+  color: #02b761;
 }
 
 .add-cart {
-    padding-top: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  padding-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .field-qty:focus-visible {
-    border: 0px;
-    outline: #fff;
-    border-bottom: 1px solid #b9b6b6;
+  border: 0px;
+  outline: #fff;
+  border-bottom: 1px solid #b9b6b6;
 }
 
 .qty-field {
-    margin: 0px 15px;
+  margin: 0px 15px;
 }
 
 .client-cnt ion-icon {
-    font-size: 35px;
+  font-size: 35px;
 }
 
 .floating {
-    animation-name: floating;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-    font-size: 35px;
+  animation-name: floating;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  font-size: 35px;
 }
 
 @keyframes floating {
-    from {
-        transform: translate(0, 0px);
-    }
+  from {
+    transform: translate(0, 0px);
+  }
 
-    65% {
-        transform: translate(5px, 0px);
-        color: green;
-    }
+  65% {
+    transform: translate(5px, 0px);
+    color: green;
+  }
 
-    to {
-        transform: translate(0, 0px);
-    }
+  to {
+    transform: translate(0, 0px);
+  }
 }

@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit{
 
   userData: any = {};
   cartItems: any = []
+  islog: boolean | undefined
 
   constructor(private router: Router, private auth: AuthService, 
     private alert: AlertController, private storageService: StorageService,
@@ -28,8 +29,15 @@ export class ProfileComponent implements OnInit{
   }
 
   async ngOnInit() {
-    let userId = await this.auth.getUserUid()
-    this.cartItems = await this.cartService.getCartItems(userId)
+
+    if(this.auth.getCurrentUser()) {
+      this.islog = true
+    } else {
+      this.islog = false
+    }
+    
+    let uid = await this.auth.getUserUid()
+    this.cartItems = await this.cartService.getCartItems(uid)
     this.userData = await this.storageService.get('usuario')
   }
 
@@ -50,6 +58,33 @@ export class ProfileComponent implements OnInit{
     }]
     })
     await alert.present()
+  }
+
+  deleteAccount() {
+    this.auth.deleteAccount()
+    this.router.navigate(['/login'])
+  }
+
+  async confirmDeleteAccount() {
+    const alert = await this.alert.create({
+      header: 'Eliminar cuenta',
+      message: '¿Está seguro de que desea eliminar su cuenta? Esta acción no se puede deshacer.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => { alert.dismiss(); }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.deleteAccount();
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }

@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
 
+
     this.cdRef.detectChanges()
 
     this.promotionService.refresh$.subscribe(() => {
@@ -48,8 +49,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       filter((event) => event instanceof NavigationEnd)
     ).subscribe(async () => {
       this.user = await this.storageService.get("usuario")
-      let userId = await this.auth.getUserUid()
-      this.cartItems = await this.cartService.getCartItems(userId)
+      let uid = await this.auth.getUserUid()
+      this.cartItems = await this.cartService.getCartItems(uid)
     })
   }
 

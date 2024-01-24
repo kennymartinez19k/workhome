@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
@@ -19,17 +19,30 @@ export class ProductDetailComponent implements OnInit {
   showSuccessMsg = false
   cartItems: any = []
   subscription!: Subscription
+  islog: boolean | undefined
 
 
   constructor(private cdRef: ChangeDetectorRef, private route: ActivatedRoute,
     private productService: ProductService, private cart: ShoppingCartService,
     private auth: AuthService, private loading: LoadingController, private router: Router,
-    private modalCtrl: ModalController) {}
+    private modalCtrl: ModalController, private alert: AlertController) {}
 
   async ngOnInit(){
 
-    let userId = await this.auth.getUserUid()
-    this.cartItems = await this.cart.getCartItems(userId)
+    if(this.auth.getCurrentUser()) {
+      this.islog = true
+    } else {
+      this.islog = false
+      const alert = await this.alert.create({
+        header: 'Inicie sesión',
+        message: 'Debe iniciar sesión para poder comprar este prodcuto.',
+        buttons: ['Aceptar']
+      })
+      alert.present()
+    }
+
+    let uid = await this.auth.getUserUid()
+    this.cartItems = await this.cart.getCartItems(uid)
     this.cdRef.detectChanges()
 
     const productId = this.route.snapshot.paramMap.get('productId')
@@ -44,7 +57,7 @@ export class ProductDetailComponent implements OnInit {
     this.subscription = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd)
     ).subscribe(async () => {
-      this.cartItems = await this.cart.getCartItems(userId)
+      this.cartItems = await this.cart.getCartItems(uid)
     })
   }
 
@@ -66,7 +79,7 @@ async openImgModal(imageUrl: string) {
 }
 
   async addToCart(product: any) {
-    let userId = await this.auth.getUserUid()
+    let uid = await this.auth.getUserUid()
     console.log(product.qty)
     let pd = { ...product }
 
@@ -77,7 +90,7 @@ async openImgModal(imageUrl: string) {
       await loading.present()
       await this.cart.addProductCart(pd)
       product.qty = 0
-      this.cartItems = await this.cart.getCartItems(userId)
+      this.cartItems = await this.cart.getCartItems(uid)
 
     await loading.dismiss()
 

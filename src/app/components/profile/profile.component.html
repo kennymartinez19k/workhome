@@ -24,15 +24,16 @@
             <p>Historial de pedidos</p>
         </ion-item>
 
+        <ion-item *ngIf="islog" class="option" (click)="confirmDeleteAccount()">
+            <ion-icon name="trash-outline"></ion-icon>
+            <p>Eliminar cuenta</p>
+        </ion-item>
+
         <ion-item class="option" (click)="confirmLogout()">
             <ion-icon name="log-out-outline"></ion-icon>
             <p>Cerrar sesión</p>
         </ion-item>
 
-        <ion-item *ngIf="islog" class="option" (click)="confirmDeleteAccount()">
-            <ion-icon name="trash-outline"></ion-icon>
-            <p>Eliminar cuenta</p>
-        </ion-item>
     </div>
 
 </ion-content>

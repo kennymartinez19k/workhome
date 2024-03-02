@@ -13,7 +13,9 @@ ion-toolbar ion-title {
   font-weight: 800;
   color: white;
   text-align: center;
-  margin-top: 1rem;
+  position: absolute;
+  width: 100%;
+  left: 0px;
 }
 
 .producto {

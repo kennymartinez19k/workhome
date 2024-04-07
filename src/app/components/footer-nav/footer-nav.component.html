@@ -2,22 +2,23 @@
   <ion-toolbar color="#">
     <div class="footer">
       <div class="home" [ngClass]="{'active': isRouteActive('/home') }">
-        <ion-icon name="home-outline" routerLink="/home"></ion-icon>
+        <ion-img src="../../../assets/icons/home-outline.svg" routerLink="/home" style="width: 25px;"></ion-img>
         <p>Inicio</p>
       </div>
       <div class="carrito" style="position: relative;" [ngClass]="{'active': isRouteActive('/cart') }" routerLink="/cart"
        *ngIf=" user && user.role == 'usuario' || user.role == 'invitado'">
-        <ion-icon name="cart-outline"></ion-icon>
+       <ion-img src="../../../assets/icons/cart-outline.svg" style="width: 25px;"></ion-img>
+
         <p>Carrito</p>
         <div class="notification-mode" *ngIf="qtyOrders.length > 0">{{qtyOrders.length}}</div>
 
       </div>
       <div class="carrito"  [ngClass]="{'active': isRouteActive('/orders') }" routerLink="/orders" *ngIf="user.role == 'admin'">
-        <ion-icon name="cart-outline"></ion-icon>
+        <ion-img src="../../../assets/icons/cart-outline.svg" style="width: 25px;"></ion-img>
         <p>Pedidos</p>
       </div>
       <div class="perfil" [ngClass]="{'active': isRouteActive('/profile') }" routerLink="/profile">
-        <ion-icon name="person-outline"></ion-icon>
+        <ion-img src="../../../assets/icons/person-outline.svg" style="width: 25px;"></ion-img>
         <p>Perfil</p>
       </div>
     </div>

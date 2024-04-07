@@ -38,7 +38,7 @@
               <ion-card-title>{{product.product.nombre}}</ion-card-title>
               <div class="order-detail-price">
                 <ion-card-subtitle>${{product.product.precio}}</ion-card-subtitle>
-                <ion-card-subtitle>qty: {{product.product.qty}}</ion-card-subtitle>
+                <ion-card-subtitle>Cantidad: {{product.product.qty}}</ion-card-subtitle>
               </div>
             </div>
           </ion-item>
@@ -63,15 +63,15 @@
 
         <div class="button-container">
             <ion-button class="location" (click)="copyToClipboard(order.ubicacion)">
-              <ion-icon slot="start" name="location-outline"></ion-icon>
+              <ion-img src="../../../assets/icons/location-outline.svg" slot="start" style="width: 25px;"></ion-img>
               Copiar ubicación
             </ion-button>
             <ion-button class="whatsapp" (click)="goToWhatsApp(order.whatsapp)">
-              <ion-icon slot="start" name="logo-whatsapp"></ion-icon>
+              <ion-img src="../../../assets/icons/logo-whatsapp.svg" slot="start" style="width: 25px;"></ion-img>
               Ir a WhatsApp
             </ion-button>
             <ion-button (click)="sentOrder(order.id)">
-              <ion-icon slot="start" name="checkmark-outline"></ion-icon>
+              <ion-img src="../../../assets/icons/checkmark-circle-outline.svg" slot="start" style="width: 25px;"></ion-img>
               Despachar pedido
             </ion-button>
           </div>

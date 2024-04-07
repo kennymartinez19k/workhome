@@ -27,24 +27,26 @@
           *ngIf="user && user.role =='usuario' || !user">
           <div class="button-cart client-cnt" style="display: flex; align-items: center; margin-right: 5px; "
             *ngIf="product.stock > 0">
-            <ion-icon (click)="removeToCart(product)" name="remove-outline"></ion-icon>
+            <ion-img src="../../../assets/icons/remove-outline.svg" style="width: 20px;"
+                (click)="removeToCart(product)"></ion-img>
             <b class="qty-field">{{product.qty}}</b>
-            <ion-icon (click)="addQty(product)" name="add-outline"></ion-icon>
+            <ion-img src="../../../assets/icons/add-outline.svg" style="width: 20px;"
+                (click)="addQty(product)"></ion-img>
           </div>
           <p *ngIf="product.stock < 1" style="color: red;"> Producto no disponible</p>
         </ion-card-content>
-        <ion-icon *ngIf="product.qty > 0" name="cart" (click)="addToCart(product)" class="floating"
-          style="font-size: 30px;"></ion-icon>
+        <ion-img src="../../../assets/icons/cart-outline.svg" *ngIf="product.qty > 0" (click)="addToCart(product)" class="floating"
+          style="width: 30px;"></ion-img>
 
 
         <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='admin'">
           <div class="buttons-crud">
             <div>
-              <ion-icon (click)="editProduct(product)" name="create-outline" style="font-size: 30px;"></ion-icon>
+              <ion-img src="../../../assets/icons/create-outline.svg" (click)="editProduct(product)" style="width: 30px;"></ion-img>
             </div>
             <div>
-              <ion-icon (click)="product.productId&& confirmDeleteProduct(product.productId, product.imageName)" name="trash-outline"
-                style="font-size: 30px;"></ion-icon>
+              <ion-img src="../../../assets/icons/trash-outline.svg" (click)="product.productId&& confirmDeleteProduct(product.productId, product.imageName)"
+                style="width: 30px;"></ion-img>
             </div>
           </div>
         </ion-card-content>
@@ -64,11 +66,11 @@
         <ion-card-content class="uk-flex uk-flex-between" *ngIf="user && user.role =='admin'">
           <div class="buttons-crud">
             <div>
-              <ion-icon (click)="editProduct(product)" name="create-outline" style="font-size: 30px;"></ion-icon>
+              <ion-img src="../../../assets/icons/create-outline.svg" (click)="editProduct(product)" style="width: 30px;"></ion-img>
             </div>
             <div>
-              <ion-icon (click)="product.productId&& confirmDeleteProduct(product.productId, product.imageName)" name="trash-outline"
-                style="font-size: 30px;"></ion-icon>
+              <ion-img src="../../../assets/icons/trash-outline.svg" (click)="product.productId&& confirmDeleteProduct(product.productId, product.imageName)"
+                style="width: 30px;"></ion-img>
             </div>
           </div>
         </ion-card-content>

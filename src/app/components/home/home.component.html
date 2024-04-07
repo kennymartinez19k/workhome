@@ -6,7 +6,7 @@
     *ngIf="user && user.role == 'admin'"
   >
     <ion-fab-button color="success">
-      <ion-icon name="add"></ion-icon>
+      <ion-img src="../../../assets/icons/add-outline.svg" style="width: 30px;"></ion-img>
     </ion-fab-button>
     <ion-fab-list side="end">
       <ion-button routerLink="/add-promotion"> PROMO </ion-button>
@@ -42,11 +42,11 @@
         placeholder="Buscar producto..."
         [(ngModel)]="searchTerm"
       ></ion-searchbar>
-      <ion-icon
-        name="search-outline"
-        style="font-size: 30px"
+      <ion-img
+        src="../../../assets/icons/search-outline.svg"
+        style="width: 30px"
         (click)="searchProducts()"
-      ></ion-icon>
+      ></ion-img>
     </div>
   </div>
 
@@ -58,14 +58,15 @@
       style="display: flex; justify-content: end; padding: 5px"
       *ngIf="user && user.role == 'admin'"
     >
-      <ion-icon
+      <ion-img
+        src="../../../assets/icons/trash-outline.svg"
         (click)="
           promo.promotionId &&
             confirmDeletePromotion(promo.promotionId, promo.imageName)
         "
         name="trash-outline"
-        style="font-size: 30px"
-      ></ion-icon>
+        style="width: 30px"
+      ></ion-img>
     </div>
   </div>
 

@@ -22,11 +22,8 @@
                 <p class="subtitle-card">${{ product.product.precio }}</p>
               </div>
               <div class="mt-5 uk-flex align-items-center">
-                <ion-icon
-                  (click)="decrementQty(product)"
-                  class="qty-icon"
-                  name="remove-outline"
-                ></ion-icon>
+                <ion-img src="../../../assets/icons/remove-outline.svg" style="width: 20px;"
+                (click)="decrementQty(product)"></ion-img>
                 <input
                   class="field-qty"
                   type="number"
@@ -35,15 +32,12 @@
                   name=""
                   id=""
                 />
-                <ion-icon
-                  class="qty-icon"
-                  name="add-outline"
-                  (click)="incrementQty(product)"
-                ></ion-icon>
+                <ion-img src="../../../assets/icons/add-outline.svg" style="width: 20px;"
+                (click)="incrementQty(product)"></ion-img>
               </div>
             </div>
             <div (click)="confirmDelete(product)">
-              <ion-icon class="icon-close" name="trash"></ion-icon>
+              <ion-img src="../../../assets/icons/trash-outline.svg" style="width: 25px;"></ion-img>
             </div>
           </div>
         </ion-item>

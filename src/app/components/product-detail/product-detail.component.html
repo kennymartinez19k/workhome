@@ -28,14 +28,14 @@
     </div>
     <div class="add-cart" *ngIf="islog">
         <div class="button-cart client-cnt" style="display: flex; align-items: center; margin-right: 5px; ">
-            <ion-icon (click)="removeToCart(productDetail)" name="remove-outline"></ion-icon>
+            <ion-img src="../../../assets/icons/remove-outline.svg" (click)="removeToCart(productDetail)" style="width: 25px;"></ion-img>
             <b class="qty-field">{{productDetail.qty}}</b>
-            <ion-icon (click)="addQty(productDetail)" name="add-outline"></ion-icon>
+            <ion-img src="../../../assets/icons/add-outline.svg" (click)="addQty(productDetail)" style="width: 25px;"></ion-img>
         </div>
 
         <div class="btn-cart">
-            <ion-icon *ngIf="productDetail.qty > 0" name="cart" (click)="addToCart(productDetail)"
-                class="floating"></ion-icon>
+            <ion-img src="../../../assets/icons/cart-outline.svg" *ngIf="productDetail.qty > 0" style="width: 30px;" (click)="addToCart(productDetail)"
+                class="floating"></ion-img>
         </div>
     </div>
 

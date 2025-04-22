@@ -11,7 +11,9 @@ import { StorageService } from './services/storage.service';
 export class AppComponent implements OnInit{
   title = 'bodega-la-fe';
   
-  constructor(private router: Router, private cdRef: ChangeDetectorRef, private storage: StorageService) {}
+  constructor(private router: Router, private cdRef: ChangeDetectorRef, private storage: StorageService) {
+
+  }
 
 async ngOnInit() {
   this.cdRef.detectChanges()
